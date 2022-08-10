@@ -16,7 +16,12 @@
 		0C6984AF28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */; };
 		0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FC28A31DC30034FA73 /* AppBuilder.swift */; };
 		0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FE28A31DD30034FA73 /* AppBuilderImp.swift */; };
-		0C96E60228A31DF90034FA73 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60128A31DF90034FA73 /* AppViewController.swift */; };
+		0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60128A31DF90034FA73 /* RootViewController.swift */; };
+		0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60328A442870034FA73 /* RootViewController+Layout.swift */; };
+		0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60528A45F3C0034FA73 /* Theme.swift */; };
+		0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60B28A463B60034FA73 /* EditorBuilder.swift */; };
+		0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60D28A463C40034FA73 /* EditorBuilderImp.swift */; };
+		0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60F28A463D60034FA73 /* EditorViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -50,7 +55,12 @@
 		0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReTodoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		0C96E5FC28A31DC30034FA73 /* AppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilder.swift; sourceTree = "<group>"; };
 		0C96E5FE28A31DD30034FA73 /* AppBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilderImp.swift; sourceTree = "<group>"; };
-		0C96E60128A31DF90034FA73 /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
+		0C96E60128A31DF90034FA73 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
+		0C96E60328A442870034FA73 /* RootViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController+Layout.swift"; sourceTree = "<group>"; };
+		0C96E60528A45F3C0034FA73 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
+		0C96E60B28A463B60034FA73 /* EditorBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorBuilder.swift; sourceTree = "<group>"; };
+		0C96E60D28A463C40034FA73 /* EditorBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorBuilderImp.swift; sourceTree = "<group>"; };
+		0C96E60F28A463D60034FA73 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -101,9 +111,11 @@
 		0C69848A28A1D8A200805B83 /* ReTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				0C96E60728A4628E0034FA73 /* Feature */,
 				0C96E5FA28A31D9E0034FA73 /* App */,
 				0C69848B28A1D8A200805B83 /* AppDelegate.swift */,
 				0C69848D28A1D8A200805B83 /* SceneDelegate.swift */,
+				0C96E60528A45F3C0034FA73 /* Theme.swift */,
 				0C69849428A1D8A400805B83 /* Assets.xcassets */,
 				0C69849628A1D8A400805B83 /* LaunchScreen.storyboard */,
 				0C69849928A1D8A400805B83 /* Info.plist */,
@@ -149,9 +161,44 @@
 		0C96E60028A31DDF0034FA73 /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0C96E60128A31DF90034FA73 /* AppViewController.swift */,
+				0C96E60128A31DF90034FA73 /* RootViewController.swift */,
+				0C96E60328A442870034FA73 /* RootViewController+Layout.swift */,
 			);
 			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0C96E60728A4628E0034FA73 /* Feature */ = {
+			isa = PBXGroup;
+			children = (
+				0C96E60828A462990034FA73 /* Editor */,
+			);
+			path = Feature;
+			sourceTree = "<group>";
+		};
+		0C96E60828A462990034FA73 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				0C96E60928A462B10034FA73 /* Builder */,
+				0C96E60A28A462B80034FA73 /* View */,
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		0C96E60928A462B10034FA73 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				0C96E60B28A463B60034FA73 /* EditorBuilder.swift */,
+				0C96E60D28A463C40034FA73 /* EditorBuilderImp.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		0C96E60A28A462B80034FA73 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0C96E60F28A463D60034FA73 /* EditorViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -305,11 +352,16 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C96E60228A31DF90034FA73 /* AppViewController.swift in Sources */,
+				0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
+				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
+				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
 				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
+				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
+				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
+				0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

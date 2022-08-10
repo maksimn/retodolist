@@ -10,6 +10,6 @@ import UIKit
 final class AppBuilderImp: AppBuilder {
 
     func build() -> UIViewController {
-        AppViewController()
+        RootViewController()
     }
 }
