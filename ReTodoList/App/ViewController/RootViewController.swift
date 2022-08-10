@@ -7,14 +7,19 @@
 
 import UIKit
 
-final class AppViewController: UIViewController {
+final class RootViewController: UIViewController {
+
+    let navToEditorButton = UIButton()
 
     init() {
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .green
+        initViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+
+    @objc
+    func onNavToEditorButtonTap() { }
 }
