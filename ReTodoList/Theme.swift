@@ -25,4 +25,6 @@ struct Theme {
 final class ThemeImage {
 
     lazy var plusImage = UIImage(named: "icon-plus")!
+    lazy var highPriorityMark = UIImage(named: "high-priority")!
+    lazy var lowPriorityMark = UIImage(named: "low-priority")!
 }
