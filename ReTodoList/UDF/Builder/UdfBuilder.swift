@@ -5,9 +5,9 @@
 //  Created by Maksim Ivanov on 10.08.2022.
 //
 
-import UIKit
+import ReSwiftRouter
 
-protocol AppBuilder {
+protocol UdfBuilder {
 
-    func build() -> UIViewController
+    func build() -> Router<AppState>
 }

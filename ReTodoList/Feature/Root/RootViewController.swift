@@ -5,13 +5,18 @@
 //  Created by Maksim Ivanov on 10.08.2022.
 //
 
+import ReSwift
+import ReSwiftRouter
 import UIKit
 
 final class RootViewController: UIViewController {
 
     let navToEditorButton = UIButton()
 
-    init() {
+    private let store: Store<AppState>
+
+    init(store: Store<AppState>) {
+        self.store = store
         super.init(nibName: nil, bundle: nil)
         initViews()
     }
@@ -21,5 +26,7 @@ final class RootViewController: UIViewController {
     }
 
     @objc
-    func onNavToEditorButtonTap() { }
+    func onNavToEditorButtonTap() {
+        store.dispatch(SetRouteAction(["Root", "Editor"]))
+    }
 }
