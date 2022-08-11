@@ -6,7 +6,6 @@
 //
 
 import ReSwift
-import ReSwiftRouter
 import UIKit
 
 final class EditorViewController: UIViewController, UITextViewDelegate {
@@ -32,12 +31,8 @@ final class EditorViewController: UIViewController, UITextViewDelegate {
     var isKeyboardActive: Bool = false
     var keyboardSize: CGSize = .zero
 
-    private let store: Store<AppState>
-
-    init(params: EditorViewParams,
-         store: Store<AppState>) {
+    init(params: EditorViewParams) {
         self.params = params
-        self.store = store
         super.init(nibName: nil, bundle: nil)
         initViews()
     }
@@ -90,7 +85,7 @@ final class EditorViewController: UIViewController, UITextViewDelegate {
     // MARK: - User Actions
 
     func onCancelButtonTap() {
-        store.dispatch(SetRouteAction(["Root"]))
+        dismiss(animated: true)
     }
 
     func onSaveButtonTap() {

@@ -6,10 +6,7 @@
 //
 
 import ReSwift
-import ReSwiftRouter
 
 func appReducer(action: Action, state: AppState?) -> AppState {
-    AppState(
-        navigationState: NavigationReducer.handleAction(action, state: state?.navigationState)
-    )
+    AppState()
 }
