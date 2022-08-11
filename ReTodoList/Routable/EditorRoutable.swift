@@ -26,11 +26,9 @@ final class EditorRoutable: Routable {
             completionHandler()
 
             let editorViewController = editorBuilder.build()
-
-            editorViewController.modalPresentationStyle = .overFullScreen
-            editorViewController.navigationItem.largeTitleDisplayMode = .never
-
             let otherNavigationController = UINavigationController(rootViewController: editorViewController)
+
+            otherNavigationController.modalPresentationStyle = .overFullScreen
 
             navigationController?.topViewController?.present(otherNavigationController, animated: true, completion: nil)
         }

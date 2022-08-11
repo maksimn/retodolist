@@ -14,6 +14,10 @@
 		0C6984A328A1D8A500805B83 /* ReTodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984A228A1D8A500805B83 /* ReTodoListTests.swift */; };
 		0C6984AD28A1D8A500805B83 /* ReTodoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984AC28A1D8A500805B83 /* ReTodoListUITests.swift */; };
 		0C6984AF28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */; };
+		0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378EE28A57C54002035EB /* EditorNavBar.swift */; };
+		0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F028A58081002035EB /* EditorViewController+Layout.swift */; };
+		0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F228A5808F002035EB /* EditorViewParams.swift */; };
+		0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */; };
 		0C96E5FD28A31DC30034FA73 /* UdfBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FC28A31DC30034FA73 /* UdfBuilder.swift */; };
 		0C96E5FF28A31DD30034FA73 /* UdfBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FE28A31DD30034FA73 /* UdfBuilderImp.swift */; };
 		0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60128A31DF90034FA73 /* RootViewController.swift */; };
@@ -59,6 +63,10 @@
 		0C6984A828A1D8A500805B83 /* ReTodoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReTodoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6984AC28A1D8A500805B83 /* ReTodoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReTodoListUITests.swift; sourceTree = "<group>"; };
 		0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReTodoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		0C9378EE28A57C54002035EB /* EditorNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorNavBar.swift; sourceTree = "<group>"; };
+		0C9378F028A58081002035EB /* EditorViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditorViewController+Layout.swift"; sourceTree = "<group>"; };
+		0C9378F228A5808F002035EB /* EditorViewParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewParams.swift; sourceTree = "<group>"; };
+		0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventsHandle.swift; sourceTree = "<group>"; };
 		0C96E5FC28A31DC30034FA73 /* UdfBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdfBuilder.swift; sourceTree = "<group>"; };
 		0C96E5FE28A31DD30034FA73 /* UdfBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdfBuilderImp.swift; sourceTree = "<group>"; };
 		0C96E60128A31DF90034FA73 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
@@ -123,6 +131,8 @@
 		0C69848A28A1D8A200805B83 /* ReTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				0C9378F428A580F9002035EB /* Core */,
+				0C9378ED28A57C39002035EB /* CustomView */,
 				0C96E60728A4628E0034FA73 /* Feature */,
 				0C97E8BB28A56B1200B087DC /* Routable */,
 				0C96E5FA28A31D9E0034FA73 /* UDF */,
@@ -151,6 +161,22 @@
 				0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */,
 			);
 			path = ReTodoListUITests;
+			sourceTree = "<group>";
+		};
+		0C9378ED28A57C39002035EB /* CustomView */ = {
+			isa = PBXGroup;
+			children = (
+				0C9378EE28A57C54002035EB /* EditorNavBar.swift */,
+			);
+			path = CustomView;
+			sourceTree = "<group>";
+		};
+		0C9378F428A580F9002035EB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		0C96E5FA28A31D9E0034FA73 /* UDF */ = {
@@ -202,6 +228,8 @@
 			isa = PBXGroup;
 			children = (
 				0C96E60F28A463D60034FA73 /* EditorViewController.swift */,
+				0C9378F028A58081002035EB /* EditorViewController+Layout.swift */,
+				0C9378F228A5808F002035EB /* EditorViewParams.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -391,6 +419,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */,
 				0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
 				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
@@ -399,12 +428,15 @@
 				0C96E5FF28A31DD30034FA73 /* UdfBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
 				0C97E8BD28A56CA100B087DC /* RootRoutable.swift in Sources */,
+				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0C97E8BF28A56CAD00B087DC /* EditorRoutable.swift in Sources */,
+				0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* UdfBuilder.swift in Sources */,
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
+				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

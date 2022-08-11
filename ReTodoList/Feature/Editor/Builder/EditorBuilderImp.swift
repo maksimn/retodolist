@@ -17,6 +17,20 @@ final class EditorBuilderImp: EditorBuilder {
     }
 
     func build() -> UIViewController {
-        EditorViewController(store: store)
+        let viewParams = EditorViewParams(
+            backgroundColor: Theme.data.backgroundColor,
+            prioritySegmentedControlItems: [Theme.image.lowPriorityMark, "нет", Theme.image.highPriorityMark],
+            newTodoPlaceholder: "Что надо сделать?",
+            priority: "Важность",
+            shouldBeDoneBefore: "Сделать до",
+            remove: "Удалить",
+            navBar: EditorNavBarParams(
+                save: "Сохранить",
+                todo: "Дело",
+                cancel: "Отменить"
+            )
+        )
+
+        return EditorViewController(params: viewParams, store: store)
     }
 }

@@ -9,30 +9,116 @@ import ReSwift
 import ReSwiftRouter
 import UIKit
 
-final class EditorViewController: UIViewController {
+final class EditorViewController: UIViewController, UITextViewDelegate {
+
+    let params: EditorViewParams
+
+    var navBar: EditorNavBar?
+    let scrollView = UIScrollView(frame: .zero)
+    let textView = UITextView()
+    let placeholderLabel = UILabel()
+    let pillowView = UIView()
+    let separatorViewOne = UIView()
+    let separatorViewTwo = UIView()
+    lazy var prioritySegmentedControl = UISegmentedControl(items: params.prioritySegmentedControlItems)
+    let importanceLabel = UILabel()
+    let shouldBeDoneBeforeLabel = UILabel()
+    let deadlineSwitch = UISwitch()
+    let deadlineButton = UIButton()
+    let deadlineDatePicker = UIDatePicker()
+    let removeButton = UIButton()
+
+    let keyboardEventsHandle = KeyboardEventsHandle()
+    var isKeyboardActive: Bool = false
+    var keyboardSize: CGSize = .zero
 
     private let store: Store<AppState>
 
-    init(store: Store<AppState>) {
+    init(params: EditorViewParams,
+         store: Store<AppState>) {
+        self.params = params
         self.store = store
         super.init(nibName: nil, bundle: nil)
-        view.backgroundColor = .yellow
-
-        let button = UIButton(frame: CGRect(x: 100, y: 100, width: 100, height: 50))
-        button.backgroundColor = .green
-        button.setTitle("Test Button", for: .normal)
-        button.addTarget(self, action: #selector(buttonAction), for: .touchUpInside)
-
-        self.view.addSubview(button)
+        initViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    @objc
-    func buttonAction() {
-        store.dispatch(SetRouteAction(["Root"]))
+    func setSaveButton(enabled: Bool) {
+        navBar?.setSaveButton(enabled)
+    }
 
+    func setRemoveButton(enabled: Bool) {
+        removeButton.setTitleColor(enabled ? .systemRed : .systemGray, for: .normal)
+        removeButton.isEnabled = enabled
+    }
+
+    func clear() {
+        deadlineDatePicker.isHidden = true
+        separatorViewTwo.isHidden = true
+        deadlineButton.isHidden = true
+        textView.text = ""
+        prioritySegmentedControl.selectedSegmentIndex = 1
+        placeholderLabel.isHidden = false
+        deadlineSwitch.setOn(false, animated: false)
+        removeButton.setTitleColor(.systemGray, for: .normal)
+        setupFrameLayout()
+    }
+
+    func setTextPlaceholder(visible: Bool) {
+        placeholderLabel.isHidden = !visible
+    }
+
+    func setDeadlineButton(visible: Bool) {
+        deadlineButton.isHidden = !visible
+    }
+
+    func updateDeadlineButtonTitle() {
+    }
+
+    func setDeadlineDatePicker(visible: Bool) {
+        deadlineDatePicker.isHidden = !visible
+        separatorViewTwo.isHidden = deadlineDatePicker.isHidden
+    }
+
+    var isDeadlineDatePickerVisible: Bool {
+        !deadlineDatePicker.isHidden
+    }
+
+    // MARK: - User Actions
+
+    func onCancelButtonTap() {
+        store.dispatch(SetRouteAction(["Root"]))
+    }
+
+    func onSaveButtonTap() {
+    }
+
+    @objc
+    func onRemoveButtonTap() {
+    }
+
+    @objc
+    func onDeadlineSwitchValueChanged() {
+        setupFrameLayout()
+    }
+
+    @objc
+    func onDeadlineDatePickerValueChanged() {
+    }
+
+    @objc
+    func onDeadlineButtonTap() {
+        setDeadlineDatePicker(visible: deadlineDatePicker.isHidden)
+        setupFrameLayout()
+    }
+
+    func textViewDidChange(_ textView: UITextView) {
+    }
+
+    @objc
+    func onPriorityChanged() {
     }
 }
