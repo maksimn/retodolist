@@ -18,20 +18,25 @@
 		0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F028A58081002035EB /* EditorViewController+Layout.swift */; };
 		0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F228A5808F002035EB /* EditorViewParams.swift */; };
 		0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */; };
-		0C96E5FD28A31DC30034FA73 /* UdfBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FC28A31DC30034FA73 /* UdfBuilder.swift */; };
-		0C96E5FF28A31DD30034FA73 /* UdfBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FE28A31DD30034FA73 /* UdfBuilderImp.swift */; };
+		0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FC28A31DC30034FA73 /* AppBuilder.swift */; };
+		0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E5FE28A31DD30034FA73 /* AppBuilderImp.swift */; };
 		0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60128A31DF90034FA73 /* RootViewController.swift */; };
 		0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60328A442870034FA73 /* RootViewController+Layout.swift */; };
 		0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60528A45F3C0034FA73 /* Theme.swift */; };
 		0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60B28A463B60034FA73 /* EditorBuilder.swift */; };
 		0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60D28A463C40034FA73 /* EditorBuilderImp.swift */; };
 		0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60F28A463D60034FA73 /* EditorViewController.swift */; };
-		0C97E8B528A4C91700B087DC /* ReSwift-Router in Frameworks */ = {isa = PBXBuildFile; productRef = 0C97E8B428A4C91700B087DC /* ReSwift-Router */; };
 		0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8B728A4CB3E00B087DC /* AppState.swift */; };
 		0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8B928A4CC7400B087DC /* appReducer.swift */; };
-		0C97E8BD28A56CA100B087DC /* RootRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8BC28A56CA100B087DC /* RootRoutable.swift */; };
-		0C97E8BF28A56CAD00B087DC /* EditorRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8BE28A56CAD00B087DC /* EditorRoutable.swift */; };
-		0C97E8C128A56CB900B087DC /* EmptyRoutable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8C028A56CB900B087DC /* EmptyRoutable.swift */; };
+		0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4D628A5BBB700668895 /* ReSwift */; };
+		0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */; };
+		0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */; };
+		0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */; };
+		0CA0A4E428A5BC0F00668895 /* NavToEditorRouterImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DF28A5BC0F00668895 /* NavToEditorRouterImp.swift */; };
+		0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4E028A5BC0F00668895 /* NavToEditorRouter.swift */; };
+		0CA0A4E828A5BC4F00668895 /* TodoItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4E728A5BC4F00668895 /* TodoItem.swift */; };
+		0CA0A4EB28A5BCBE00668895 /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4EA28A5BCBE00668895 /* SnapKit */; };
+		0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -67,8 +72,8 @@
 		0C9378F028A58081002035EB /* EditorViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditorViewController+Layout.swift"; sourceTree = "<group>"; };
 		0C9378F228A5808F002035EB /* EditorViewParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewParams.swift; sourceTree = "<group>"; };
 		0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventsHandle.swift; sourceTree = "<group>"; };
-		0C96E5FC28A31DC30034FA73 /* UdfBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdfBuilder.swift; sourceTree = "<group>"; };
-		0C96E5FE28A31DD30034FA73 /* UdfBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UdfBuilderImp.swift; sourceTree = "<group>"; };
+		0C96E5FC28A31DC30034FA73 /* AppBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilder.swift; sourceTree = "<group>"; };
+		0C96E5FE28A31DD30034FA73 /* AppBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppBuilderImp.swift; sourceTree = "<group>"; };
 		0C96E60128A31DF90034FA73 /* RootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootViewController.swift; sourceTree = "<group>"; };
 		0C96E60328A442870034FA73 /* RootViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RootViewController+Layout.swift"; sourceTree = "<group>"; };
 		0C96E60528A45F3C0034FA73 /* Theme.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Theme.swift; sourceTree = "<group>"; };
@@ -77,9 +82,13 @@
 		0C96E60F28A463D60034FA73 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		0C97E8B728A4CB3E00B087DC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0C97E8B928A4CC7400B087DC /* appReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appReducer.swift; sourceTree = "<group>"; };
-		0C97E8BC28A56CA100B087DC /* RootRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootRoutable.swift; sourceTree = "<group>"; };
-		0C97E8BE28A56CAD00B087DC /* EditorRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorRoutable.swift; sourceTree = "<group>"; };
-		0C97E8C028A56CB900B087DC /* EmptyRoutable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRoutable.swift; sourceTree = "<group>"; };
+		0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorView.swift; sourceTree = "<group>"; };
+		0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilderImp.swift; sourceTree = "<group>"; };
+		0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilder.swift; sourceTree = "<group>"; };
+		0CA0A4DF28A5BC0F00668895 /* NavToEditorRouterImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorRouterImp.swift; sourceTree = "<group>"; };
+		0CA0A4E028A5BC0F00668895 /* NavToEditorRouter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorRouter.swift; sourceTree = "<group>"; };
+		0CA0A4E728A5BC4F00668895 /* TodoItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoItem.swift; sourceTree = "<group>"; };
+		0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Core.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -87,7 +96,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0C97E8B528A4C91700B087DC /* ReSwift-Router in Frameworks */,
+				0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */,
+				0CA0A4EB28A5BCBE00668895 /* SnapKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,11 +141,11 @@
 		0C69848A28A1D8A200805B83 /* ReTodoList */ = {
 			isa = PBXGroup;
 			children = (
+				0C96E5FA28A31D9E0034FA73 /* App */,
 				0C9378F428A580F9002035EB /* Core */,
 				0C9378ED28A57C39002035EB /* CustomView */,
+				0CA0A4E628A5BC4300668895 /* DataClass */,
 				0C96E60728A4628E0034FA73 /* Feature */,
-				0C97E8BB28A56B1200B087DC /* Routable */,
-				0C96E5FA28A31D9E0034FA73 /* UDF */,
 				0C69848B28A1D8A200805B83 /* AppDelegate.swift */,
 				0C69848D28A1D8A200805B83 /* SceneDelegate.swift */,
 				0C96E60528A45F3C0034FA73 /* Theme.swift */,
@@ -175,24 +185,26 @@
 			isa = PBXGroup;
 			children = (
 				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
+				0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
 		};
-		0C96E5FA28A31D9E0034FA73 /* UDF */ = {
+		0C96E5FA28A31D9E0034FA73 /* App */ = {
 			isa = PBXGroup;
 			children = (
 				0C96E5FB28A31DB00034FA73 /* Builder */,
-				0C97E8B628A4CB2500B087DC /* App */,
+				0C97E8C228A573F000B087DC /* ViewController */,
+				0C97E8B628A4CB2500B087DC /* UDF */,
 			);
-			path = UDF;
+			path = App;
 			sourceTree = "<group>";
 		};
 		0C96E5FB28A31DB00034FA73 /* Builder */ = {
 			isa = PBXGroup;
 			children = (
-				0C96E5FC28A31DC30034FA73 /* UdfBuilder.swift */,
-				0C96E5FE28A31DD30034FA73 /* UdfBuilderImp.swift */,
+				0C96E5FC28A31DC30034FA73 /* AppBuilder.swift */,
+				0C96E5FE28A31DD30034FA73 /* AppBuilderImp.swift */,
 			);
 			path = Builder;
 			sourceTree = "<group>";
@@ -201,7 +213,7 @@
 			isa = PBXGroup;
 			children = (
 				0C96E60828A462990034FA73 /* Editor */,
-				0C97E8C228A573F000B087DC /* Root */,
+				0CA0A4D828A5BC0F00668895 /* NavToEditor */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -234,32 +246,66 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		0C97E8B628A4CB2500B087DC /* App */ = {
+		0C97E8B628A4CB2500B087DC /* UDF */ = {
 			isa = PBXGroup;
 			children = (
 				0C97E8B728A4CB3E00B087DC /* AppState.swift */,
 				0C97E8B928A4CC7400B087DC /* appReducer.swift */,
 			);
-			path = App;
+			path = UDF;
 			sourceTree = "<group>";
 		};
-		0C97E8BB28A56B1200B087DC /* Routable */ = {
-			isa = PBXGroup;
-			children = (
-				0C97E8BC28A56CA100B087DC /* RootRoutable.swift */,
-				0C97E8BE28A56CAD00B087DC /* EditorRoutable.swift */,
-				0C97E8C028A56CB900B087DC /* EmptyRoutable.swift */,
-			);
-			path = Routable;
-			sourceTree = "<group>";
-		};
-		0C97E8C228A573F000B087DC /* Root */ = {
+		0C97E8C228A573F000B087DC /* ViewController */ = {
 			isa = PBXGroup;
 			children = (
 				0C96E60128A31DF90034FA73 /* RootViewController.swift */,
 				0C96E60328A442870034FA73 /* RootViewController+Layout.swift */,
 			);
-			path = Root;
+			path = ViewController;
+			sourceTree = "<group>";
+		};
+		0CA0A4D828A5BC0F00668895 /* NavToEditor */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0A4DB28A5BC0F00668895 /* Builder */,
+				0CA0A4DE28A5BC0F00668895 /* Router */,
+				0CA0A4D928A5BC0F00668895 /* View */,
+			);
+			path = NavToEditor;
+			sourceTree = "<group>";
+		};
+		0CA0A4D928A5BC0F00668895 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0CA0A4DB28A5BC0F00668895 /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */,
+				0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		0CA0A4DE28A5BC0F00668895 /* Router */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0A4E028A5BC0F00668895 /* NavToEditorRouter.swift */,
+				0CA0A4DF28A5BC0F00668895 /* NavToEditorRouterImp.swift */,
+			);
+			path = Router;
+			sourceTree = "<group>";
+		};
+		0CA0A4E628A5BC4300668895 /* DataClass */ = {
+			isa = PBXGroup;
+			children = (
+				0CA0A4E728A5BC4F00668895 /* TodoItem.swift */,
+			);
+			path = DataClass;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -280,7 +326,8 @@
 			);
 			name = ReTodoList;
 			packageProductDependencies = (
-				0C97E8B428A4C91700B087DC /* ReSwift-Router */,
+				0CA0A4D628A5BBB700668895 /* ReSwift */,
+				0CA0A4EA28A5BCBE00668895 /* SnapKit */,
 			);
 			productName = ReTodoList;
 			productReference = 0C69848828A1D8A200805B83 /* ReTodoList.app */;
@@ -355,7 +402,8 @@
 			);
 			mainGroup = 0C69847F28A1D8A200805B83;
 			packageReferences = (
-				0C97E8B328A4C91700B087DC /* XCRemoteSwiftPackageReference "ReSwift-Router" */,
+				0CA0A4D528A5BBB700668895 /* XCRemoteSwiftPackageReference "ReSwift" */,
+				0CA0A4E928A5BCBE00668895 /* XCRemoteSwiftPackageReference "SnapKit" */,
 			);
 			productRefGroup = 0C69848928A1D8A200805B83 /* Products */;
 			projectDirPath = "";
@@ -419,22 +467,26 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0CA0A4E828A5BC4F00668895 /* TodoItem.swift in Sources */,
 				0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */,
 				0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
+				0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */,
 				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
-				0C97E8C128A56CB900B087DC /* EmptyRoutable.swift in Sources */,
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
-				0C96E5FF28A31DD30034FA73 /* UdfBuilderImp.swift in Sources */,
+				0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */,
+				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
-				0C97E8BD28A56CA100B087DC /* RootRoutable.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
-				0C97E8BF28A56CAD00B087DC /* EditorRoutable.swift in Sources */,
+				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
 				0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */,
-				0C96E5FD28A31DC30034FA73 /* UdfBuilder.swift in Sources */,
+				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
+				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
+				0CA0A4E428A5BC0F00668895 /* NavToEditorRouterImp.swift in Sources */,
+				0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */,
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */,
@@ -773,21 +825,34 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		0C97E8B328A4C91700B087DC /* XCRemoteSwiftPackageReference "ReSwift-Router" */ = {
+		0CA0A4D528A5BBB700668895 /* XCRemoteSwiftPackageReference "ReSwift" */ = {
 			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/ReSwift/ReSwift-Router";
+			repositoryURL = "https://github.com/ReSwift/ReSwift";
 			requirement = {
 				kind = exactVersion;
-				version = 0.7.1;
+				version = 6.1.0;
+			};
+		};
+		0CA0A4E928A5BCBE00668895 /* XCRemoteSwiftPackageReference "SnapKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SnapKit/SnapKit";
+			requirement = {
+				kind = exactVersion;
+				version = 5.6.0;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		0C97E8B428A4C91700B087DC /* ReSwift-Router */ = {
+		0CA0A4D628A5BBB700668895 /* ReSwift */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = 0C97E8B328A4C91700B087DC /* XCRemoteSwiftPackageReference "ReSwift-Router" */;
-			productName = "ReSwift-Router";
+			package = 0CA0A4D528A5BBB700668895 /* XCRemoteSwiftPackageReference "ReSwift" */;
+			productName = ReSwift;
+		};
+		0CA0A4EA28A5BCBE00668895 /* SnapKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0CA0A4E928A5BCBE00668895 /* XCRemoteSwiftPackageReference "SnapKit" */;
+			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

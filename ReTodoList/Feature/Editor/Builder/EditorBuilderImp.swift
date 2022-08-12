@@ -10,13 +10,7 @@ import UIKit
 
 final class EditorBuilderImp: EditorBuilder {
 
-    private let store: Store<AppState>
-
-    init(store: Store<AppState>) {
-        self.store = store
-    }
-
-    func build() -> UIViewController {
+    func build(initTodoItem: TodoItem?) -> UIViewController {
         let viewParams = EditorViewParams(
             backgroundColor: Theme.data.backgroundColor,
             prioritySegmentedControlItems: [Theme.image.lowPriorityMark, "нет", Theme.image.highPriorityMark],
@@ -31,6 +25,6 @@ final class EditorBuilderImp: EditorBuilder {
             )
         )
 
-        return EditorViewController(params: viewParams, store: store)
+        return EditorViewController(params: viewParams)
     }
 }

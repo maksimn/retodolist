@@ -9,5 +9,5 @@ import UIKit
 
 protocol EditorBuilder {
 
-    func build() -> UIViewController
+    func build(initTodoItem: TodoItem?) -> UIViewController
 }
