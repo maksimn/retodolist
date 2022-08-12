@@ -38,6 +38,7 @@ final class AppBuilderImp: AppBuilder {
         let navigationController = UINavigationController()
         let rootViewController = RootViewController(
             mainTitle: "Мои дела",
+            counterBuilder: CounterBuilderImp(store: store),
             itemListBuilder: ItemListBuilderImp(
                 navigationController: navigationController,
                 store: store

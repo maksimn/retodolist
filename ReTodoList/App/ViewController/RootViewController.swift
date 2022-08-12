@@ -12,11 +12,13 @@ final class RootViewController: UIViewController {
     let navToEditorButton = UIButton()
 
     init(mainTitle: String,
+         counterBuilder: CounterBuilder,
          itemListBuilder: ItemListBuilder,
          navToEditorBuilder: NavToEditorBuilder) {
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = mainTitle
         view.backgroundColor = Theme.data.backgroundColor
+        layout(counterBuilder)
         layout(itemListBuilder)
         layout(navToEditorBuilder)
     }
