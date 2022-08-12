@@ -5,20 +5,25 @@
 //  Created by Maksim Ivanov on 21.02.2022.
 //
 
+import ReSwift
 import UIKit
 
 final class NavToEditorBuilderImp: NavToEditorBuilder {
 
     private weak var navigationController: UINavigationController?
 
-    init(navigationController: UINavigationController?) {
+    private var store: Store<AppState>
+
+    init(navigationController: UINavigationController?,
+         store: Store<AppState>) {
         self.navigationController = navigationController
+        self.store = store
     }
 
     /// Создать фичу.
     /// - Returns: представление фичи.
     func build() -> UIView {
-        let editorBuilder = EditorBuilderImp()
+        let editorBuilder = EditorBuilderImp(store: store)
         let router = NavToEditorRouterImp(
             navigationController: navigationController,
             editorBuilder: editorBuilder

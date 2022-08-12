@@ -6,5 +6,5 @@
 //
 
 struct AppState {
-
+    var editorState: EditorState?
 }

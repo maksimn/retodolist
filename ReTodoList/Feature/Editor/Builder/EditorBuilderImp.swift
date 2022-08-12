@@ -10,6 +10,12 @@ import UIKit
 
 final class EditorBuilderImp: EditorBuilder {
 
+    private var store: Store<AppState>
+
+    init(store: Store<AppState>) {
+        self.store = store
+    }
+
     func build(initTodoItem: TodoItem?) -> UIViewController {
         let viewParams = EditorViewParams(
             backgroundColor: Theme.data.backgroundColor,
@@ -25,6 +31,11 @@ final class EditorBuilderImp: EditorBuilder {
             )
         )
 
-        return EditorViewController(params: viewParams)
+        store.dispatch(InitEditorAction(item: initTodoItem))
+
+        return EditorViewController(
+            params: viewParams,
+            store: store
+        )
     }
 }
