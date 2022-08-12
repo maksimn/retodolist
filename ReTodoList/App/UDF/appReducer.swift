@@ -9,6 +9,7 @@ import ReSwift
 
 func appReducer(action: Action, state: AppState?) -> AppState {
     AppState(
+        itemListState: itemListReducer(action: action, state: state),
         editorState: editorReducer(action: action, state: state?.editorState)
     )
 }

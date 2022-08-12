@@ -10,6 +10,18 @@ import UIKit
 
 extension RootViewController {
 
+    func layout(_ itemListBuilder: ItemListBuilder) {
+        let itemListView = itemListBuilder.build()
+
+        view.addSubview(itemListView)
+        itemListView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
+            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
+            make.bottom.equalTo(view.snp.bottom)
+        }
+    }
+
     func layout(_ navToEditorBuilder: NavToEditorBuilder) {
         let navToEditorView = navToEditorBuilder.build()
 

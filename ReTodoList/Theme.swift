@@ -28,7 +28,7 @@ struct Theme {
     }
 
     static let data = Theme(
-        backgroundColor: UIColor(red: 1.00, green: 0.80, blue: 1.00, alpha: 1.00),
+        backgroundColor: UIColor(red: 0.97, green: 0.97, blue: 0.95, alpha: 1.0),
         lightTextColor: UIColor(red: 0, green: 0, blue: 0, alpha: 0.3),
         darkRed: UIColor(red: 1, green: 0.271, blue: 0.227, alpha: 1),
         darkGreen: UIColor(red: 0.196, green: 0.843, blue: 0.294, alpha: 1)

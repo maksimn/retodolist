@@ -31,13 +31,17 @@ final class AppBuilderImp: AppBuilder {
 
         let store = Store(
             reducer: appReducer,
-            state: AppState(editorState: nil),
+            state: nil,
             middleware: [loggingMiddleware]
         )
 
         let navigationController = UINavigationController()
         let rootViewController = RootViewController(
             mainTitle: "Мои дела",
+            itemListBuilder: ItemListBuilderImp(
+                navigationController: navigationController,
+                store: store
+            ),
             navToEditorBuilder: NavToEditorBuilderImp(
                 navigationController: navigationController,
                 store: store
