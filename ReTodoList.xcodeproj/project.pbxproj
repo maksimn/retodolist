@@ -17,6 +17,13 @@
 		0C1604F428A64EA9004E710F /* NewTodoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604EF28A64EA8004E710F /* NewTodoItemCell.swift */; };
 		0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */; };
 		0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604F628A64EDD004E710F /* UIView+Core.swift */; };
+		0C16050D28A65623004E710F /* ItemListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050328A65623004E710F /* ItemListView.swift */; };
+		0C16050E28A65623004E710F /* ItemListBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050528A65623004E710F /* ItemListBuilderImp.swift */; };
+		0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050628A65623004E710F /* ItemListBuilder.swift */; };
+		0C16051228A666E8004E710F /* ItemListState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051128A666E8004E710F /* ItemListState.swift */; };
+		0C16051428A666F8004E710F /* ItemListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051328A666F8004E710F /* ItemListAction.swift */; };
+		0C16051628A66707004E710F /* itemListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051528A66707004E710F /* itemListReducer.swift */; };
+		0C16051828A6B882004E710F /* ItemListView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051728A6B882004E710F /* ItemListView+Layout.swift */; };
 		0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848B28A1D8A200805B83 /* AppDelegate.swift */; };
 		0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848D28A1D8A200805B83 /* SceneDelegate.swift */; };
 		0C69849528A1D8A400805B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C69849428A1D8A400805B83 /* Assets.xcassets */; };
@@ -77,6 +84,13 @@
 		0C1604EF28A64EA8004E710F /* NewTodoItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodoItemCell.swift; sourceTree = "<group>"; };
 		0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NewTodoItemCell+Layout.swift"; sourceTree = "<group>"; };
 		0C1604F628A64EDD004E710F /* UIView+Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Core.swift"; sourceTree = "<group>"; };
+		0C16050328A65623004E710F /* ItemListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListView.swift; sourceTree = "<group>"; };
+		0C16050528A65623004E710F /* ItemListBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListBuilderImp.swift; sourceTree = "<group>"; };
+		0C16050628A65623004E710F /* ItemListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListBuilder.swift; sourceTree = "<group>"; };
+		0C16051128A666E8004E710F /* ItemListState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListState.swift; sourceTree = "<group>"; };
+		0C16051328A666F8004E710F /* ItemListAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListAction.swift; sourceTree = "<group>"; };
+		0C16051528A66707004E710F /* itemListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemListReducer.swift; sourceTree = "<group>"; };
+		0C16051728A6B882004E710F /* ItemListView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemListView+Layout.swift"; sourceTree = "<group>"; };
 		0C69848828A1D8A200805B83 /* ReTodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReTodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C69848B28A1D8A200805B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C69848D28A1D8A200805B83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -166,6 +180,44 @@
 				0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		0C1604F828A65623004E710F /* ItemList */ = {
+			isa = PBXGroup;
+			children = (
+				0C16050428A65623004E710F /* Builder */,
+				0C16050228A65623004E710F /* View */,
+				0C16051028A66593004E710F /* UDF */,
+			);
+			path = ItemList;
+			sourceTree = "<group>";
+		};
+		0C16050228A65623004E710F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0C16050328A65623004E710F /* ItemListView.swift */,
+				0C16051728A6B882004E710F /* ItemListView+Layout.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0C16050428A65623004E710F /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				0C16050628A65623004E710F /* ItemListBuilder.swift */,
+				0C16050528A65623004E710F /* ItemListBuilderImp.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		0C16051028A66593004E710F /* UDF */ = {
+			isa = PBXGroup;
+			children = (
+				0C16051128A666E8004E710F /* ItemListState.swift */,
+				0C16051328A666F8004E710F /* ItemListAction.swift */,
+				0C16051528A66707004E710F /* itemListReducer.swift */,
+			);
+			path = UDF;
 			sourceTree = "<group>";
 		};
 		0C69847F28A1D8A200805B83 = {
@@ -266,6 +318,7 @@
 			isa = PBXGroup;
 			children = (
 				0C96E60828A462990034FA73 /* Editor */,
+				0C1604F828A65623004E710F /* ItemList */,
 				0CA0A4D828A5BC0F00668895 /* NavToEditor */,
 			);
 			path = Feature;
@@ -530,19 +583,25 @@
 				0C1604F428A64EA9004E710F /* NewTodoItemCell.swift in Sources */,
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
 				0C1604E928A61DF1004E710F /* UISegmentedControl+Core.swift in Sources */,
+				0C16050E28A65623004E710F /* ItemListBuilderImp.swift in Sources */,
+				0C16051628A66707004E710F /* itemListReducer.swift in Sources */,
 				0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */,
 				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
+				0C16051228A666E8004E710F /* ItemListState.swift in Sources */,
+				0C16051428A666F8004E710F /* ItemListAction.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
 				0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */,
 				0C1604F128A64EA9004E710F /* TodoTableController.swift in Sources */,
+				0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */,
 				0C1604DC28A5E917004E710F /* EditorState.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
+				0C16051828A6B882004E710F /* ItemListView+Layout.swift in Sources */,
 				0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */,
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
@@ -550,6 +609,7 @@
 				0CA0A4E428A5BC0F00668895 /* NavToEditorRouterImp.swift in Sources */,
 				0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */,
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
+				0C16050D28A65623004E710F /* ItemListView.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */,
 				0C1604F328A64EA9004E710F /* TodoItemCell.swift in Sources */,
