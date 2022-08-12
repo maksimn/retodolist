@@ -12,9 +12,9 @@ struct CreateItemAction: Action {
 }
 
 struct ToggleItemCompletionAction: Action {
-    let position: Int
+    let item: TodoItem
 }
 
 struct DeleteItemAction: Action {
-    let position: Int
+    let item: TodoItem
 }
