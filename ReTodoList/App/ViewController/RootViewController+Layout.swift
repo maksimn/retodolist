@@ -10,6 +10,13 @@ import UIKit
 
 extension RootViewController {
 
+    func layout(_ counterBuilder: CounterBuilder) {
+        let counterView = counterBuilder.build()
+        view.addSubview(counterView)
+        counterView.constraints((view.safeAreaLayoutGuide.topAnchor, 16), 20,
+                                (view.safeAreaLayoutGuide.leadingAnchor, 32), (nil, 0))
+    }
+
     func layout(_ itemListBuilder: ItemListBuilder) {
         let itemListView = itemListBuilder.build()
 
