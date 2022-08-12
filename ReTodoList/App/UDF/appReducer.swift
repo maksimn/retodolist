@@ -8,5 +8,7 @@
 import ReSwift
 
 func appReducer(action: Action, state: AppState?) -> AppState {
-    AppState()
+    AppState(
+        editorState: editorReducer(action: action, state: state?.editorState)
+    )
 }

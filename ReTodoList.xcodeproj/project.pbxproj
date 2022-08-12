@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C1604DC28A5E917004E710F /* EditorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DB28A5E917004E710F /* EditorState.swift */; };
+		0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DD28A5E930004E710F /* editorReducer.swift */; };
+		0C1604E028A5E949004E710F /* EditorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DF28A5E949004E710F /* EditorAction.swift */; };
+		0C1604E928A61DF1004E710F /* UISegmentedControl+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604E828A61DF1004E710F /* UISegmentedControl+Core.swift */; };
 		0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848B28A1D8A200805B83 /* AppDelegate.swift */; };
 		0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848D28A1D8A200805B83 /* SceneDelegate.swift */; };
 		0C69849528A1D8A400805B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C69849428A1D8A400805B83 /* Assets.xcassets */; };
@@ -57,6 +61,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C1604DB28A5E917004E710F /* EditorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorState.swift; sourceTree = "<group>"; };
+		0C1604DD28A5E930004E710F /* editorReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editorReducer.swift; sourceTree = "<group>"; };
+		0C1604DF28A5E949004E710F /* EditorAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorAction.swift; sourceTree = "<group>"; };
+		0C1604E828A61DF1004E710F /* UISegmentedControl+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISegmentedControl+Core.swift"; sourceTree = "<group>"; };
 		0C69848828A1D8A200805B83 /* ReTodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReTodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C69848B28A1D8A200805B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C69848D28A1D8A200805B83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -118,6 +126,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0C1604DA28A5E8FA004E710F /* UDF */ = {
+			isa = PBXGroup;
+			children = (
+				0C1604DF28A5E949004E710F /* EditorAction.swift */,
+				0C1604DB28A5E917004E710F /* EditorState.swift */,
+				0C1604DD28A5E930004E710F /* editorReducer.swift */,
+			);
+			path = UDF;
+			sourceTree = "<group>";
+		};
 		0C69847F28A1D8A200805B83 = {
 			isa = PBXGroup;
 			children = (
@@ -184,8 +202,9 @@
 		0C9378F428A580F9002035EB /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
 				0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */,
+				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
+				0C1604E828A61DF1004E710F /* UISegmentedControl+Core.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -223,6 +242,7 @@
 			children = (
 				0C96E60928A462B10034FA73 /* Builder */,
 				0C96E60A28A462B80034FA73 /* View */,
+				0C1604DA28A5E8FA004E710F /* UDF */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -474,11 +494,14 @@
 				0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */,
 				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
+				0C1604E928A61DF1004E710F /* UISegmentedControl+Core.swift in Sources */,
 				0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */,
 				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
+				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
+				0C1604DC28A5E917004E710F /* EditorState.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
@@ -489,6 +512,7 @@
 				0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */,
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
+				0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */,
 				0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

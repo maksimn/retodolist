@@ -56,7 +56,6 @@ extension EditorViewController {
         initDatePicker()
         initRemoveButton()
         addViews()
-        clear()
         initKeyboardEventsHandle()
     }
 
