@@ -52,6 +52,19 @@
 		0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C96E60F28A463D60034FA73 /* EditorViewController.swift */; };
 		0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8B728A4CB3E00B087DC /* AppState.swift */; };
 		0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C97E8B928A4CC7400B087DC /* appReducer.swift */; };
+		0C9EBD9628A745600043797C /* TodoListCacheImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD8E28A745600043797C /* TodoListCacheImp.swift */; };
+		0C9EBD9728A745600043797C /* DeadItemsCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD8F28A745600043797C /* DeadItemsCache.swift */; };
+		0C9EBD9828A745600043797C /* TodoListCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9028A745600043797C /* TodoListCache.swift */; };
+		0C9EBD9928A745600043797C /* TodoItemMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9228A745600043797C /* TodoItemMO.swift */; };
+		0C9EBD9A28A745600043797C /* TombstoneMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9328A745600043797C /* TombstoneMO.swift */; };
+		0C9EBD9B28A745600043797C /* TodoListPersistentContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9428A745600043797C /* TodoListPersistentContainer.swift */; };
+		0C9EBD9C28A745600043797C /* DeadItemsCacheImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9528A745600043797C /* DeadItemsCacheImp.swift */; };
+		0C9EBD9F28A745960043797C /* TodoList.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBD9D28A745960043797C /* TodoList.xcdatamodeld */; };
+		0C9EBDA328A745D90043797C /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDA128A745D90043797C /* Logger.swift */; };
+		0C9EBDA428A745D90043797C /* LoggerImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDA228A745D90043797C /* LoggerImpl.swift */; };
+		0C9EBDA728A7462D0043797C /* Tombstone.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDA528A7462D0043797C /* Tombstone.swift */; };
+		0C9EBDA828A7462D0043797C /* TodoItem+Array.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDA628A7462D0043797C /* TodoItem+Array.swift */; };
+		0C9EBDAA28A746B10043797C /* TodoItemDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDA928A746B10043797C /* TodoItemDTO.swift */; };
 		0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4D628A5BBB700668895 /* ReSwift */; };
 		0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */; };
 		0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */; };
@@ -130,6 +143,19 @@
 		0C96E60F28A463D60034FA73 /* EditorViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewController.swift; sourceTree = "<group>"; };
 		0C97E8B728A4CB3E00B087DC /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
 		0C97E8B928A4CC7400B087DC /* appReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = appReducer.swift; sourceTree = "<group>"; };
+		0C9EBD8E28A745600043797C /* TodoListCacheImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCacheImp.swift; sourceTree = "<group>"; };
+		0C9EBD8F28A745600043797C /* DeadItemsCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadItemsCache.swift; sourceTree = "<group>"; };
+		0C9EBD9028A745600043797C /* TodoListCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListCache.swift; sourceTree = "<group>"; };
+		0C9EBD9228A745600043797C /* TodoItemMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemMO.swift; sourceTree = "<group>"; };
+		0C9EBD9328A745600043797C /* TombstoneMO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TombstoneMO.swift; sourceTree = "<group>"; };
+		0C9EBD9428A745600043797C /* TodoListPersistentContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoListPersistentContainer.swift; sourceTree = "<group>"; };
+		0C9EBD9528A745600043797C /* DeadItemsCacheImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DeadItemsCacheImp.swift; sourceTree = "<group>"; };
+		0C9EBD9E28A745960043797C /* StorageModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = StorageModel.xcdatamodel; sourceTree = "<group>"; };
+		0C9EBDA128A745D90043797C /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
+		0C9EBDA228A745D90043797C /* LoggerImpl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoggerImpl.swift; sourceTree = "<group>"; };
+		0C9EBDA528A7462D0043797C /* Tombstone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tombstone.swift; sourceTree = "<group>"; };
+		0C9EBDA628A7462D0043797C /* TodoItem+Array.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "TodoItem+Array.swift"; sourceTree = "<group>"; };
+		0C9EBDA928A746B10043797C /* TodoItemDTO.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemDTO.swift; sourceTree = "<group>"; };
 		0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorView.swift; sourceTree = "<group>"; };
 		0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilderImp.swift; sourceTree = "<group>"; };
 		0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilder.swift; sourceTree = "<group>"; };
@@ -319,16 +345,19 @@
 			isa = PBXGroup;
 			children = (
 				0C96E5FA28A31D9E0034FA73 /* App */,
+				0C9EBD8D28A745600043797C /* Cache */,
 				0C9378F428A580F9002035EB /* Core */,
 				0C9378ED28A57C39002035EB /* CustomView */,
 				0CA0A4E628A5BC4300668895 /* DataClass */,
 				0C96E60728A4628E0034FA73 /* Feature */,
 				0C69848B28A1D8A200805B83 /* AppDelegate.swift */,
 				0C69848D28A1D8A200805B83 /* SceneDelegate.swift */,
+				0C9EBDA928A746B10043797C /* TodoItemDTO.swift */,
 				0C96E60528A45F3C0034FA73 /* Theme.swift */,
 				0C69849428A1D8A400805B83 /* Assets.xcassets */,
 				0C69849628A1D8A400805B83 /* LaunchScreen.storyboard */,
 				0C69849928A1D8A400805B83 /* Info.plist */,
+				0C9EBD9D28A745960043797C /* TodoList.xcdatamodeld */,
 			);
 			path = ReTodoList;
 			sourceTree = "<group>";
@@ -362,6 +391,7 @@
 		0C9378F428A580F9002035EB /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0C9EBDA028A745D90043797C /* Logger */,
 				0C1604F628A64EDD004E710F /* UIView+Core.swift */,
 				0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */,
 				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
@@ -448,6 +478,37 @@
 			path = ViewController;
 			sourceTree = "<group>";
 		};
+		0C9EBD8D28A745600043797C /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBD8E28A745600043797C /* TodoListCacheImp.swift */,
+				0C9EBD8F28A745600043797C /* DeadItemsCache.swift */,
+				0C9EBD9028A745600043797C /* TodoListCache.swift */,
+				0C9EBD9128A745600043797C /* DataClass */,
+				0C9EBD9428A745600043797C /* TodoListPersistentContainer.swift */,
+				0C9EBD9528A745600043797C /* DeadItemsCacheImp.swift */,
+			);
+			path = Cache;
+			sourceTree = "<group>";
+		};
+		0C9EBD9128A745600043797C /* DataClass */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBD9228A745600043797C /* TodoItemMO.swift */,
+				0C9EBD9328A745600043797C /* TombstoneMO.swift */,
+			);
+			path = DataClass;
+			sourceTree = "<group>";
+		};
+		0C9EBDA028A745D90043797C /* Logger */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBDA128A745D90043797C /* Logger.swift */,
+				0C9EBDA228A745D90043797C /* LoggerImpl.swift */,
+			);
+			path = Logger;
+			sourceTree = "<group>";
+		};
 		0CA0A4D828A5BC0F00668895 /* NavToEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -487,6 +548,8 @@
 		0CA0A4E628A5BC4300668895 /* DataClass */ = {
 			isa = PBXGroup;
 			children = (
+				0C9EBDA628A7462D0043797C /* TodoItem+Array.swift */,
+				0C9EBDA528A7462D0043797C /* Tombstone.swift */,
 				0CA0A4E728A5BC4F00668895 /* TodoItem.swift */,
 			);
 			path = DataClass;
@@ -653,36 +716,46 @@
 			files = (
 				0CA0A4E828A5BC4F00668895 /* TodoItem.swift in Sources */,
 				0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */,
+				0C9EBD9828A745600043797C /* TodoListCache.swift in Sources */,
+				0C9EBD9B28A745600043797C /* TodoListPersistentContainer.swift in Sources */,
 				0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */,
+				0C9EBD9F28A745960043797C /* TodoList.xcdatamodeld in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
 				0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */,
 				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
 				0C1604F428A64EA9004E710F /* NewTodoItemCell.swift in Sources */,
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
+				0C9EBD9C28A745600043797C /* DeadItemsCacheImp.swift in Sources */,
 				0C1604E928A61DF1004E710F /* UISegmentedControl+Core.swift in Sources */,
 				0C16050E28A65623004E710F /* ItemListBuilderImp.swift in Sources */,
 				0C16051628A66707004E710F /* itemListReducer.swift in Sources */,
 				0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */,
 				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
+				0C9EBD9A28A745600043797C /* TombstoneMO.swift in Sources */,
+				0C9EBDA728A7462D0043797C /* Tombstone.swift in Sources */,
 				0C16051228A666E8004E710F /* ItemListState.swift in Sources */,
 				0C16051428A666F8004E710F /* ItemListAction.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
+				0C9EBD9728A745600043797C /* DeadItemsCache.swift in Sources */,
 				0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */,
 				0C1604F128A64EA9004E710F /* TodoTableController.swift in Sources */,
 				0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */,
 				0C16052828A70C98004E710F /* VisibilitySwitchBuilderImp.swift in Sources */,
 				0C1604DC28A5E917004E710F /* EditorState.swift in Sources */,
+				0C9EBDA828A7462D0043797C /* TodoItem+Array.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
+				0C9EBD9928A745600043797C /* TodoItemMO.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
 				0C16051828A6B882004E710F /* ItemListView+Layout.swift in Sources */,
 				0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */,
 				0C16052628A70C7D004E710F /* VisibilitySwitchBuilder.swift in Sources */,
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
+				0C9EBDA328A745D90043797C /* Logger.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
 				0C16052028A6BEBB004E710F /* CounterBuilder.swift in Sources */,
@@ -695,7 +768,10 @@
 				0C16051F28A6BEBB004E710F /* CounterView.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */,
+				0C9EBDA428A745D90043797C /* LoggerImpl.swift in Sources */,
 				0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */,
+				0C9EBDAA28A746B10043797C /* TodoItemDTO.swift in Sources */,
+				0C9EBD9628A745600043797C /* TodoListCacheImp.swift in Sources */,
 				0C1604F328A64EA9004E710F /* TodoItemCell.swift in Sources */,
 				0C96E60628A45F3C0034FA73 /* Theme.swift in Sources */,
 			);
@@ -1063,6 +1139,19 @@
 			productName = SnapKit;
 		};
 /* End XCSwiftPackageProductDependency section */
+
+/* Begin XCVersionGroup section */
+		0C9EBD9D28A745960043797C /* TodoList.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0C9EBD9E28A745960043797C /* StorageModel.xcdatamodel */,
+			);
+			currentVersion = 0C9EBD9E28A745960043797C /* StorageModel.xcdatamodel */;
+			path = TodoList.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 0C69848028A1D8A200805B83 /* Project object */;
 }
