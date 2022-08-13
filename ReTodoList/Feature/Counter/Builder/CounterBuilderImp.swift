@@ -17,6 +17,13 @@ final class CounterBuilderImp: CounterBuilder {
     }
 
     func build() -> UIView {
-        CounterView(text: "Выполнено — ", store: store)
+        weak var viewLazy: CounterView?
+
+        let model = CounterModelImp(viewBlock: { viewLazy }, store: store)
+        let view = CounterViewImp(text: "Выполнено — ", model: model)
+
+        viewLazy = view
+
+        return view
     }
 }

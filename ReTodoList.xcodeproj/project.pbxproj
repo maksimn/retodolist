@@ -24,7 +24,7 @@
 		0C16051428A666F8004E710F /* ItemListAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051328A666F8004E710F /* ItemListAction.swift */; };
 		0C16051628A66707004E710F /* itemListReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051528A66707004E710F /* itemListReducer.swift */; };
 		0C16051828A6B882004E710F /* ItemListView+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051728A6B882004E710F /* ItemListView+Layout.swift */; };
-		0C16051F28A6BEBB004E710F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051B28A6BEBB004E710F /* CounterView.swift */; };
+		0C16051F28A6BEBB004E710F /* CounterViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051B28A6BEBB004E710F /* CounterViewImp.swift */; };
 		0C16052028A6BEBB004E710F /* CounterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051D28A6BEBB004E710F /* CounterBuilder.swift */; };
 		0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051E28A6BEBB004E710F /* CounterBuilderImp.swift */; };
 		0C16052628A70C7D004E710F /* VisibilitySwitchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052528A70C7D004E710F /* VisibilitySwitchBuilder.swift */; };
@@ -82,6 +82,9 @@
 		0C9EBDDF28A8319D0043797C /* NetworkIndicatorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDDE28A8319D0043797C /* NetworkIndicatorAction.swift */; };
 		0C9EBDE128A836740043797C /* NetworkIndicatorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDE028A836740043797C /* NetworkIndicatorState.swift */; };
 		0C9EBDE328A836990043797C /* networkIndicatorReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDE228A836990043797C /* networkIndicatorReducer.swift */; };
+		0C9EBDE628A861B80043797C /* CounterModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDE528A861B80043797C /* CounterModel.swift */; };
+		0C9EBDE828A861DA0043797C /* CounterModelImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDE728A861DA0043797C /* CounterModelImp.swift */; };
+		0C9EBDEA28A862B40043797C /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDE928A862B40043797C /* CounterView.swift */; };
 		0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4D628A5BBB700668895 /* ReSwift */; };
 		0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */; };
 		0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */; };
@@ -128,7 +131,7 @@
 		0C16051328A666F8004E710F /* ItemListAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListAction.swift; sourceTree = "<group>"; };
 		0C16051528A66707004E710F /* itemListReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = itemListReducer.swift; sourceTree = "<group>"; };
 		0C16051728A6B882004E710F /* ItemListView+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ItemListView+Layout.swift"; sourceTree = "<group>"; };
-		0C16051B28A6BEBB004E710F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
+		0C16051B28A6BEBB004E710F /* CounterViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterViewImp.swift; sourceTree = "<group>"; };
 		0C16051D28A6BEBB004E710F /* CounterBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterBuilder.swift; sourceTree = "<group>"; };
 		0C16051E28A6BEBB004E710F /* CounterBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterBuilderImp.swift; sourceTree = "<group>"; };
 		0C16052528A70C7D004E710F /* VisibilitySwitchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchBuilder.swift; sourceTree = "<group>"; };
@@ -190,6 +193,9 @@
 		0C9EBDDE28A8319D0043797C /* NetworkIndicatorAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorAction.swift; sourceTree = "<group>"; };
 		0C9EBDE028A836740043797C /* NetworkIndicatorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorState.swift; sourceTree = "<group>"; };
 		0C9EBDE228A836990043797C /* networkIndicatorReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = networkIndicatorReducer.swift; sourceTree = "<group>"; };
+		0C9EBDE528A861B80043797C /* CounterModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterModel.swift; sourceTree = "<group>"; };
+		0C9EBDE728A861DA0043797C /* CounterModelImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterModelImp.swift; sourceTree = "<group>"; };
+		0C9EBDE928A862B40043797C /* CounterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorView.swift; sourceTree = "<group>"; };
 		0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilderImp.swift; sourceTree = "<group>"; };
 		0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilder.swift; sourceTree = "<group>"; };
@@ -299,6 +305,7 @@
 			isa = PBXGroup;
 			children = (
 				0C16051C28A6BEBB004E710F /* Builder */,
+				0C9EBDE428A861A30043797C /* Model */,
 				0C16051A28A6BEBB004E710F /* View */,
 			);
 			path = Counter;
@@ -307,7 +314,8 @@
 		0C16051A28A6BEBB004E710F /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0C16051B28A6BEBB004E710F /* CounterView.swift */,
+				0C9EBDE928A862B40043797C /* CounterView.swift */,
+				0C16051B28A6BEBB004E710F /* CounterViewImp.swift */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -648,6 +656,15 @@
 			path = UDF;
 			sourceTree = "<group>";
 		};
+		0C9EBDE428A861A30043797C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBDE528A861B80043797C /* CounterModel.swift */,
+				0C9EBDE728A861DA0043797C /* CounterModelImp.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0CA0A4D828A5BC0F00668895 /* NavToEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -885,12 +902,14 @@
 				0C16051228A666E8004E710F /* ItemListState.swift in Sources */,
 				0C16051428A666F8004E710F /* ItemListAction.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
+				0C9EBDE628A861B80043797C /* CounterModel.swift in Sources */,
 				0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* TodoCoder.swift in Sources */,
 				0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
 				0C9EBD9728A745600043797C /* DeadItemsCache.swift in Sources */,
+				0C9EBDEA28A862B40043797C /* CounterView.swift in Sources */,
 				0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */,
 				0C1604F128A64EA9004E710F /* TodoTableController.swift in Sources */,
 				0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */,
@@ -920,8 +939,9 @@
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
 				0C16050D28A65623004E710F /* ItemListView.swift in Sources */,
 				0C9EBDBB28A749EF0043797C /* NetworkingService.swift in Sources */,
-				0C16051F28A6BEBB004E710F /* CounterView.swift in Sources */,
+				0C16051F28A6BEBB004E710F /* CounterViewImp.swift in Sources */,
 				0C9EBDDF28A8319D0043797C /* NetworkIndicatorAction.swift in Sources */,
+				0C9EBDE828A861DA0043797C /* CounterModelImp.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */,
 				0C9EBDA428A745D90043797C /* LoggerImpl.swift in Sources */,

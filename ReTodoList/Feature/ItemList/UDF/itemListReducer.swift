@@ -47,25 +47,22 @@ func itemListReducer(action: Action, state: AppState?) -> ItemListState {
 }
 
 private func nextState(_ action: LoadItemsFromCacheAction, _ state: ItemListState) -> ItemListState {
-    var state = state
-
-    state.items = action.items
-
-    return state
+    return nextState(forNewItems: action.items, state: state)
 }
 
 private func nextState(_ action: GetRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
-    var state = state
-
-    state.items = action.items
-
-    return state
+    return nextState(forNewItems: action.items, state: state)
 }
 
 private func nextState(_ action: MergeWithRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
+    return nextState(forNewItems: action.items, state: state)
+}
+
+private func nextState(forNewItems items: [TodoItem], state: ItemListState) -> ItemListState {
     var state = state
 
-    state.items = action.items
+    state.items = items
+    state.completedItemCount = items.filter({ $0.isCompleted }).count
 
     return state
 }
