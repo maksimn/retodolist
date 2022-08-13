@@ -29,9 +29,17 @@ final class AppBuilderImp: AppBuilder {
             }
         }
 
+        let initialState = AppState(
+            itemListState: ItemListState(
+                items: [],
+                completedItemCount: 0,
+                areCompleteItemsVisible: false
+            ),
+            editorState: nil
+        )
         let store = Store(
             reducer: appReducer,
-            state: nil,
+            state: initialState,
             middleware: [loggingMiddleware]
         )
 
@@ -39,6 +47,7 @@ final class AppBuilderImp: AppBuilder {
         let rootViewController = RootViewController(
             mainTitle: "Мои дела",
             counterBuilder: CounterBuilderImp(store: store),
+            visibilitySwitchBuilder: VisibilitySwitchBuilderImp(store: store),
             itemListBuilder: ItemListBuilderImp(
                 navigationController: navigationController,
                 store: store

@@ -13,12 +13,14 @@ final class RootViewController: UIViewController {
 
     init(mainTitle: String,
          counterBuilder: CounterBuilder,
+         visibilitySwitchBuilder: VisibilitySwitchBuilder,
          itemListBuilder: ItemListBuilder,
          navToEditorBuilder: NavToEditorBuilder) {
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = mainTitle
         view.backgroundColor = Theme.data.backgroundColor
         layout(counterBuilder)
+        layout(visibilitySwitchBuilder)
         layout(itemListBuilder)
         layout(navToEditorBuilder)
     }

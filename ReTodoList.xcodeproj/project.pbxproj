@@ -27,6 +27,10 @@
 		0C16051F28A6BEBB004E710F /* CounterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051B28A6BEBB004E710F /* CounterView.swift */; };
 		0C16052028A6BEBB004E710F /* CounterBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051D28A6BEBB004E710F /* CounterBuilder.swift */; };
 		0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16051E28A6BEBB004E710F /* CounterBuilderImp.swift */; };
+		0C16052628A70C7D004E710F /* VisibilitySwitchBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052528A70C7D004E710F /* VisibilitySwitchBuilder.swift */; };
+		0C16052828A70C98004E710F /* VisibilitySwitchBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052728A70C98004E710F /* VisibilitySwitchBuilderImp.swift */; };
+		0C16052A28A70CB4004E710F /* VisibilitySwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052928A70CB4004E710F /* VisibilitySwitchView.swift */; };
+		0C16052D28A7100E004E710F /* VisibilitySwitchAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */; };
 		0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848B28A1D8A200805B83 /* AppDelegate.swift */; };
 		0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848D28A1D8A200805B83 /* SceneDelegate.swift */; };
 		0C69849528A1D8A400805B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C69849428A1D8A400805B83 /* Assets.xcassets */; };
@@ -97,6 +101,10 @@
 		0C16051B28A6BEBB004E710F /* CounterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterView.swift; sourceTree = "<group>"; };
 		0C16051D28A6BEBB004E710F /* CounterBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterBuilder.swift; sourceTree = "<group>"; };
 		0C16051E28A6BEBB004E710F /* CounterBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CounterBuilderImp.swift; sourceTree = "<group>"; };
+		0C16052528A70C7D004E710F /* VisibilitySwitchBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchBuilder.swift; sourceTree = "<group>"; };
+		0C16052728A70C98004E710F /* VisibilitySwitchBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchBuilderImp.swift; sourceTree = "<group>"; };
+		0C16052928A70CB4004E710F /* VisibilitySwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchView.swift; sourceTree = "<group>"; };
+		0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchAction.swift; sourceTree = "<group>"; };
 		0C69848828A1D8A200805B83 /* ReTodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReTodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C69848B28A1D8A200805B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C69848D28A1D8A200805B83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -252,6 +260,41 @@
 			path = Builder;
 			sourceTree = "<group>";
 		};
+		0C16052228A70C50004E710F /* VisibilitySwitch */ = {
+			isa = PBXGroup;
+			children = (
+				0C16052328A70C5C004E710F /* Builder */,
+				0C16052428A70C65004E710F /* View */,
+				0C16052B28A71003004E710F /* UDF */,
+			);
+			path = VisibilitySwitch;
+			sourceTree = "<group>";
+		};
+		0C16052328A70C5C004E710F /* Builder */ = {
+			isa = PBXGroup;
+			children = (
+				0C16052528A70C7D004E710F /* VisibilitySwitchBuilder.swift */,
+				0C16052728A70C98004E710F /* VisibilitySwitchBuilderImp.swift */,
+			);
+			path = Builder;
+			sourceTree = "<group>";
+		};
+		0C16052428A70C65004E710F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0C16052928A70CB4004E710F /* VisibilitySwitchView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		0C16052B28A71003004E710F /* UDF */ = {
+			isa = PBXGroup;
+			children = (
+				0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */,
+			);
+			path = UDF;
+			sourceTree = "<group>";
+		};
 		0C69847F28A1D8A200805B83 = {
 			isa = PBXGroup;
 			children = (
@@ -353,6 +396,7 @@
 				0C96E60828A462990034FA73 /* Editor */,
 				0C1604F828A65623004E710F /* ItemList */,
 				0CA0A4D828A5BC0F00668895 /* NavToEditor */,
+				0C16052228A70C50004E710F /* VisibilitySwitch */,
 			);
 			path = Feature;
 			sourceTree = "<group>";
@@ -630,17 +674,21 @@
 				0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */,
 				0C1604F128A64EA9004E710F /* TodoTableController.swift in Sources */,
 				0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */,
+				0C16052828A70C98004E710F /* VisibilitySwitchBuilderImp.swift in Sources */,
 				0C1604DC28A5E917004E710F /* EditorState.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
 				0C16051828A6B882004E710F /* ItemListView+Layout.swift in Sources */,
 				0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */,
+				0C16052628A70C7D004E710F /* VisibilitySwitchBuilder.swift in Sources */,
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
 				0C16052028A6BEBB004E710F /* CounterBuilder.swift in Sources */,
 				0CA0A4E428A5BC0F00668895 /* NavToEditorRouterImp.swift in Sources */,
+				0C16052A28A70CB4004E710F /* VisibilitySwitchView.swift in Sources */,
+				0C16052D28A7100E004E710F /* VisibilitySwitchAction.swift in Sources */,
 				0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */,
 				0C97E8BA28A4CC7400B087DC /* appReducer.swift in Sources */,
 				0C16050D28A65623004E710F /* ItemListView.swift in Sources */,

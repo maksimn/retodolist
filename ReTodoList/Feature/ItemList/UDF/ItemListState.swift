@@ -7,7 +7,6 @@
 
 struct ItemListState {
     var items: [TodoItem]
-    var incompleteItems: [TodoItem]
     var completedItemCount: Int
     var areCompleteItemsVisible: Bool
 }

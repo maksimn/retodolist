@@ -7,76 +7,109 @@
 
 import ReSwift
 
-// swiftlint:disable cyclomatic_complexity
 func itemListReducer(action: Action, state: AppState?) -> ItemListState {
-    let initialState = ItemListState(
-        items: [], incompleteItems: [], completedItemCount: 0, areCompleteItemsVisible: true
-    )
     guard let state = state else {
-        return state?.itemListState ?? initialState
+        return ItemListState(items: [], completedItemCount: 0, areCompleteItemsVisible: true)
+    }
+
+    switch action {
+    case let action as ItemSavedEditorAction:
+        return nextState(action, state)
+
+    case let action as ItemDeletedEditorAction:
+        return nextState(action, state)
+
+    case let action as CreateItemAction:
+        return nextState(action, state.itemListState)
+
+    case let action as ToggleItemCompletionAction:
+        return nextState(action, state.itemListState)
+
+    case let action as DeleteItemAction:
+        return nextState(action, state.itemListState)
+
+    case let action as SwitchCompletedItemsVisibilityAction:
+        return nextState(action, state.itemListState)
+
+    default:
+        return state.itemListState
+    }
+}
+
+private func nextState(_ action: ItemSavedEditorAction, _ state: AppState) -> ItemListState {
+    guard let item = state.editorState?.item else {
+        return state.itemListState
     }
     var itemListState = state.itemListState
 
-    switch action {
-    case _ as ItemSavedEditorAction:
-        guard let item = state.editorState?.item else {
-            return state.itemListState
-        }
-
-        if let index = itemListState.items.firstIndex(where: { $0.id == item.id }) {
-            itemListState.items[index] = item
-        } else {
-            itemListState.items.append(item)
-        }
-
-    case _ as ItemDeletedEditorAction:
-        guard let deletedItem = state.editorState?.item else { return itemListState }
-
-        if let index = state.itemListState.items.firstIndex(where: { $0.id == deletedItem.id }) {
-            return stateAfterItemDeletionWith(index: index, state: itemListState)
-        }
-
-    case let action as CreateItemAction:
-        itemListState.items.append(action.item)
-
-    case let action as ToggleItemCompletionAction:
-        let index = action.position
-
-        if index > -1 && index < itemListState.items.count {
-            let item = itemListState.items[index]
-            let newItem = item.update(isCompleted: !item.isCompleted)
-
-            itemListState.items[index] = newItem
-
-            if newItem.isCompleted {
-                itemListState.completedItemCount += 1
-            } else if itemListState.completedItemCount > 0 {
-                itemListState.completedItemCount -= 1
-            }
-        }
-
-    case let action as DeleteItemAction:
-        return stateAfterItemDeletionWith(index: action.position, state: itemListState)
-
-    default:
-        break
+    if let index = itemListState.items.firstIndex(where: { $0.id == item.id }) {
+        itemListState.items[index] = item
+    } else {
+        itemListState.items.append(item)
     }
 
     return itemListState
 }
 
-private func stateAfterItemDeletionWith(index: Int, state: ItemListState) -> ItemListState {
+private func nextState(_ action: ItemDeletedEditorAction, _ state: AppState) -> ItemListState {
+    guard let deletedItem = state.editorState?.item else {
+        return state.itemListState
+    }
+    var state = state.itemListState
+
+    if let index = state.items.firstIndex(where: { $0.id == deletedItem.id }) {
+        state.items.remove(at: index)
+    }
+
+    return state
+}
+
+private func nextState(_ action: CreateItemAction, _ state: ItemListState) -> ItemListState {
+    var itemListState = state
+
+    itemListState.items.append(action.item)
+
+    return itemListState
+}
+
+private func nextState(_ action: ToggleItemCompletionAction, _ state: ItemListState) -> ItemListState {
+    var state = state
+    guard let index = state.items.firstIndex(where: { $0.id == action.item.id }) else {
+        return state
+    }
+
+    let item = state.items[index]
+    let newItem = item.update(isCompleted: !item.isCompleted)
+
+    state.items[index] = newItem
+
+    if newItem.isCompleted {
+        state.completedItemCount += 1
+    } else if state.completedItemCount > 0 {
+        state.completedItemCount -= 1
+    }
+
+    return state
+}
+
+private func nextState(_ action: DeleteItemAction, _ state: ItemListState) -> ItemListState {
+    guard let index = state.items.firstIndex(where: { $0.id == action.item.id }) else { return state }
+    let item = state.items[index]
     var state = state
 
-    if index > -1 && index < state.items.count {
-        let item = state.items[index]
+    state.items.remove(at: index)
 
-        state.items.remove(at: index)
-
-        if item.isCompleted && state.completedItemCount > 0 {
-            state.completedItemCount -= 1
-        }
+    if item.isCompleted && state.completedItemCount > 0 {
+        state.completedItemCount -= 1
     }
+
+    return state
+}
+
+private func nextState(_ action: SwitchCompletedItemsVisibilityAction, _ state: ItemListState) -> ItemListState {
+    var state = state
+
+    state.areCompleteItemsVisible = !state.areCompleteItemsVisible
 
     return state
 }

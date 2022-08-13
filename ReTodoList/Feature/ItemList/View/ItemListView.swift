@@ -58,12 +58,10 @@ final class ItemListView: UIView, StoreSubscriber {
 
     func newState(state: ItemListState?) {
         guard let state = state else { return }
-
-        tableController.items = state.items
-
-        var items = state.items
         var snapshot = NSDiffableDataSourceSnapshot<Int, TodoItem>()
+        var items = state.areCompleteItemsVisible ? state.items : state.items.filter { !$0.isCompleted }
 
+        tableController.items = items
         items.append(TodoItem(isTerminal: true))
         snapshot.appendSections([0])
         snapshot.appendItems(items, toSection: 0)
@@ -76,11 +74,19 @@ final class ItemListView: UIView, StoreSubscriber {
     }
 
     func onDeleteTap(_ position: Int) {
-        store.dispatch(DeleteItemAction(position: position))
+        guard position > -1 && position < tableController.items.count else { return }
+
+        let todoItem = tableController.items[position]
+
+        store.dispatch(DeleteItemAction(item: todoItem))
     }
 
     func onTodoCompletionTap(_ position: Int) {
-        store.dispatch(ToggleItemCompletionAction(position: position))
+        guard position > -1 && position < tableController.items.count else { return }
+
+        let todoItem = tableController.items[position]
+
+        store.dispatch(ToggleItemCompletionAction(item: todoItem))
     }
 
     func onDidSelectAt(_ position: Int) {

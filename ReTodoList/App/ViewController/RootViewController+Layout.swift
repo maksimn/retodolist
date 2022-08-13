@@ -17,6 +17,14 @@ extension RootViewController {
                                 (view.safeAreaLayoutGuide.leadingAnchor, 32), (nil, 0))
     }
 
+    func layout(_ visibilitySwitchBuilder: VisibilitySwitchBuilder) {
+        let visibilitySwitchView = visibilitySwitchBuilder.build()
+
+        view.addSubview(visibilitySwitchView)
+        visibilitySwitchView.constraints((view.safeAreaLayoutGuide.topAnchor, 16), 20, (nil, 0),
+                                         (view.safeAreaLayoutGuide.trailingAnchor, -32))
+    }
+
     func layout(_ itemListBuilder: ItemListBuilder) {
         let itemListView = itemListBuilder.build()
 
