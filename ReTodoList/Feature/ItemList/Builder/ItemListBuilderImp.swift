@@ -34,7 +34,6 @@ final class ItemListBuilderImp: ItemListBuilder {
             isRemotingEnabled: !token.isEmpty,
             cache: TodoListCacheImp(container: persistentContainer, logger: logger),
             deadItemsCache: DeadItemsCacheImp(container: persistentContainer, logger: logger),
-            logger: logger,
             networking: DefaultNetworkingService(
                 urlString: "https://d5dps3h13rv6902lp5c8.apigw.yandexcloud.net",
                 headers: [
@@ -44,8 +43,8 @@ final class ItemListBuilderImp: ItemListBuilder {
                 coreService: URLSessionCoreService(),
                 coder: JSONTodoCoder()
             ),
-            dispatch: { [weak self] action in
-                self?.store.dispatch(action)
+            dispatch: { action in
+                self.store.dispatch(action)
             }
         )
 

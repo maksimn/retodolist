@@ -8,27 +8,12 @@
 import Foundation
 import ReSwift
 
-struct IncrementNetworkRequestCountAction: Action { }
-
-struct DecrementNetworkRequestCountAction: Action { }
-
-struct MergeItemsWithRemoteSuccessAction: Action {
-    let items: [TodoItem]
-}
-
-private let getTodoList = "GET TODOLIST"
-private let createTodoItem = "CREATE TODO ITEM"
-private let updateTodoItem = "UPDATE TODO ITEM"
-private let deleteTodoItem = "DELETE TODO ITEM"
-private let mergeTodoList = "MERGE TODOLIST"
-
 /// Общая логика отправки и обработки сетевых запросов создания, обновления и удаления todo item'a.
 class TodoListServiceOne: TodoListService {
 
     private let isRemotingEnabled: Bool
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
-    private let logger: Logger
     private let networking: NetworkingService
     private let dispatch: (Action) -> Void
 
@@ -41,13 +26,11 @@ class TodoListServiceOne: TodoListService {
     init(isRemotingEnabled: Bool,
          cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
-         logger: Logger,
          networking: NetworkingService,
          dispatch: @escaping (Action) -> Void) {
         self.isRemotingEnabled = isRemotingEnabled
         self.cache = cache
         self.deadItemsCache = deadItemsCache
-        self.logger = logger
         self.networking = networking
         self.dispatch = dispatch
     }
@@ -62,22 +45,22 @@ class TodoListServiceOne: TodoListService {
         }
 
         if cache.isDirty {
-            mergeWithRemote(completion)
-        } else {
-            requestWillStart(getTodoList)
-            networking.fetchTodoList { [weak self] result in
-                do {
-                    self?.requestDidEnd(getTodoList)
+            return mergeWithRemote(completion)
+        }
 
-                    let fetchedItems = try result.get().map { TodoItem($0) }
-                    let mergedItems = self?.cachedItems.mergeWith(fetchedItems) ?? []
-                    self?.cache.replaceWith(mergedItems) { error in
-                        completion(error)
-                    }
-                } catch {
-                    self?.requestDidEnd(getTodoList, withError: error)
+        dispatch(GetRemoteItemsStartAction())
+        networking.fetchTodoList { [weak self] result in
+            do {
+                let fetchedItems = try result.get().map { TodoItem($0) }
+                let mergedItems = self?.cachedItems.mergeWith(fetchedItems) ?? []
+
+                self?.dispatch(GetRemoteItemsSuccessAction(items: mergedItems))
+                self?.cache.replaceWith(mergedItems) { error in
                     completion(error)
                 }
+            } catch {
+                self?.dispatch(GetRemoteItemsErrorAction(error: error))
+                completion(error)
             }
         }
     }
@@ -95,18 +78,19 @@ class TodoListServiceOne: TodoListService {
             }
         }
 
-        requestWillStart(createTodoItem)
         cache.insert(todoItem.update(isDirty: true)) { [weak self] _ in
+            self?.dispatch(CreateRemoteItemStartAction(item: todoItem))
             self?.networking.createTodoItem(TodoItemDTO(todoItem)) { [weak self] result in
                 do {
                     _ = try result.get()
 
-                    self?.requestDidEnd(createTodoItem)
+                    self?.dispatch(CreateRemoteItemSuccessAction(item: todoItem))
                     self?.cache.update(todoItem.update(isDirty: false)) { _ in
                         completion(nil)
                     }
                 } catch {
-                    self?.handleItemRequestError(error, todoItem, requestName: createTodoItem, completion)
+                    self?.dispatch(CreateRemoteItemErrorAction(item: todoItem, error: error))
+                    self?.handleItemRequestError(error, todoItem, isDelete: false, completion)
                 }
             }
         }
@@ -127,18 +111,19 @@ class TodoListServiceOne: TodoListService {
             return
         }
 
-        requestWillStart(updateTodoItem)
         cache.update(todoItem.update(isDirty: true)) { [weak self] _ in
+            self?.dispatch(UpdateRemoteItemStartAction(item: todoItem))
             self?.networking.updateTodoItem(TodoItemDTO(todoItem)) { [weak self] result in
                 do {
                     _ = try result.get()
 
-                    self?.requestDidEnd(updateTodoItem)
+                    self?.dispatch(UpdateRemoteItemSuccessAction(item: todoItem))
                     self?.cache.update(todoItem.update(isDirty: false)) { _ in
                         completion(nil)
                     }
                 } catch {
-                    self?.handleItemRequestError(error, todoItem, requestName: updateTodoItem, completion)
+                    self?.dispatch(UpdateRemoteItemErrorAction(item: todoItem, error: error))
+                    self?.handleItemRequestError(error, todoItem, isDelete: false, completion)
                 }
             }
         }
@@ -160,7 +145,7 @@ class TodoListServiceOne: TodoListService {
         }
     }
 
-    func mergeWithRemote(_ completion: @escaping (Error?) -> Void) {
+    private func mergeWithRemote(_ completion: @escaping (Error?) -> Void) {
         guard isRemotingEnabled else {
             return completion(TodoListServiceError.remotingDisabled)
         }
@@ -169,21 +154,20 @@ class TodoListServiceOne: TodoListService {
         let dirtyItems = cache.items.filter { $0.isDirty }.map { TodoItemDTO($0) }
         let requestData = MergeTodoListRequestData(deleted: deleted, other: dirtyItems)
 
-        requestWillStart(mergeTodoList)
+        dispatch(MergeWithRemoteItemsStartAction())
         networking.mergeTodoList(requestData) { [weak self] result in
             do {
                 var todoList = try result.get().map({ TodoItem($0) })
 
                 todoList.sortByCreateAt()
-                self?.requestDidEnd(mergeTodoList)
+                self?.dispatch(MergeWithRemoteItemsSuccessAction(items: todoList))
                 self?.deadItemsCache.clearTombstones { _ in }
                 self?.currentDelay = TodoListServiceOne.minDelay
-                self?.cache.replaceWith(todoList) { [weak self] error in
-                    self?.dispatch(MergeItemsWithRemoteSuccessAction(items: todoList))
+                self?.cache.replaceWith(todoList) { error in
                     completion(error)
                 }
             } catch {
-                self?.requestDidEnd(deleteTodoItem, withError: error)
+                self?.dispatch(MergeWithRemoteItemsErrorAction(error: error))
                 self?.retryMergeRequestAfterDelay(completion)
             }
         }
@@ -193,23 +177,24 @@ class TodoListServiceOne: TodoListService {
         let tombstone = Tombstone(itemId: todoItem.id, deletedAt: Date())
 
         if cache.isDirty {
-            deadItemsCache.insert(tombstone: tombstone) { [weak self] _ in
+            return deadItemsCache.insert(tombstone: tombstone) { [weak self] _ in
                 self?.mergeWithRemote(completion)
             }
-        } else {
-            requestWillStart(deleteTodoItem)
-            deadItemsCache.insert(tombstone: tombstone) { [weak self] _ in
-                self?.networking.deleteTodoItem(todoItem.id) { [weak self] result in
-                    do {
-                        _ = try result.get()
+        }
 
-                        self?.requestDidEnd(deleteTodoItem)
-                        self?.deadItemsCache.clearTombstones { _ in
-                            completion(nil)
-                        }
-                    } catch {
-                        self?.handleItemRequestError(error, todoItem, requestName: deleteTodoItem, completion)
+        deadItemsCache.insert(tombstone: tombstone) { [weak self] _ in
+            self?.dispatch(DeleteRemoteItemStartAction(item: todoItem))
+            self?.networking.deleteTodoItem(todoItem.id) { [weak self] result in
+                do {
+                    _ = try result.get()
+
+                    self?.dispatch(DeleteRemoteItemSuccessAction(item: todoItem))
+                    self?.deadItemsCache.clearTombstones { _ in
+                        completion(nil)
                     }
+                } catch {
+                    self?.dispatch(DeleteRemoteItemErrorAction(item: todoItem, error: error))
+                    self?.handleItemRequestError(error, todoItem, isDelete: true, completion)
                 }
             }
         }
@@ -236,32 +221,14 @@ class TodoListServiceOne: TodoListService {
         return next
     }
 
-    private func handleItemRequestError(_ error: Error, _ item: TodoItem, requestName: String,
+    private func handleItemRequestError(_ error: Error, _ item: TodoItem, isDelete: Bool,
                                         _ completion: @escaping (Error?) -> Void) {
-        requestDidEnd(requestName, withError: error)
-
-        if requestName != deleteTodoItem {
+        if !isDelete {
             cache.update(item.update(isDirty: true)) { [weak self] _ in
                 self?.retryMergeRequestAfterDelay(completion)
             }
         } else {
             retryMergeRequestAfterDelay(completion)
-        }
-    }
-
-    private func requestWillStart(_ requestName: String) {
-        logger.log(message: "\n\(requestName) NETWORK REQUEST START\n")
-        dispatch(IncrementNetworkRequestCountAction())
-    }
-
-    private func requestDidEnd(_ requestName: String, withError error: Error? = nil) {
-        dispatch(DecrementNetworkRequestCountAction())
-
-        if let error = error {
-            logger.log(message: "\n\(requestName) NETWORK REQUEST ERROR\n")
-            logger.log(error: error)
-        } else {
-            logger.log(message: "\n\(requestName) NETWORK REQUEST SUCCESS\n")
         }
     }
 

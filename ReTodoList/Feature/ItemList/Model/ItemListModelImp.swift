@@ -30,6 +30,9 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
         store.dispatch(
             LoadItemsFromCacheAction(items: service.cachedItems)
         )
+        service.fetchRemoteTodoList { _ in
+
+        }
     }
 
     func create(item: TodoItem) {

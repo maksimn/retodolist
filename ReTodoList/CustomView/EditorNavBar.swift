@@ -23,23 +23,23 @@ class EditorNavBar {
                                                          target: self, action: #selector(saveButtonTap))
 
     init(params: EditorNavBarParams,
-         navigationItem: UINavigationItem) {
+         navigationItem: UINavigationItem,
+         networkIndicatorBuilder: NetworkIndicatorBuilder) {
         self.params = params
+        let activityBarButtonItem = UIBarButtonItem(customView: networkIndicatorBuilder.build())
 
         navigationItem.title = params.todo
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.rightBarButtonItems = [saveBarButtonItem]
+        navigationItem.rightBarButtonItems = [saveBarButtonItem, activityBarButtonItem]
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: params.cancel, style: .plain,
                                                            target: self, action: #selector(cancelButtonTap))
     }
 
-    @objc
-    private func saveButtonTap() {
+    @objc private func saveButtonTap() {
         onSaveButtonTap?()
     }
 
-    @objc
-    private func cancelButtonTap() {
+    @objc private func cancelButtonTap() {
         onCancelButtonTap?()
     }
 

@@ -33,10 +33,14 @@ final class EditorViewController: UIViewController, UITextViewDelegate, StoreSub
 
     private let store: Store<AppState>
 
+    let networkIndicatorBuilder: NetworkIndicatorBuilder
+
     init(params: EditorViewParams,
-         store: Store<AppState>) {
+         store: Store<AppState>,
+         networkIndicatorBuilder: NetworkIndicatorBuilder) {
         self.params = params
         self.store = store
+        self.networkIndicatorBuilder = networkIndicatorBuilder
         super.init(nibName: nil, bundle: nil)
         initViews()
         store.subscribe(self) { subcription in

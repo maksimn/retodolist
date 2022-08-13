@@ -7,6 +7,7 @@
 
 import ReSwift
 
+// swiftlint:disable cyclomatic_complexity
 func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     guard let state = state else {
         return ItemListState(items: [], completedItemCount: 0, areCompleteItemsVisible: true)
@@ -16,7 +17,10 @@ func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     case let action as LoadItemsFromCacheAction:
         return nextState(action, state.itemListState)
 
-    case let action as MergeItemsWithRemoteSuccessAction:
+    case let action as GetRemoteItemsSuccessAction:
+        return nextState(action, state.itemListState)
+
+    case let action as MergeWithRemoteItemsSuccessAction:
         return nextState(action, state.itemListState)
 
     case let action as ItemSavedEditorAction:
@@ -50,7 +54,15 @@ private func nextState(_ action: LoadItemsFromCacheAction, _ state: ItemListStat
     return state
 }
 
-private func nextState(_ action: MergeItemsWithRemoteSuccessAction, _ state: ItemListState) -> ItemListState {
+private func nextState(_ action: GetRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
+    var state = state
+
+    state.items = action.items
+
+    return state
+}
+
+private func nextState(_ action: MergeWithRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
     var state = state
 
     state.items = action.items

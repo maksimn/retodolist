@@ -16,6 +16,4 @@ protocol TodoListService {
     func updateRemote(_ todoItem: TodoItem, _ completion: @escaping (Error?) -> Void)
 
     func removeRemote(_ todoItem: TodoItem, _ completion: @escaping (Error?) -> Void)
-
-    func mergeWithRemote(_ completion: @escaping (Error?) -> Void)
 }

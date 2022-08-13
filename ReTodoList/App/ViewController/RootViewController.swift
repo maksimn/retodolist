@@ -15,7 +15,8 @@ final class RootViewController: UIViewController {
          counterBuilder: CounterBuilder,
          visibilitySwitchBuilder: VisibilitySwitchBuilder,
          itemListBuilder: ItemListBuilder,
-         navToEditorBuilder: NavToEditorBuilder) {
+         navToEditorBuilder: NavToEditorBuilder,
+         networkIndicatorBuilder: NetworkIndicatorBuilder) {
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = mainTitle
         view.backgroundColor = Theme.data.backgroundColor
@@ -23,6 +24,7 @@ final class RootViewController: UIViewController {
         layout(visibilitySwitchBuilder)
         layout(itemListBuilder)
         layout(navToEditorBuilder)
+        layout(networkIndicatorBuilder)
     }
 
     required init?(coder: NSCoder) {
