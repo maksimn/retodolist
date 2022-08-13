@@ -7,7 +7,7 @@
 
 protocol TodoListService {
 
-    var cachedTodoList: [TodoItem] { get }
+    var cachedItems: [TodoItem] { get }
 
     func fetchRemoteTodoList(_ completion: @escaping (Error?) -> Void)
 

@@ -7,40 +7,105 @@
 
 import Foundation
 
-private let bearerTokenKey = "Authorization"
-private let bearerTokenValue = ""
-private let baseUrl = "https://d5dps3h13rv6902lp5c8.apigw.yandexcloud.net"
-
 class DefaultNetworkingService: NetworkingService {
 
+    private let urlString: String
+    private let headers: [String: String]
     private let coreService: CoreService
-    private let todoCoder: TodoCoder
-    private let jsonHeaders = [bearerTokenKey: bearerTokenValue, "Content-Type": "application/json"]
+    private let coder: TodoCoder
 
-    init(_ coreService: CoreService, _ todoCoder: TodoCoder) {
+    init(urlString: String,
+         headers: [String: String],
+         coreService: CoreService,
+         coder: TodoCoder) {
+        self.urlString = urlString
+        self.headers = headers
         self.coreService = coreService
-        self.todoCoder = todoCoder
+        self.coder = coder
     }
 
-    func fetchTodoList(_ completion: @escaping (TodoListResult) -> Void) {
-        coreService.set(urlString: "\(baseUrl)/tasks/",
-                        httpMethod: "GET",
-                        headers: [bearerTokenKey: bearerTokenValue])
-        coreService.send(nil) { [weak self] result in
-            self?.todoListRequestHandler(result, completion)
+    func fetchTodoList(_ completion: @escaping (TodoListDTOResult) -> Void) {
+        send(
+            Http(
+                urlString: "\(urlString)/tasks/",
+                method: "GET",
+                headers: headers
+            ),
+            completion
+        )
+    }
+
+    func createTodoItem(_ todoItemDTO: TodoItemDTO, _ completion: @escaping (TodoItemDTOResult) -> Void) {
+        send(
+            Http(
+                urlString: "\(urlString)/tasks/",
+                method: "POST",
+                headers: headers
+            ),
+            todoItemDTO,
+            completion
+        )
+    }
+
+    func updateTodoItem(_ todoItemDTO: TodoItemDTO, _ completion: @escaping (TodoItemDTOResult) -> Void) {
+        send(
+            Http(
+                urlString: "\(urlString)/tasks/\(todoItemDTO.id)",
+                method: "PUT",
+                headers: headers
+            ),
+            todoItemDTO,
+            completion
+        )
+    }
+
+    func deleteTodoItem(_ id: String, _ completion: @escaping (TodoItemDTOResult) -> Void) {
+        send(
+            Http(
+                urlString: "\(urlString)/tasks/\(id)",
+                method: "DELETE",
+                headers: headers
+            ),
+            completion
+        )
+    }
+
+    func mergeTodoList(_ requestData: MergeTodoListRequestData, _ completion: @escaping (TodoListDTOResult) -> Void) {
+        send(
+            Http(
+                urlString: "\(urlString)/tasks/",
+                method: "PUT",
+                headers: headers
+            ),
+            requestData,
+            completion
+        )
+    }
+
+    private func send<OutputDTO: Decodable>(_ http: Http, _ completion: @escaping (Result<OutputDTO, Error>) -> Void) {
+        coreService.send(http) { [weak self] result in
+            self?.decode(result, completion)
         }
     }
 
-    func createTodoItem(_ todoItemDTO: TodoItemDTO, _ completion: @escaping (TodoItemResult) -> Void) {
-        coreService.set(urlString: "\(baseUrl)/tasks/",
-                        httpMethod: "POST",
-                        headers: jsonHeaders)
-        todoCoder.encodeAsync(todoItemDTO) { [weak self] result in
+    private func send<InputDTO: Encodable, OutputDTO: Decodable>(
+        _ http: Http,
+        _ dto: InputDTO,
+        _ completion: @escaping (Result<OutputDTO, Error>) -> Void
+    ) {
+        coder.encodeAsync(dto) { [weak self] result in
             do {
                 let data = try result.get()
 
-                self?.coreService.send(data) { [weak self] result in
-                    self?.todoItemRequestHandler(result, completion)
+                self?.coreService.send(
+                    Http(
+                        urlString: http.urlString,
+                        method: http.method,
+                        headers: http.headers,
+                        body: data
+                    )
+                ) { [weak self] result in
+                    self?.decode(result, completion)
                 }
             } catch {
                 completion(.failure(error))
@@ -48,74 +113,15 @@ class DefaultNetworkingService: NetworkingService {
         }
     }
 
-    func updateTodoItem(_ todoItemDTO: TodoItemDTO, _ completion: @escaping (TodoItemResult) -> Void) {
-        coreService.set(urlString: "\(baseUrl)/tasks/\(todoItemDTO.id)",
-                        httpMethod: "PUT",
-                        headers: jsonHeaders)
-        todoCoder.encodeAsync(todoItemDTO) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.coreService.send(data) { [weak self] result in
-                    self?.todoItemRequestHandler(result, completion)
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
-    func deleteTodoItem(_ id: String, _ completion: @escaping (TodoItemResult) -> Void) {
-        coreService.set(urlString: "\(baseUrl)/tasks/\(id)",
-                        httpMethod: "DELETE",
-                        headers: [bearerTokenKey: bearerTokenValue])
-        coreService.send(nil) { [weak self] result in
-            self?.todoItemRequestHandler(result, completion)
-        }
-    }
-
-    func mergeTodoList(_ requestData: MergeTodoListRequestData, _ completion: @escaping (TodoListResult) -> Void) {
-        coreService.set(urlString: "\(baseUrl)/tasks/",
-                        httpMethod: "PUT",
-                        headers: jsonHeaders)
-        todoCoder.encodeAsync(requestData) { [weak self] result in
-            switch result {
-            case .success(let data):
-                self?.coreService.send(data) { [weak self] result in
-                    self?.todoListRequestHandler(result, completion)
-                }
-            case .failure(let error):
-                completion(.failure(error))
-            }
-        }
-    }
-
-    private func todoListRequestHandler(_ result: Result<Data, Error>,
-                                        _ completion: @escaping (Result<[TodoItemDTO], Error>) -> Void) {
+    private func decode<OutputDTO: Decodable>(_ result: Result<Data, Error>,
+                                              _ completion: @escaping (Result<OutputDTO, Error>) -> Void) {
         do {
             let data = try result.get()
 
-            todoCoder.decodeAsync(data) { (result: Result<[TodoItemDTO], Error>) in
+            coder.decodeAsync(data) { (result: Result<OutputDTO, Error>) in
                 switch result {
-                case .success(let array):
-                    completion(.success(array))
-                case .failure(let error):
-                    completion(.failure(error))
-                }
-            }
-        } catch {
-            completion(.failure(error))
-        }
-    }
-
-    private func todoItemRequestHandler(_ result: Result<Data, Error>,
-                                        _ completion: @escaping (Result<TodoItemDTO, Error>) -> Void) {
-        do {
-            let data = try result.get()
-
-            todoCoder.decodeAsync(data) { (result: Result<TodoItemDTO, Error>) in
-                switch result {
-                case .success(let todoItemDTO):
-                    completion(.success(todoItemDTO))
+                case .success(let dto):
+                    completion(.success(dto))
                 case .failure(let error):
                     completion(.failure(error))
                 }
