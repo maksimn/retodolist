@@ -35,7 +35,8 @@ final class EditorBuilderImp: EditorBuilder {
 
         return EditorViewController(
             params: viewParams,
-            store: store
+            store: store,
+            networkIndicatorBuilder: NetworkIndicatorBuilderImp(store: store)
         )
     }
 }

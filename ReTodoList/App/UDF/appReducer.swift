@@ -10,6 +10,7 @@ import ReSwift
 func appReducer(action: Action, state: AppState?) -> AppState {
     AppState(
         itemListState: itemListReducer(action: action, state: state),
-        editorState: editorReducer(action: action, state: state?.editorState)
+        editorState: editorReducer(action: action, state: state?.editorState),
+        networkIndicatorState: networkIndicatorReducer(action: action, state: state?.networkIndicatorState)
     )
 }

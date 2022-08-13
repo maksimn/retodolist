@@ -11,13 +11,14 @@ import UIKit
 final class AppBuilderImp: AppBuilder {
 
     func build() -> UIViewController {
+        let isLoggingLongOutputEnabled = false
         let loggingMiddleware: Middleware<Any> = { _, getState in
             return { next in
                 return { action in
 
                     print("**********************************")
 
-                    if let state = getState() {
+                    if isLoggingLongOutputEnabled, let state = getState() {
                         print("PREVIOUS_STATE:\(state)")
                     }
 
@@ -35,7 +36,8 @@ final class AppBuilderImp: AppBuilder {
                 completedItemCount: 0,
                 areCompleteItemsVisible: false
             ),
-            editorState: nil
+            editorState: nil,
+            networkIndicatorState: NetworkIndicatorState(pendingRequestCount: 0)
         )
         let store = Store(
             reducer: appReducer,
@@ -55,7 +57,8 @@ final class AppBuilderImp: AppBuilder {
             navToEditorBuilder: NavToEditorBuilderImp(
                 navigationController: navigationController,
                 store: store
-            )
+            ),
+            networkIndicatorBuilder: NetworkIndicatorBuilderImp(store: store)
         )
 
         navigationController.navigationBar.setValue(true, forKey: "hidesShadow")

@@ -8,4 +8,5 @@
 struct AppState {
     var itemListState: ItemListState
     var editorState: EditorState?
+    var networkIndicatorState: NetworkIndicatorState
 }

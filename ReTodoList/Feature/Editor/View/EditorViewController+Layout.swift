@@ -33,7 +33,8 @@ extension EditorViewController {
     func initViews() {
         navBar = EditorNavBar(
             params: params.navBar,
-            navigationItem: navigationItem
+            navigationItem: navigationItem,
+            networkIndicatorBuilder: networkIndicatorBuilder
         )
         navBar?.onSaveButtonTap = { [weak self] in
             self?.onSaveButtonTap()
