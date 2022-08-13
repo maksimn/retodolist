@@ -17,6 +17,22 @@ struct TodoItemDTO: Codable {
     let createdAt: Int
     let updatedAt: Int
 
+    init(_ item: TodoItem) {
+        var deadlineInteger: Int?
+
+        if let deadline = item.deadline {
+            deadlineInteger = Int(deadline.timeIntervalSince1970)
+        }
+
+        id = item.id
+        text = item.text
+        importance = TodoItemDTO.mapPriority(item.priority)
+        done = item.isCompleted
+        deadline = deadlineInteger
+        createdAt = item.createdAt
+        updatedAt = item.updatedAt
+    }
+
     private enum CodingKeys: String, CodingKey {
         case id,
              text,
@@ -25,38 +41,6 @@ struct TodoItemDTO: Codable {
              deadline,
              createdAt = "created_at",
              updatedAt = "updated_at"
-    }
-
-    static func map(_ item: TodoItem) -> TodoItemDTO {
-        var deadlineInteger: Int?
-
-        if let deadline = item.deadline {
-            deadlineInteger = Int(deadline.timeIntervalSince1970)
-        }
-
-        return TodoItemDTO(id: item.id,
-                           text: item.text,
-                           importance: mapPriority(item.priority),
-                           done: item.isCompleted,
-                           deadline: deadlineInteger,
-                           createdAt: item.createdAt,
-                           updatedAt: item.updatedAt)
-    }
-
-    func map() -> TodoItem {
-        var deadlineDate: Date?
-
-        if let deadline = deadline {
-            deadlineDate = Date(timeIntervalSince1970: TimeInterval(deadline))
-        }
-
-        return TodoItem(id: id,
-                        text: text,
-                        priority: TodoItemDTO.mapPriority(importance),
-                        deadline: deadlineDate,
-                        isCompleted: done,
-                        createdAt: createdAt,
-                        updatedAt: updatedAt)
     }
 
     static func mapPriority(_ string: String) -> TodoItemPriority {
@@ -79,5 +63,25 @@ struct TodoItemDTO: Codable {
         default:
             return "basic"
         }
+    }
+}
+
+extension TodoItem {
+
+    init(_ dto: TodoItemDTO) {
+        var deadlineDate: Date?
+
+        if let deadline = dto.deadline {
+            deadlineDate = Date(timeIntervalSince1970: TimeInterval(deadline))
+        }
+
+        id = dto.id
+        text =  dto.text
+        priority = TodoItemDTO.mapPriority(dto.importance)
+        deadline = deadlineDate
+        isCompleted = dto.done
+        createdAt = dto.createdAt
+        updatedAt = dto.updatedAt
+        isDirty = false
     }
 }
