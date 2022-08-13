@@ -18,3 +18,7 @@ struct ToggleItemCompletionAction: Action {
 struct DeleteItemAction: Action {
     let item: TodoItem
 }
+
+struct LoadItemsFromCacheAction: Action {
+    let items: [TodoItem]
+}

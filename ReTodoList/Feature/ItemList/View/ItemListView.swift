@@ -8,7 +8,12 @@
 import ReSwift
 import UIKit
 
-final class ItemListView: UIView, StoreSubscriber {
+protocol ItemListViewable: AnyObject {
+
+    func set(state: ItemListState)
+}
+
+final class ItemListView: UIView, ItemListViewable {
 
     private let navToEditorRouter: NavToEditorRouter
 
@@ -39,25 +44,21 @@ final class ItemListView: UIView, StoreSubscriber {
 
     let tableController = TodoTableController()
 
-    private let store: Store<AppState>
+    private let model: ItemListModel
 
-    init(store: Store<AppState>,
+    init(model: ItemListModel,
          navToEditorRouter: NavToEditorRouter) {
-        self.store = store
+        self.model = model
         self.navToEditorRouter = navToEditorRouter
         super.init(frame: .zero)
         initViews()
-        store.subscribe(self) { subcription in
-            subcription.select { state in state.itemListState }
-        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func newState(state: ItemListState?) {
-        guard let state = state else { return }
+    func set(state: ItemListState) {
         var snapshot = NSDiffableDataSourceSnapshot<Int, TodoItem>()
         var items = state.areCompleteItemsVisible ? state.items : state.items.filter { !$0.isCompleted }
 
@@ -70,30 +71,30 @@ final class ItemListView: UIView, StoreSubscriber {
     }
 
     func onNewTodoItemTextEnter(_ text: String) {
-        store.dispatch(CreateItemAction(item: TodoItem(text: text)))
+        model.create(item: TodoItem(text: text))
     }
 
     func onDeleteTap(_ position: Int) {
-        guard position > -1 && position < tableController.items.count else { return }
-
-        let todoItem = tableController.items[position]
-
-        store.dispatch(DeleteItemAction(item: todoItem))
+        if let item = itemAt(position) {
+            model.delete(item: item)
+        }
     }
 
     func onTodoCompletionTap(_ position: Int) {
-        guard position > -1 && position < tableController.items.count else { return }
-
-        let todoItem = tableController.items[position]
-
-        store.dispatch(ToggleItemCompletionAction(item: todoItem))
+        if let item = itemAt(position) {
+            model.toggleCompletionFor(item: item)
+        }
     }
 
     func onDidSelectAt(_ position: Int) {
-        guard position > -1 && position < tableController.items.count else { return }
+        if let item = itemAt(position) {
+            navToEditorRouter.navigate(with: item)
+        }
+    }
 
-        let todoItem = tableController.items[position]
+    private func itemAt(_ position: Int) -> TodoItem? {
+        guard position > -1 && position < tableController.items.count else { return nil }
 
-        navToEditorRouter.navigate(with: todoItem)
+        return tableController.items[position]
     }
 }

@@ -74,6 +74,8 @@
 		0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDB928A749EF0043797C /* MergeTodoListRequestData.swift */; };
 		0C9EBDC828A74B770043797C /* JSONTodoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDC628A74B770043797C /* JSONTodoCoder.swift */; };
 		0C9EBDC928A74B770043797C /* TodoCoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDC728A74B770043797C /* TodoCoder.swift */; };
+		0C9EBDCC28A7B41C0043797C /* ItemListModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDCB28A7B41C0043797C /* ItemListModel.swift */; };
+		0C9EBDCE28A7B42F0043797C /* ItemListModelImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDCD28A7B42F0043797C /* ItemListModelImp.swift */; };
 		0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4D628A5BBB700668895 /* ReSwift */; };
 		0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */; };
 		0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */; };
@@ -174,6 +176,8 @@
 		0C9EBDB928A749EF0043797C /* MergeTodoListRequestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MergeTodoListRequestData.swift; sourceTree = "<group>"; };
 		0C9EBDC628A74B770043797C /* JSONTodoCoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JSONTodoCoder.swift; sourceTree = "<group>"; };
 		0C9EBDC728A74B770043797C /* TodoCoder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoCoder.swift; sourceTree = "<group>"; };
+		0C9EBDCB28A7B41C0043797C /* ItemListModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModel.swift; sourceTree = "<group>"; };
+		0C9EBDCD28A7B42F0043797C /* ItemListModelImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ItemListModelImp.swift; sourceTree = "<group>"; };
 		0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorView.swift; sourceTree = "<group>"; };
 		0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilderImp.swift; sourceTree = "<group>"; };
 		0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilder.swift; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 			isa = PBXGroup;
 			children = (
 				0C16050428A65623004E710F /* Builder */,
+				0C9EBDCA28A7B40D0043797C /* Model */,
 				0C16050228A65623004E710F /* View */,
 				0C16051028A66593004E710F /* UDF */,
 			);
@@ -584,6 +589,15 @@
 			path = Coder;
 			sourceTree = "<group>";
 		};
+		0C9EBDCA28A7B40D0043797C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBDCB28A7B41C0043797C /* ItemListModel.swift */,
+				0C9EBDCD28A7B42F0043797C /* ItemListModelImp.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
 		0CA0A4D828A5BC0F00668895 /* NavToEditor */ = {
 			isa = PBXGroup;
 			children = (
@@ -798,7 +812,9 @@
 				0C9EBD9F28A745960043797C /* TodoList.xcdatamodeld in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
 				0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */,
+				0C9EBDCE28A7B42F0043797C /* ItemListModelImp.swift in Sources */,
 				0C9EBDC028A749EF0043797C /* URLSessionCoreService.swift in Sources */,
+				0C9EBDCC28A7B41C0043797C /* ItemListModel.swift in Sources */,
 				0C96E60428A442870034FA73 /* RootViewController+Layout.swift in Sources */,
 				0C1604F428A64EA9004E710F /* NewTodoItemCell.swift in Sources */,
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
