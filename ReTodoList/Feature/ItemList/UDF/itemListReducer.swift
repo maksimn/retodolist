@@ -13,6 +13,12 @@ func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     }
 
     switch action {
+    case let action as LoadItemsFromCacheAction:
+        return nextState(action, state.itemListState)
+
+    case let action as MergeItemsWithRemoteSuccessAction:
+        return nextState(action, state.itemListState)
+
     case let action as ItemSavedEditorAction:
         return nextState(action, state)
 
@@ -34,6 +40,22 @@ func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     default:
         return state.itemListState
     }
+}
+
+private func nextState(_ action: LoadItemsFromCacheAction, _ state: ItemListState) -> ItemListState {
+    var state = state
+
+    state.items = action.items
+
+    return state
+}
+
+private func nextState(_ action: MergeItemsWithRemoteSuccessAction, _ state: ItemListState) -> ItemListState {
+    var state = state
+
+    state.items = action.items
+
+    return state
 }
 
 private func nextState(_ action: ItemSavedEditorAction, _ state: AppState) -> ItemListState {
