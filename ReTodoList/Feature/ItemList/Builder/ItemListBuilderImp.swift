@@ -26,7 +26,7 @@ final class ItemListBuilderImp: ItemListBuilder {
             editorBuilder: EditorBuilderImp(store: store)
         )
 
-        weak var viewLazy: ItemListViewable?
+        weak var viewLazy: ItemListView?
 
         let logger = LoggerImpl(isLoggingEnabled: true)
         let persistentContainer = TodoListPersistentContainer(logger: logger)
@@ -53,7 +53,7 @@ final class ItemListBuilderImp: ItemListBuilder {
             store: store,
             service: service
         )
-        let view = ItemListView(
+        let view = ItemListViewImp(
             model: model,
             navToEditorRouter: router
         )

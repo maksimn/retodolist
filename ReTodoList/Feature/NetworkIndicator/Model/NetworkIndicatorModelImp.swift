@@ -1,5 +1,5 @@
 //
-//  EditorModelImp.swift
+//  NetworkIndicatorModelImp.swift
 //  ReTodoList
 //
 //  Created by Maksim Ivanov on 14.08.2022.
@@ -7,13 +7,13 @@
 
 import ReSwift
 
-final class EditorModelImp: EditorModel, StoreSubscriber {
+final class NetworkIndicatorModelImp: NetworkIndicatorModel, StoreSubscriber {
 
-    private let viewBlock: () -> EditorView?
-    private weak var view: EditorView?
+    private let viewBlock: () -> NetworkIndicatorView?
+    private weak var view: NetworkIndicatorView?
     private let store: Store<AppState>
 
-    init(viewBlock: @escaping () -> EditorView?,
+    init(viewBlock: @escaping () -> NetworkIndicatorView?,
          store: Store<AppState>) {
         self.viewBlock = viewBlock
         self.store = store
@@ -25,18 +25,14 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
         }
 
         store.subscribe(self) { subcription in
-            subcription.select { state in state.editorState }
+            subcription.select { state in state.networkIndicatorState }
         }
     }
 
-    func newState(state: EditorState?) {
+    func newState(state: NetworkIndicatorState?) {
         guard let state = state else { return }
 
-        view?.set(state: state)
-    }
-
-    func dispatch(_ action: Action) {
-        store.dispatch(action)
+        view?.set(visible: state.pendingRequestCount > 0)
     }
 
     func unsubscribe() {

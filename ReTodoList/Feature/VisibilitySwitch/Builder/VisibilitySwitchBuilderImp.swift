@@ -17,12 +17,21 @@ final class VisibilitySwitchBuilderImp: VisibilitySwitchBuilder {
     }
 
     func build() -> UIView {
-        return VisibilitySwitchView(
+        weak var viewLazy: VisibilitySwitchView?
+
+        let model = VisibilitySwitchModelImp(viewBlock: { viewLazy }, store: store)
+        let view = VisibilitySwitchViewImp(
             params: VisibilitySwitchViewParams(
                 show: "Показать",
                 hide: "Скрыть"
             ),
-            store: store
+            model: model
         )
+
+        viewLazy = view
+
+        model.subscribe()
+
+        return view
     }
 }

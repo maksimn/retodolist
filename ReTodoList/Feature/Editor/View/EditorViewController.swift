@@ -49,6 +49,11 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
         fatalError("init(coder:) has not been implemented")
     }
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        model.dispatch(InitEditorAction(item: params.initTodoItem))
+    }
+
     func set(state: EditorState) {
         navBar?.setSaveButton(state.canItemBeSaved)
         removeButton.isEnabled = state.canItemBeRemoved

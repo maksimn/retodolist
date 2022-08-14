@@ -7,7 +7,7 @@
 
 import UIKit
 
-extension ItemListView {
+extension ItemListViewImp {
 
     func initViews() {
         addSubview(tableView)
