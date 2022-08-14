@@ -20,7 +20,6 @@ final class ItemListBuilderImp: ItemListBuilder {
     }
 
     func build() -> UIView {
-        let service = TodoListServiceOne(store: store)
         let router = NavToEditorRouterImp(
             navigationController: navigationController,
             editorBuilder: EditorBuilderImp(store: store)
@@ -30,8 +29,7 @@ final class ItemListBuilderImp: ItemListBuilder {
 
         let model = ItemListModelImp(
             viewBlock: { viewLazy },
-            store: store,
-            service: service
+            store: store
         )
         let view = ItemListViewImp(
             model: model,
