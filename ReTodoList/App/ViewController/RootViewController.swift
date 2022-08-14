@@ -11,12 +11,15 @@ final class RootViewController: UIViewController {
 
     let navToEditorButton = UIButton()
 
+    let networkIndicatorGraph: NetworkIndicatorGraph
+
     init(mainTitle: String,
          counterBuilder: CounterBuilder,
          visibilitySwitchBuilder: VisibilitySwitchBuilder,
          itemListBuilder: ItemListBuilder,
          navToEditorBuilder: NavToEditorBuilder,
          networkIndicatorBuilder: NetworkIndicatorBuilder) {
+        networkIndicatorGraph = networkIndicatorBuilder.build()
         super.init(nibName: nil, bundle: nil)
         navigationItem.title = mainTitle
         view.backgroundColor = Theme.data.backgroundColor
@@ -24,7 +27,7 @@ final class RootViewController: UIViewController {
         layout(visibilitySwitchBuilder)
         layout(itemListBuilder)
         layout(navToEditorBuilder)
-        layout(networkIndicatorBuilder)
+        layout(networkIndicatorGraph.view)
     }
 
     required init?(coder: NSCoder) {

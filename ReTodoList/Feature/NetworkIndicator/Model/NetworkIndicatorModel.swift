@@ -5,9 +5,7 @@
 //  Created by Maksim Ivanov on 14.08.2022.
 //
 
-protocol NetworkIndicatorModel {
-
-    func subscribe()
+protocol NetworkIndicatorModel: AnyObject {
 
     func unsubscribe()
 }
