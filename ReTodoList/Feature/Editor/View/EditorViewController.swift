@@ -84,12 +84,12 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     }
 
     func onSaveButtonTap() {
-        model.dispatch(ItemSavedEditorAction())
+        model.dispatch(EditorItemSavedAction())
     }
 
     @objc
     func onRemoveButtonTap() {
-        model.dispatch(ItemDeletedEditorAction())
+        model.dispatch(EditorItemDeletedAction())
     }
 
     @objc

@@ -23,10 +23,10 @@ func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     case let action as MergeWithRemoteItemsSuccessAction:
         return nextState(action, state.itemListState)
 
-    case let action as ItemSavedEditorAction:
+    case let action as EditorItemSavedAction:
         return nextState(action, state)
 
-    case let action as ItemDeletedEditorAction:
+    case let action as EditorItemDeletedAction:
         return nextState(action, state)
 
     case let action as CreateItemAction:
@@ -67,7 +67,7 @@ private func nextState(forNewItems items: [TodoItem], state: ItemListState) -> I
     return state
 }
 
-private func nextState(_ action: ItemSavedEditorAction, _ state: AppState) -> ItemListState {
+private func nextState(_ action: EditorItemSavedAction, _ state: AppState) -> ItemListState {
     guard let item = state.editorState?.item else {
         return state.itemListState
     }
@@ -82,7 +82,7 @@ private func nextState(_ action: ItemSavedEditorAction, _ state: AppState) -> It
     return itemListState
 }
 
-private func nextState(_ action: ItemDeletedEditorAction, _ state: AppState) -> ItemListState {
+private func nextState(_ action: EditorItemDeletedAction, _ state: AppState) -> ItemListState {
     guard let deletedItem = state.editorState?.item else {
         return state.itemListState
     }

@@ -24,7 +24,6 @@ final class AppBuilderImp: AppBuilder {
                     }
 
                     print("\(action)")
-                    print("**********************************")
 
                     return next(action)
                 }

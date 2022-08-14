@@ -13,41 +13,39 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
     private weak var view: ItemListView?
 
     private let store: Store<AppState>
-    private let service: TodoListService
+    private let thunk: ItemListThunk
 
     init(viewBlock: @escaping () -> ItemListView?,
          store: Store<AppState>,
-         service: TodoListService) {
+         thunk: ItemListThunk) {
         self.viewBlock = viewBlock
         self.store = store
-        self.service = service
+        self.thunk = thunk
         store.subscribe(self) { subcription in
             subcription.select { state in state.itemListState }
         }
     }
 
     func load() {
-        store.dispatch(
-            LoadItemsFromCacheAction(items: service.cachedItems)
-        )
-        store.dispatch(getRemoteItems(withService: service))
+        store.dispatch(thunk.loadItemsFromCache)
+        store.dispatch(thunk.getRemoteItems)
     }
 
     func create(item: TodoItem) {
         store.dispatch(CreateItemAction(item: item))
-        store.dispatch(createRemoteItem(item, withService: service))
+        store.dispatch(thunk.createItemInCacheAndRemote(item))
     }
 
     func toggleCompletionFor(item: TodoItem) {
         let updatedItem = item.update(isCompleted: !item.isCompleted)
 
         store.dispatch(ToggleItemCompletionAction(item: item))
-        store.dispatch(updateRemoteItem(updatedItem, withService: service))
+        store.dispatch(thunk.updateItemInCacheAndRemote(updatedItem))
     }
 
     func delete(item: TodoItem) {
         store.dispatch(DeleteItemAction(item: item))
-        store.dispatch(deleteRemoteItem(item, withService: service))
+        store.dispatch(thunk.deleteItemInCacheAndRemote(item))
     }
 
     func newState(state: ItemListState?) {
