@@ -6,6 +6,7 @@
 //
 
 import ReSwift
+import ReSwiftThunk
 import UIKit
 
 final class AppBuilderImp: AppBuilder {
@@ -30,6 +31,8 @@ final class AppBuilderImp: AppBuilder {
             }
         }
 
+        let thunkMiddleware: Middleware<AppState> = createThunkMiddleware()
+
         let initialState = AppState(
             itemListState: ItemListState(
                 items: [],
@@ -42,7 +45,7 @@ final class AppBuilderImp: AppBuilder {
         let store = Store(
             reducer: appReducer,
             state: initialState,
-            middleware: [loggingMiddleware]
+            middleware: [loggingMiddleware, thunkMiddleware]
         )
 
         let navigationController = UINavigationController()

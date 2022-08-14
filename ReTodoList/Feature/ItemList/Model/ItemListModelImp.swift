@@ -30,30 +30,24 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
         store.dispatch(
             LoadItemsFromCacheAction(items: service.cachedItems)
         )
-        service.fetchRemoteTodoList { _ in
-
-        }
+        store.dispatch(getRemoteItems(withService: service))
     }
 
     func create(item: TodoItem) {
         store.dispatch(CreateItemAction(item: item))
-        service.createRemote(item) { _ in
-
-        }
+        store.dispatch(createRemoteItem(item, withService: service))
     }
 
     func toggleCompletionFor(item: TodoItem) {
-        store.dispatch(ToggleItemCompletionAction(item: item))
-        service.updateRemote(item.update(isCompleted: !item.isCompleted)) { _ in
+        let updatedItem = item.update(isCompleted: !item.isCompleted)
 
-        }
+        store.dispatch(ToggleItemCompletionAction(item: item))
+        store.dispatch(updateRemoteItem(updatedItem, withService: service))
     }
 
     func delete(item: TodoItem) {
         store.dispatch(DeleteItemAction(item: item))
-        service.removeRemote(item) { _ in
-
-        }
+        store.dispatch(deleteRemoteItem(item, withService: service))
     }
 
     func newState(state: ItemListState?) {
