@@ -8,7 +8,7 @@
 import ReSwift
 import UIKit
 
-final class EditorViewController: UIViewController, UITextViewDelegate, StoreSubscriber {
+final class EditorViewController: UIViewController, EditorView, UITextViewDelegate {
 
     let params: EditorViewParams
 
@@ -31,30 +31,25 @@ final class EditorViewController: UIViewController, UITextViewDelegate, StoreSub
     var isKeyboardActive: Bool = false
     var keyboardSize: CGSize = .zero
 
-    private let store: Store<AppState>
+    private let model: EditorModel
 
     let networkIndicatorBuilder: NetworkIndicatorBuilder
 
     init(params: EditorViewParams,
-         store: Store<AppState>,
+         model: EditorModel,
          networkIndicatorBuilder: NetworkIndicatorBuilder) {
         self.params = params
-        self.store = store
+        self.model = model
         self.networkIndicatorBuilder = networkIndicatorBuilder
         super.init(nibName: nil, bundle: nil)
         initViews()
-        store.subscribe(self) { subcription in
-            subcription.select { state in state.editorState }
-        }
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
 
-    func newState(state: EditorState?) {
-        guard let state = state else { return }
-
+    func set(state: EditorState) {
         navBar?.setSaveButton(state.canItemBeSaved)
         removeButton.isEnabled = state.canItemBeRemoved
         removeButton.setTitleColor(state.canItemBeRemoved ? .systemRed : .systemGray, for: .normal)
@@ -77,41 +72,41 @@ final class EditorViewController: UIViewController, UITextViewDelegate, StoreSub
     }
 
     func onCancelButtonTap() {
-        store.dispatch(CloseEditorAction())
-        store.unsubscribe(self)
+        model.dispatch(CloseEditorAction())
+        model.unsubscribe()
         dismiss(animated: true)
     }
 
     func onSaveButtonTap() {
-        store.dispatch(ItemSavedEditorAction())
+        model.dispatch(ItemSavedEditorAction())
     }
 
     @objc
     func onRemoveButtonTap() {
-        store.dispatch(ItemDeletedEditorAction())
+        model.dispatch(ItemDeletedEditorAction())
     }
 
     @objc
     func onDeadlineSwitchValueChanged() {
-        store.dispatch(DeadlineChangedEditorAction(deadline: deadlineSwitch.isOn ? Date() : nil))
+        model.dispatch(DeadlineChangedEditorAction(deadline: deadlineSwitch.isOn ? Date() : nil))
     }
 
     @objc
     func onDeadlineDatePickerValueChanged() {
-        store.dispatch(DeadlineChangedEditorAction(deadline: deadlineDatePicker.date))
+        model.dispatch(DeadlineChangedEditorAction(deadline: deadlineDatePicker.date))
     }
 
     @objc
     func onDeadlineButtonTap() {
-        store.dispatch(DeadlinePickerVisibilityAction(isHidden: !deadlineDatePicker.isHidden))
+        model.dispatch(DeadlinePickerVisibilityAction(isHidden: !deadlineDatePicker.isHidden))
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        store.dispatch(TextChangedEditorAction(text: textView.text))
+        model.dispatch(TextChangedEditorAction(text: textView.text))
     }
 
     @objc
     func onPriorityChanged() {
-        store.dispatch(PriorityChangedEditorAction(priority: prioritySegmentedControl.todoItemPriority))
+        model.dispatch(PriorityChangedEditorAction(priority: prioritySegmentedControl.todoItemPriority))
     }
 }

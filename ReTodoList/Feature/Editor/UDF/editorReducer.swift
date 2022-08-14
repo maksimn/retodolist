@@ -7,79 +7,103 @@
 
 import ReSwift
 
-// swiftlint:disable cyclomatic_complexity function_body_length
 func editorReducer(action: Action, state: EditorState?) -> EditorState? {
-    let isDeadlinePickerHiddenByDefault = true
-    let emptyEditorState = EditorState(
-        mode: .creating,
-        item: TodoItem(),
-        savedItem: nil,
-        isDeadlinePickerHidden: isDeadlinePickerHiddenByDefault
-    )
-
     switch action {
 
     case let action as InitEditorAction:
-        if let item = action.item {
-            return EditorState(
-                mode: .editing,
-                item: item,
-                savedItem: item,
-                isDeadlinePickerHidden: isDeadlinePickerHiddenByDefault
-            )
-        } else {
-            return emptyEditorState
-        }
+        return nextState(action, state)
 
     case _ as CloseEditorAction:
         return nil
 
     case let action as TextChangedEditorAction:
-        guard let state = state else { return state }
-        var newState = state
-
-        newState.item = state.item.update(text: action.text)
-
-        return newState
+        return nextState(action, state)
 
     case let action as PriorityChangedEditorAction:
-        guard let state = state else { return state }
-        var newState = state
-
-        newState.item = state.item.update(priority: action.priority)
-
-        return newState
+        return nextState(action, state)
 
     case let action as DeadlineChangedEditorAction:
-        guard let state = state else { return state }
-        var newState = state
-
-        newState.item.deadline = action.deadline
-
-        return newState
+        return nextState(action, state)
 
     case let action as DeadlinePickerVisibilityAction:
-        var state = state
+        return nextState(action, state)
 
-        state?.isDeadlinePickerHidden = action.isHidden
-
-        return state
-
-    case _ as ItemSavedEditorAction:
-        guard let state = state else { return state }
-        var newState = state
-
-        newState.mode = .editing
-        newState.savedItem = state.item
-
-        return newState
+    case let action as ItemSavedEditorAction:
+        return nextState(action, state)
 
     case _ as ItemDeletedEditorAction:
-        return emptyEditorState
+        return createEmptyState()
 
     default:
-        break
+        return state
     }
+}
+
+private func createEmptyState() -> EditorState {
+    EditorState(
+        mode: .creating,
+        item: TodoItem(),
+        savedItem: nil,
+        isDeadlinePickerHidden: true
+    )
+}
+
+private func nextState(_ action: InitEditorAction, _ state: EditorState?) -> EditorState? {
+    let emptyState = createEmptyState()
+
+    if let item = action.item {
+        return EditorState(
+            mode: .editing,
+            item: item,
+            savedItem: item,
+            isDeadlinePickerHidden: emptyState.isDeadlinePickerHidden
+        )
+    } else {
+        return emptyState
+    }
+}
+
+private func nextState(_ action: TextChangedEditorAction, _ state: EditorState?) -> EditorState? {
+    guard let state = state else { return state }
+    var newState = state
+
+    newState.item = state.item.update(text: action.text)
+
+    return newState
+}
+
+private func nextState(_ action: PriorityChangedEditorAction, _ state: EditorState?) -> EditorState? {
+    guard let state = state else { return state }
+    var newState = state
+
+    newState.item = state.item.update(priority: action.priority)
+
+    return newState
+}
+
+private func nextState(_ action: DeadlineChangedEditorAction, _ state: EditorState?) -> EditorState? {
+    guard let state = state else { return state }
+    var newState = state
+
+    newState.item = newState.item.update(deadline: action.deadline)
+
+    return newState
+}
+
+private func nextState(_ action: DeadlinePickerVisibilityAction, _ state: EditorState?) -> EditorState? {
+    var state = state
+
+    state?.isDeadlinePickerHidden = action.isHidden
 
     return state
+}
+
+private func nextState(_ action: ItemSavedEditorAction, _ state: EditorState?) -> EditorState? {
+    guard let state = state else { return state }
+    var newState = state
+
+    newState.mode = .editing
+    newState.savedItem = state.item
+
+    return newState
 }

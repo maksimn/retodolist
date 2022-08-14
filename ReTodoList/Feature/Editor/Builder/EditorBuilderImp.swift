@@ -31,12 +31,19 @@ final class EditorBuilderImp: EditorBuilder {
             )
         )
 
-        store.dispatch(InitEditorAction(item: initTodoItem))
+        weak var viewLazy: EditorView?
 
-        return EditorViewController(
+        let model = EditorModelImp(viewBlock: { viewLazy }, store: store)
+        let view = EditorViewController(
             params: viewParams,
-            store: store,
+            model: model,
             networkIndicatorBuilder: NetworkIndicatorBuilderImp(store: store)
         )
+
+        viewLazy = view
+
+        store.dispatch(InitEditorAction(item: initTodoItem))
+
+        return view
     }
 }

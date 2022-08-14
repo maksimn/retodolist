@@ -18,7 +18,7 @@ struct TodoItem: Equatable, Codable, Hashable {
     let id: String
     let text: String
     let priority: TodoItemPriority
-    var deadline: Date?
+    let deadline: Date?
     let isCompleted: Bool
     let createdAt: Int
     let updatedAt: Int
@@ -58,8 +58,7 @@ struct TodoItem: Equatable, Codable, Hashable {
     func update(text: String? = nil,
                 priority: TodoItemPriority? = nil,
                 isCompleted: Bool? = nil,
-                updatedAt: Int = Date().integer,
-                isDirty: Bool? = nil) -> TodoItem {
+                updatedAt: Int = Date().integer) -> TodoItem {
         TodoItem(id: self.id,
                  text: text ?? self.text,
                  priority: priority ?? self.priority,
@@ -67,7 +66,29 @@ struct TodoItem: Equatable, Codable, Hashable {
                  isCompleted: isCompleted ?? self.isCompleted,
                  createdAt: self.createdAt,
                  updatedAt: updatedAt,
-                 isDirty: isDirty ?? self.isDirty)
+                 isDirty: isDirty)
+    }
+
+    func update(isDirty: Bool) -> TodoItem {
+        TodoItem(id: self.id,
+                 text: text,
+                 priority: priority,
+                 deadline: deadline,
+                 isCompleted: isCompleted,
+                 createdAt: createdAt,
+                 updatedAt: updatedAt,
+                 isDirty: isDirty)
+    }
+
+    func update(deadline: Date?) -> TodoItem {
+        TodoItem(id: self.id,
+                 text: text,
+                 priority: priority,
+                 deadline: deadline,
+                 isCompleted: isCompleted,
+                 createdAt: createdAt,
+                 updatedAt: Date().integer,
+                 isDirty: isDirty)
     }
 
     static func == (lhs: TodoItem, rhs: TodoItem) -> Bool {
