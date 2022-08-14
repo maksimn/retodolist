@@ -12,11 +12,14 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     private let viewBlock: () -> EditorView?
     private weak var view: EditorView?
     private let store: Store<AppState>
+    private let thunk: ItemListThunk
 
     init(viewBlock: @escaping () -> EditorView?,
-         store: Store<AppState>) {
+         store: Store<AppState>,
+         thunk: ItemListThunk) {
         self.viewBlock = viewBlock
         self.store = store
+        self.thunk = thunk
     }
 
     func subscribe() {
@@ -36,12 +39,19 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     }
 
     func dispatch(_ action: Action) {
+        let isCreatingMode = store.state.editorState?.mode == .creating
+        let item = store.state.editorState?.item
+
         store.dispatch(action)
 
         if action as? EditorItemSavedAction != nil {
-
-        } else if action as? EditorItemDeletedAction != nil {
-
+            if isCreatingMode, let item = item {
+                store.dispatch(thunk.createItemInCacheAndRemote(item))
+            } else if let item = item {
+                store.dispatch(thunk.updateItemInCacheAndRemote(item))
+            }
+        } else if action as? EditorItemDeletedAction != nil, let item = item {
+            store.dispatch(thunk.deleteItemInCacheAndRemote(item))
         }
     }
 
