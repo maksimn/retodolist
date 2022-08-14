@@ -95,6 +95,8 @@
 		0C9EBDFC28A8AE690043797C /* VisibilitySwitchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDFB28A8AE690043797C /* VisibilitySwitchView.swift */; };
 		0C9EBDFF28A8AE850043797C /* VisibilitySwitchModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBDFE28A8AE850043797C /* VisibilitySwitchModel.swift */; };
 		0C9EBE0128A8AE980043797C /* VisibilitySwitchModelImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBE0028A8AE980043797C /* VisibilitySwitchModelImp.swift */; };
+		0C9EBE0428A8B7E90043797C /* NetworkIndicatorGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBE0328A8B7E90043797C /* NetworkIndicatorGraph.swift */; };
+		0C9EBE0628A8B8040043797C /* NetworkIndicatorGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9EBE0528A8B8040043797C /* NetworkIndicatorGraphImp.swift */; };
 		0CA0A4D728A5BBB700668895 /* ReSwift in Frameworks */ = {isa = PBXBuildFile; productRef = 0CA0A4D628A5BBB700668895 /* ReSwift */; };
 		0CA0A4E128A5BC0F00668895 /* NavToEditorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */; };
 		0CA0A4E228A5BC0F00668895 /* NavToEditorBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */; };
@@ -216,6 +218,8 @@
 		0C9EBDFB28A8AE690043797C /* VisibilitySwitchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchView.swift; sourceTree = "<group>"; };
 		0C9EBDFE28A8AE850043797C /* VisibilitySwitchModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchModel.swift; sourceTree = "<group>"; };
 		0C9EBE0028A8AE980043797C /* VisibilitySwitchModelImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchModelImp.swift; sourceTree = "<group>"; };
+		0C9EBE0328A8B7E90043797C /* NetworkIndicatorGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorGraph.swift; sourceTree = "<group>"; };
+		0C9EBE0528A8B8040043797C /* NetworkIndicatorGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkIndicatorGraphImp.swift; sourceTree = "<group>"; };
 		0CA0A4DA28A5BC0F00668895 /* NavToEditorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorView.swift; sourceTree = "<group>"; };
 		0CA0A4DC28A5BC0F00668895 /* NavToEditorBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilderImp.swift; sourceTree = "<group>"; };
 		0CA0A4DD28A5BC0F00668895 /* NavToEditorBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NavToEditorBuilder.swift; sourceTree = "<group>"; };
@@ -648,6 +652,7 @@
 			isa = PBXGroup;
 			children = (
 				0C9EBDD528A831130043797C /* Builder */,
+				0C9EBE0228A8B7C30043797C /* Graph */,
 				0C9EBDF428A89C0D0043797C /* Model */,
 				0C9EBDDA28A8315E0043797C /* View */,
 				0C9EBDDD28A831890043797C /* UDF */,
@@ -717,6 +722,15 @@
 				0C9EBE0028A8AE980043797C /* VisibilitySwitchModelImp.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		0C9EBE0228A8B7C30043797C /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				0C9EBE0328A8B7E90043797C /* NetworkIndicatorGraph.swift */,
+				0C9EBE0528A8B8040043797C /* NetworkIndicatorGraphImp.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		0CA0A4D828A5BC0F00668895 /* NavToEditor */ = {
@@ -932,6 +946,7 @@
 				0C96E60228A31DF90034FA73 /* RootViewController.swift in Sources */,
 				0C9EBD9F28A745960043797C /* TodoList.xcdatamodeld in Sources */,
 				0C9EBDD928A831580043797C /* NetworkIndicatorBuilderImp.swift in Sources */,
+				0C9EBE0628A8B8040043797C /* NetworkIndicatorGraphImp.swift in Sources */,
 				0C9EBDFA28A89C950043797C /* NetworkIndicatorView.swift in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
 				0C9EBDED28A86E1C0043797C /* EditorModel.swift in Sources */,
@@ -964,6 +979,7 @@
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* TodoCoder.swift in Sources */,
 				0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */,
+				0C9EBE0428A8B7E90043797C /* NetworkIndicatorGraph.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
 				0C9EBD9728A745600043797C /* DeadItemsCache.swift in Sources */,
 				0C9EBDEA28A862B40043797C /* CounterView.swift in Sources */,

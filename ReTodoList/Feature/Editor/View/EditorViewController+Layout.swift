@@ -34,7 +34,7 @@ extension EditorViewController {
         navBar = EditorNavBar(
             params: params.navBar,
             navigationItem: navigationItem,
-            networkIndicatorBuilder: networkIndicatorBuilder
+            networkIndicatorView: networkIndicatorGraph.view
         )
         navBar?.onSaveButtonTap = { [weak self] in
             self?.onSaveButtonTap()

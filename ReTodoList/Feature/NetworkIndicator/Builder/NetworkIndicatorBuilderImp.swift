@@ -6,7 +6,6 @@
 //
 
 import ReSwift
-import UIKit
 
 final class NetworkIndicatorBuilderImp: NetworkIndicatorBuilder {
 
@@ -16,16 +15,7 @@ final class NetworkIndicatorBuilderImp: NetworkIndicatorBuilder {
         self.store = store
     }
 
-    func build() -> UIView {
-        weak var viewLazy: NetworkIndicatorView?
-
-        let model = NetworkIndicatorModelImp(viewBlock: { viewLazy }, store: store)
-        let view = NetworkIndicatorViewImp(model: model)
-
-        viewLazy = view
-
-        model.subscribe()
-
-        return view
+    func build() -> NetworkIndicatorGraph {
+        NetworkIndicatorGraphImp(store: store)
     }
 }

@@ -33,14 +33,14 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     private let model: EditorModel
 
-    let networkIndicatorBuilder: NetworkIndicatorBuilder
+    let networkIndicatorGraph: NetworkIndicatorGraph
 
     init(params: EditorViewParams,
          model: EditorModel,
          networkIndicatorBuilder: NetworkIndicatorBuilder) {
         self.params = params
         self.model = model
-        self.networkIndicatorBuilder = networkIndicatorBuilder
+        self.networkIndicatorGraph = networkIndicatorBuilder.build()
         super.init(nibName: nil, bundle: nil)
         initViews()
     }
@@ -79,6 +79,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     func onCancelButtonTap() {
         model.dispatch(CloseEditorAction())
         model.unsubscribe()
+        networkIndicatorGraph.model?.unsubscribe()
         dismiss(animated: true)
     }
 

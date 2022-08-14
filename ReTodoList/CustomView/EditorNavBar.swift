@@ -24,9 +24,9 @@ class EditorNavBar {
 
     init(params: EditorNavBarParams,
          navigationItem: UINavigationItem,
-         networkIndicatorBuilder: NetworkIndicatorBuilder) {
+         networkIndicatorView: UIView) {
         self.params = params
-        let activityBarButtonItem = UIBarButtonItem(customView: networkIndicatorBuilder.build())
+        let activityBarButtonItem = UIBarButtonItem(customView: networkIndicatorView)
 
         navigationItem.title = params.todo
         navigationItem.setHidesBackButton(true, animated: false)
