@@ -9,13 +9,13 @@ import ReSwift
 
 final class ItemListModelImp: ItemListModel, StoreSubscriber {
 
-    private let viewBlock: () -> ItemListViewable?
-    private weak var view: ItemListViewable?
+    private let viewBlock: () -> ItemListView?
+    private weak var view: ItemListView?
 
     private let store: Store<AppState>
     private let service: TodoListService
 
-    init(viewBlock: @escaping () -> ItemListViewable?,
+    init(viewBlock: @escaping () -> ItemListView?,
          store: Store<AppState>,
          service: TodoListService) {
         self.viewBlock = viewBlock

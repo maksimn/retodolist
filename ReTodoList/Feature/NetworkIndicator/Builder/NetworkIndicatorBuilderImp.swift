@@ -17,6 +17,15 @@ final class NetworkIndicatorBuilderImp: NetworkIndicatorBuilder {
     }
 
     func build() -> UIView {
-        return NetworkIndicatorView(store: store)
+        weak var viewLazy: NetworkIndicatorView?
+
+        let model = NetworkIndicatorModelImp(viewBlock: { viewLazy }, store: store)
+        let view = NetworkIndicatorViewImp(model: model)
+
+        viewLazy = view
+
+        model.subscribe()
+
+        return view
     }
 }

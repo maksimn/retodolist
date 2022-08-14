@@ -7,61 +7,71 @@
 
 import ReSwift
 
-struct GetRemoteItemsStartAction: Action { }
+protocol GetRemoteItemsAction: Action { }
 
-struct GetRemoteItemsSuccessAction: Action {
+struct GetRemoteItemsStartAction: GetRemoteItemsAction { }
+
+struct GetRemoteItemsSuccessAction: GetRemoteItemsAction {
     let items: [TodoItem]
 }
 
-struct GetRemoteItemsErrorAction: Action {
+struct GetRemoteItemsErrorAction: GetRemoteItemsAction {
     let error: Error
 }
 
-struct CreateRemoteItemStartAction: Action {
+protocol CreateRemoteItemAction: Action { }
+
+struct CreateRemoteItemStartAction: CreateRemoteItemAction {
     let item: TodoItem
 }
 
-struct CreateRemoteItemSuccessAction: Action {
+struct CreateRemoteItemSuccessAction: CreateRemoteItemAction {
     let item: TodoItem
 }
 
-struct CreateRemoteItemErrorAction: Action {
-    let item: TodoItem
-    let error: Error
-}
-
-struct UpdateRemoteItemStartAction: Action {
-    let item: TodoItem
-}
-
-struct UpdateRemoteItemSuccessAction: Action {
-    let item: TodoItem
-}
-
-struct UpdateRemoteItemErrorAction: Action {
+struct CreateRemoteItemErrorAction: CreateRemoteItemAction {
     let item: TodoItem
     let error: Error
 }
 
-struct DeleteRemoteItemStartAction: Action {
+protocol UpdateRemoteItemAction: Action { }
+
+struct UpdateRemoteItemStartAction: UpdateRemoteItemAction {
     let item: TodoItem
 }
 
-struct DeleteRemoteItemSuccessAction: Action {
+struct UpdateRemoteItemSuccessAction: UpdateRemoteItemAction {
     let item: TodoItem
 }
 
-struct DeleteRemoteItemErrorAction: Action {
+struct UpdateRemoteItemErrorAction: UpdateRemoteItemAction {
     let item: TodoItem
     let error: Error
 }
 
-struct MergeWithRemoteItemsStartAction: Action { }
+protocol DeleteRemoteItemAction: Action { }
 
-struct MergeWithRemoteItemsSuccessAction: Action {
+struct DeleteRemoteItemStartAction: DeleteRemoteItemAction {
+    let item: TodoItem
+}
+
+struct DeleteRemoteItemSuccessAction: DeleteRemoteItemAction {
+    let item: TodoItem
+}
+
+struct DeleteRemoteItemErrorAction: DeleteRemoteItemAction {
+    let item: TodoItem
+    let error: Error
+}
+
+protocol MergeWithRemoteItemsAction: Action { }
+
+struct MergeWithRemoteItemsStartAction: MergeWithRemoteItemsAction { }
+
+struct MergeWithRemoteItemsSuccessAction: MergeWithRemoteItemsAction {
     let items: [TodoItem]
 }
 
-struct MergeWithRemoteItemsErrorAction: Action {
+struct MergeWithRemoteItemsErrorAction: MergeWithRemoteItemsAction {
     let error: Error
 }

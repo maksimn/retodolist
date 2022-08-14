@@ -28,7 +28,8 @@ final class EditorBuilderImp: EditorBuilder {
                 save: "Сохранить",
                 todo: "Дело",
                 cancel: "Отменить"
-            )
+            ),
+            initTodoItem: initTodoItem
         )
 
         weak var viewLazy: EditorView?
@@ -42,7 +43,7 @@ final class EditorBuilderImp: EditorBuilder {
 
         viewLazy = view
 
-        store.dispatch(InitEditorAction(item: initTodoItem))
+        model.subscribe()
 
         return view
     }
