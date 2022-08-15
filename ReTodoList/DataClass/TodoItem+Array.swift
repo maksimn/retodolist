@@ -21,36 +21,33 @@ extension Array where Element == TodoItem {
         })
     }
 
-    func mergeWith(_ remoteTodoList: [TodoItem]) -> [TodoItem] {
-        let localTodoList = self
-        var resultTodoList: [TodoItem] = []
+    func mergeWith(_ remoteItems: [TodoItem]) -> [TodoItem] {
+        var mergedItems: [TodoItem] = []
 
-        // Добавлять TodoItem 'ы с id , которых у вас нет
-        for fetchedItem in remoteTodoList where !localTodoList.contains(where: { $0.id == fetchedItem.id }) {
-            resultTodoList.append(fetchedItem)
+        // Добавлять TodoItem'ы с id, которых у вас нет
+        for item in remoteItems where !self.contains(where: { $0.id == item.id }) {
+            mergedItems.append(item)
         }
 
-        // Удалять TodoItem 'ы которые есть локально, но id  которых отсутствует в ответе ручки
-        let filteredLocalTodoList = localTodoList.filter { item in
-            remoteTodoList.contains(where: { $0.id == item.id })
+        // Удалять TodoItem'ы которые есть локально, но id  которых отсутствует в ответе ручки
+        let itemsContainingInRemote = self.filter { item in
+            remoteItems.contains(where: { $0.id == item.id })
         }
 
-        // Обновлять TodoItem 'ы, id  которых есть и у в кэше и в ответе ручки, и в поле updated_at ручки
+        // Обновлять TodoItem'ы, id  которых есть и у в кэше и в ответе ручки, и в поле updated_at ручки
         // бОльшее значение, чем у айтема в кэше
-        for filteredItem in filteredLocalTodoList {
-            if let handleItem = remoteTodoList.first(where: { $0.id == filteredItem.id }) {
-                if handleItem.updatedAt > filteredItem.updatedAt {
-                    resultTodoList.append(handleItem)
-                } else {
-                    resultTodoList.append(filteredItem)
-                }
+        for item in itemsContainingInRemote {
+            if let remoteItem = remoteItems.first(where: { $0.id == item.id }),
+                remoteItem.updatedAt > item.updatedAt {
+                mergedItems.append(remoteItem)
             } else {
-                resultTodoList.append(filteredItem)
+                mergedItems.append(item)
             }
         }
 
-        resultTodoList.sortByCreateAt()
+        mergedItems.sortByCreateAt()
 
-        return resultTodoList
+        // для полученных моделей ставить флаг isDirty в значение false
+        return mergedItems.map { $0.isDirty ? $0.update(isDirty: false) : $0 }
     }
 }
