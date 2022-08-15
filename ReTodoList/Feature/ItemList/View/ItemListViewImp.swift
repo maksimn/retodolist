@@ -14,30 +14,7 @@ final class ItemListViewImp: UIView, ItemListView {
 
     let tableView = UITableView()
 
-    lazy var datasource = UITableViewDiffableDataSource<Int, TodoItem>(
-        tableView: tableView
-    ) { [weak self] tableView, indexPath, item in
-        if item.isTerminal {
-            guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(NewTodoItemCell.self)",
-                                                           for: indexPath) as? NewTodoItemCell else {
-                return UITableViewCell()
-            }
-            cell.onNewTodoItemTextEnter = self?.onNewTodoItemTextEnter
-
-            return cell
-        }
-
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "\(TodoItemCell.self)",
-                                                       for: indexPath) as? TodoItemCell else {
-            return UITableViewCell()
-        }
-
-        cell.set(todoItem: item)
-
-        return cell
-    }
-
-    let tableController = TodoTableController()
+    lazy var tableController = TodoTableController(tableView: tableView)
 
     private let model: ItemListModel
 
@@ -54,15 +31,9 @@ final class ItemListViewImp: UIView, ItemListView {
     }
 
     func set(state: ItemListState) {
-        var snapshot = NSDiffableDataSourceSnapshot<Int, TodoItem>()
-        var items = state.areCompleteItemsVisible ? state.items : state.items.filter { !$0.isCompleted }
+        let items = state.areCompleteItemsVisible ? state.items : state.items.filter { !$0.isCompleted }
 
-        tableController.items = items
-        items.append(TodoItem(isTerminal: true))
-        snapshot.appendSections([0])
-        snapshot.appendItems(items, toSection: 0)
-
-        datasource.apply(snapshot)
+        tableController.update(items)
     }
 
     func onNewTodoItemTextEnter(_ text: String) {

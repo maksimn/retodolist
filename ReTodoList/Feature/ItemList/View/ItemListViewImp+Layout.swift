@@ -15,8 +15,7 @@ extension ItemListViewImp {
         tableView.layer.cornerRadius = 16
         tableView.register(TodoItemCell.self, forCellReuseIdentifier: "\(TodoItemCell.self)")
         tableView.register(NewTodoItemCell.self, forCellReuseIdentifier: "\(NewTodoItemCell.self)")
-        tableView.dataSource = datasource
-        tableView.backgroundColor = Theme.data.backgroundColor
+        tableView.dataSource = tableController
         tableView.delegate = tableController
         tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
         tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
@@ -24,6 +23,7 @@ extension ItemListViewImp {
             make.edges.equalTo(self)
         }
         tableView.keyboardDismissMode = .onDrag
+        tableController.onNewTodoItemTextEnter = self.onNewTodoItemTextEnter
         tableController.onDeleteTap = self.onDeleteTap
         tableController.onTodoCompletionTap = self.onTodoCompletionTap
         tableController.onDidSelectAt = self.onDidSelectAt
