@@ -7,7 +7,7 @@
 
 import Foundation
 
-class DefaultNetworkingService: NetworkingService {
+class NetworkingServiceImp: NetworkingService {
 
     private let urlString: String
     private let headers: [String: String]

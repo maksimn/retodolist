@@ -30,6 +30,6 @@ struct DeadlinePickerVisibilityAction: Action {
     let isHidden: Bool
 }
 
-struct ItemSavedEditorAction: Action { }
+struct EditorItemSavedAction: Action { }
 
-struct ItemDeletedEditorAction: Action { }
+struct EditorItemDeletedAction: Action { }

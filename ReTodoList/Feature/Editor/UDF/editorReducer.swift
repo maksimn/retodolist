@@ -28,10 +28,10 @@ func editorReducer(action: Action, state: EditorState?) -> EditorState? {
     case let action as DeadlinePickerVisibilityAction:
         return nextState(action, state)
 
-    case let action as ItemSavedEditorAction:
+    case let action as EditorItemSavedAction:
         return nextState(action, state)
 
-    case _ as ItemDeletedEditorAction:
+    case _ as EditorItemDeletedAction:
         return createEmptyState()
 
     default:
@@ -98,7 +98,7 @@ private func nextState(_ action: DeadlinePickerVisibilityAction, _ state: Editor
     return state
 }
 
-private func nextState(_ action: ItemSavedEditorAction, _ state: EditorState?) -> EditorState? {
+private func nextState(_ action: EditorItemSavedAction, _ state: EditorState?) -> EditorState? {
     guard let state = state else { return state }
     var newState = state
 
