@@ -9,13 +9,13 @@ import Foundation
 import ReSwift
 import ReSwiftThunk
 
+private let initialDelay = 2
+
 final class ItemListThunkImp: ItemListThunk {
 
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
     private let service: TodoListService
-
-    private static let initialDelay = 2
 
     init(cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
@@ -34,7 +34,7 @@ final class ItemListThunkImp: ItemListThunk {
     var getRemoteItems: Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
             if self?.cache.isDirty ?? false {
-                return self?.mergeWithRemote(dispatch) ?? Void()
+                return self?.mergeWithRemote(dispatch, getState) ?? Void()
             }
 
             dispatch(GetRemoteItemsStartAction())
@@ -44,14 +44,9 @@ final class ItemListThunkImp: ItemListThunk {
 
                 switch result {
                 case .success(let items):
-                    dispatch(GetRemoteItemsSuccessAction(items: items))
+                    let mergedItems = mergedItemsFrom(remoteItems: items, getState)
 
-                    guard let state = getState() else {
-                        return
-                    }
-                    let currentItems = state.itemListState.items
-                    let mergedItems = currentItems.mergeWith(items)
-
+                    dispatch(GetRemoteItemsSuccessAction(items: mergedItems))
                     self?.replaceAllCachedItemsWith(mergedItems, dispatch)
                 case .failure(let error):
                     dispatch(GetRemoteItemsErrorAction(error: error))
@@ -61,7 +56,7 @@ final class ItemListThunkImp: ItemListThunk {
     }
 
     func createItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
-        Thunk<AppState> { [weak self] dispatch, _ in
+        Thunk<AppState> { [weak self] dispatch, getState in
             let dirtyItem = item.update(isDirty: true)
 
             if self?.cache.isDirty ?? false {
@@ -72,7 +67,7 @@ final class ItemListThunkImp: ItemListThunk {
                     }
 
                     dispatch(InsertItemIntoCacheSuccessAction(item: dirtyItem))
-                    self?.mergeWithRemote(dispatch)
+                    self?.mergeWithRemote(dispatch, getState)
                 }
                 return
             }
@@ -102,7 +97,7 @@ final class ItemListThunkImp: ItemListThunk {
                         }
                     case .failure(let error):
                         dispatch(CreateRemoteItemErrorAction(item: item, error: error))
-                        self?.retryMergeWithRemoteAfterDelay(ItemListThunkImp.initialDelay, dispatch)
+                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
                     }
                 }
             }
@@ -110,7 +105,7 @@ final class ItemListThunkImp: ItemListThunk {
     }
 
     func updateItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
-        Thunk<AppState> { [weak self] dispatch, _ in
+        Thunk<AppState> { [weak self] dispatch, getState in
             let dirtyItem = item.update(isDirty: true)
 
             if self?.cache.isDirty ?? false {
@@ -121,7 +116,7 @@ final class ItemListThunkImp: ItemListThunk {
                     }
 
                     dispatch(UpdateItemInCacheSuccessAction(item: dirtyItem))
-                    self?.mergeWithRemote(dispatch)
+                    self?.mergeWithRemote(dispatch, getState)
                 }
                 return
             }
@@ -151,7 +146,7 @@ final class ItemListThunkImp: ItemListThunk {
                         }
                     case .failure(let error):
                         dispatch(UpdateRemoteItemErrorAction(item: item, error: error))
-                        self?.retryMergeWithRemoteAfterDelay(ItemListThunkImp.initialDelay, dispatch)
+                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
                     }
                 }
             }
@@ -159,7 +154,7 @@ final class ItemListThunkImp: ItemListThunk {
     }
 
     func deleteItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
-        Thunk<AppState> { [weak self] dispatch, _ in
+        Thunk<AppState> { [weak self] dispatch, getState in
             dispatch(DeleteItemInCacheStartAction(item: item))
             self?.cache.delete(item) { error in
                 if let error = error {
@@ -168,31 +163,31 @@ final class ItemListThunkImp: ItemListThunk {
 
                 dispatch(DeleteItemInCacheSuccessAction(item: item))
 
-                let tombstone = Tombstone(itemId: item.id, deletedAt: Date())
-
                 if self?.cache.isDirty ?? false {
+                    let tombstone = Tombstone(itemId: item.id, deletedAt: Date())
+
                     self?.deadItemsCache.insert(tombstone: tombstone) { _ in
-                        self?.mergeWithRemote(dispatch)
+                        self?.mergeWithRemote(dispatch, getState)
                     }
                     return
                 }
 
-                self?.deadItemsCache.insert(tombstone: tombstone) { [weak self] _ in
-                    dispatch(DeleteRemoteItemStartAction(item: item))
-                    dispatch(IncrementNetworkRequestCountAction())
-                    self?.service.deleteRemote(item) { [weak self] result in
-                        dispatch(DecrementNetworkRequestCountAction())
+                dispatch(DeleteRemoteItemStartAction(item: item))
+                dispatch(IncrementNetworkRequestCountAction())
+                self?.service.deleteRemote(item) { [weak self] result in
+                    dispatch(DecrementNetworkRequestCountAction())
 
-                        switch result {
-                        case .success:
-                            dispatch(DeleteRemoteItemSuccessAction(item: item))
-                            self?.deadItemsCache.clearTombstones { _ in
+                    switch result {
+                    case .success:
+                        dispatch(DeleteRemoteItemSuccessAction(item: item))
+                    case .failure(let error):
+                        let tombstone = Tombstone(itemId: item.id, deletedAt: Date())
 
-                            }
-                        case .failure(let error):
-                            dispatch(DeleteRemoteItemErrorAction(item: item, error: error))
-                            self?.retryMergeWithRemoteAfterDelay(ItemListThunkImp.initialDelay, dispatch)
+                        self?.deadItemsCache.insert(tombstone: tombstone) { _ in
+
                         }
+                        dispatch(DeleteRemoteItemErrorAction(item: item, error: error))
+                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
                     }
                 }
             }
@@ -210,7 +205,7 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    private func mergeWithRemote(_ dispatch: @escaping DispatchFunction) {
+    private func mergeWithRemote(_ dispatch: @escaping DispatchFunction, _ getState: @escaping () -> AppState?) {
         let deleted = Array(Set(deadItemsCache.tombstones.map { $0.itemId }))
         let dirtyItems = cache.items.filter { $0.isDirty }
 
@@ -221,20 +216,33 @@ final class ItemListThunkImp: ItemListThunk {
 
             switch result {
             case .success(let items):
-                dispatch(MergeWithRemoteItemsSuccessAction(items: items))
+                let mergedItems = mergedItemsFrom(remoteItems: items, getState)
+
+                dispatch(MergeWithRemoteItemsSuccessAction(items: mergedItems))
                 self?.deadItemsCache.clearTombstones { _ in }
-                self?.replaceAllCachedItemsWith(items, dispatch)
+                self?.replaceAllCachedItemsWith(mergedItems, dispatch)
             case .failure(let error):
                 dispatch(MergeWithRemoteItemsErrorAction(error: error))
             }
         }
     }
 
-    private func retryMergeWithRemoteAfterDelay(_ seconds: Int, _ dispatch: @escaping DispatchFunction) {
+    private func retryMergeWithRemoteAfterDelay(_ seconds: Int,
+                                                _ dispatch: @escaping DispatchFunction,
+                                                _ getState: @escaping () -> AppState?) {
         let deadlineTime = DispatchTime.now() + .seconds(seconds)
 
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime) { [weak self] in
-            self?.mergeWithRemote(dispatch)
+        DispatchQueue.main.asyncAfter(deadline: deadlineTime) { [weak self, getState] in
+            self?.mergeWithRemote(dispatch, getState)
         }
     }
+}
+
+private func mergedItemsFrom(remoteItems: [TodoItem], _ getState: () -> AppState?) -> [TodoItem] {
+    guard let state = getState() else {
+        return remoteItems
+    }
+    let currentItems = state.itemListState.items
+
+    return currentItems.mergeWith(remoteItems)
 }
