@@ -5,6 +5,8 @@
 //  Created by Maksim Ivanov on 15.08.2022.
 //
 
+import Foundation
+
 extension ItemListThunkImp {
 
     convenience init() {
@@ -25,6 +27,6 @@ extension ItemListThunkImp {
             )
         )
 
-        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service)
+        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service, userDefaults: UserDefaults.standard)
     }
 }

@@ -28,7 +28,7 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
 
     func load() {
         store.dispatch(thunk.loadItemsFromCache)
-        store.dispatch(thunk.getRemoteItems)
+        store.dispatch(thunk.getRemoteItemsIfNeeded)
     }
 
     func create(item: TodoItem) {

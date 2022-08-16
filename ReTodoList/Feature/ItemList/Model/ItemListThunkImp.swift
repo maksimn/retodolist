@@ -10,19 +10,24 @@ import ReSwift
 import ReSwiftThunk
 
 private let initialDelay = 2
+private let getItemsCompletedKey = "io.github.maksimn.retodolist.getItemsCompletedKey"
 
 final class ItemListThunkImp: ItemListThunk {
 
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
     private let service: TodoListService
+    private let userDefaults: UserDefaults
 
     init(cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
-         service: TodoListService) {
+         service: TodoListService,
+         userDefaults: UserDefaults
+    ) {
         self.cache = cache
         self.deadItemsCache = deadItemsCache
         self.service = service
+        self.userDefaults = userDefaults
     }
 
     var loadItemsFromCache: Thunk<AppState> {
@@ -31,11 +36,15 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    var getRemoteItems: Thunk<AppState> {
+    var getRemoteItemsIfNeeded: Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
-            if self?.cache.isDirty ?? false {
+            let getItemsCompleted = self?.userDefaults.bool(forKey: getItemsCompletedKey) ?? false
+
+            if getItemsCompleted && (self?.cache.isDirty ?? false) {
                 return self?.mergeWithRemote(dispatch, getState) ?? Void()
             }
+
+            guard !getItemsCompleted else { return }
 
             dispatch(GetRemoteItemsStartAction())
             dispatch(IncrementNetworkRequestCountAction())
@@ -44,10 +53,8 @@ final class ItemListThunkImp: ItemListThunk {
 
                 switch result {
                 case .success(let items):
-                    let mergedItems = mergedItemsFrom(remoteItems: items, getState)
-
-                    dispatch(GetRemoteItemsSuccessAction(items: mergedItems))
-                    self?.replaceAllCachedItemsWith(mergedItems, dispatch)
+                    dispatch(GetRemoteItemsSuccessAction(items: items))
+                    self?.replaceAllCachedItemsWith(items, dispatch, isInitialGet: true)
                 case .failure(let error):
                     dispatch(GetRemoteItemsErrorAction(error: error))
                 }
@@ -194,14 +201,20 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    private func replaceAllCachedItemsWith(_ mergedItems: [TodoItem], _ dispatch: @escaping DispatchFunction) {
+    private func replaceAllCachedItemsWith(_ items: [TodoItem],
+                                           _ dispatch: @escaping DispatchFunction,
+                                           isInitialGet: Bool) {
         dispatch(ReplaceAllCachedItemsStartAction())
-        cache.replaceWith(mergedItems) { error in
+        cache.replaceWith(items) { [weak self] error in
             if let error = error {
                 return dispatch(ReplaceAllCachedItemsErrorAction(error: error))
             }
 
             dispatch(ReplaceAllCachedItemsSuccessAction())
+
+            if isInitialGet {
+                self?.userDefaults.set(true, forKey: getItemsCompletedKey)
+            }
         }
     }
 
@@ -220,7 +233,7 @@ final class ItemListThunkImp: ItemListThunk {
 
                 dispatch(MergeWithRemoteItemsSuccessAction(items: mergedItems))
                 self?.deadItemsCache.clearTombstones { _ in }
-                self?.replaceAllCachedItemsWith(mergedItems, dispatch)
+                self?.replaceAllCachedItemsWith(mergedItems, dispatch, isInitialGet: false)
             case .failure(let error):
                 dispatch(MergeWithRemoteItemsErrorAction(error: error))
             }
