@@ -11,7 +11,7 @@ protocol ItemListThunk {
 
     var loadItemsFromCache: Thunk<AppState> { get }
 
-    var getRemoteItems: Thunk<AppState> { get }
+    var getRemoteItemsIfNeeded: Thunk<AppState> { get }
 
     func createItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState>
 

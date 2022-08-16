@@ -34,10 +34,8 @@ class TodoTableController: NSObject, UITableViewDataSource, UITableViewDelegate 
         if isCreateItem(items, prev) {
             tableView?.insertRows(at: [IndexPath(row: items.count - 1, section: 0)], with: .automatic)
         } else if isUpdateItem(items, prev) {
-            for i in 0..<items.count {
-                if prev[i] != items[i] {
-                    tableView?.reloadRows(at: [IndexPath(row: i, section: 0)], with: .automatic)
-                }
+            for i in 0..<items.count where prev[i] != items[i] {
+                tableView?.reloadRows(at: [IndexPath(row: i, section: 0)], with: .automatic)
             }
         } else if isDeleteItem(items, prev) {
             for i in 0..<prev.count {
