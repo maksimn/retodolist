@@ -18,7 +18,7 @@ final class TodoListServiceImp: TodoListService {
     private var currentDelay: Double = 2
 
     private var mergeAttempts = 0
-    private static let maxMergeAttempts = 10
+    private static let maxMergeAttempts = 6
 
     init(networking: NetworkingService) {
         self.networking = networking
@@ -86,6 +86,7 @@ final class TodoListServiceImp: TodoListService {
                 self?.retryMergeRequestAfter(
                     delay: self?.nextDelay ?? TodoListServiceImp.minDelay, deleted, other, completion
                 )
+                self?.currentDelay = self?.nextDelay ?? TodoListServiceImp.minDelay
             }
         }
     }

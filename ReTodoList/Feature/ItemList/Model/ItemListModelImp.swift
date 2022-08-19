@@ -13,11 +13,11 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
     private weak var view: ItemListView?
 
     private let store: Store<AppState>
-    private let thunk: ItemListThunk
+    private let thunk: TodoListThunk
 
     init(viewBlock: @escaping () -> ItemListView?,
          store: Store<AppState>,
-         thunk: ItemListThunk) {
+         thunk: TodoListThunk) {
         self.viewBlock = viewBlock
         self.store = store
         self.thunk = thunk
@@ -33,19 +33,19 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
 
     func create(item: TodoItem) {
         store.dispatch(CreateItemAction(item: item))
-        store.dispatch(thunk.createItemInCacheAndRemote(item))
+        store.dispatch(thunk.createInCacheAndRemote(item))
     }
 
     func toggleCompletionFor(item: TodoItem) {
         let updatedItem = item.update(isCompleted: !item.isCompleted)
 
         store.dispatch(ToggleItemCompletionAction(item: item))
-        store.dispatch(thunk.updateItemInCacheAndRemote(updatedItem))
+        store.dispatch(thunk.updateInCacheAndRemote(updatedItem))
     }
 
     func delete(item: TodoItem) {
         store.dispatch(DeleteItemAction(item: item))
-        store.dispatch(thunk.deleteItemInCacheAndRemote(item))
+        store.dispatch(thunk.deleteInCacheAndRemote(item))
     }
 
     func newState(state: ItemListState?) {

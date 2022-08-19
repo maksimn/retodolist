@@ -12,11 +12,11 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     private let viewBlock: () -> EditorView?
     private weak var view: EditorView?
     private let store: Store<AppState>
-    private let thunk: ItemListThunk
+    private let thunk: CUDTodoItemThunk
 
     init(viewBlock: @escaping () -> EditorView?,
          store: Store<AppState>,
-         thunk: ItemListThunk) {
+         thunk: CUDTodoItemThunk) {
         self.viewBlock = viewBlock
         self.store = store
         self.thunk = thunk
@@ -45,11 +45,11 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
         store.dispatch(action)
 
         if action as? EditorItemSavedAction != nil, isCreatingMode, let item = item {
-            store.dispatch(thunk.createItemInCacheAndRemote(item))
+            store.dispatch(thunk.createInCacheAndRemote(item))
         } else if action as? EditorItemSavedAction != nil, let item = item {
-            store.dispatch(thunk.updateItemInCacheAndRemote(item))
+            store.dispatch(thunk.updateInCacheAndRemote(item))
         } else if action as? EditorItemDeletedAction != nil, let item = item {
-            store.dispatch(thunk.deleteItemInCacheAndRemote(item))
+            store.dispatch(thunk.deleteInCacheAndRemote(item))
         }
     }
 
