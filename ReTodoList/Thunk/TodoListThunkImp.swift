@@ -12,7 +12,7 @@ import ReSwiftThunk
 private let initialDelay = 2
 private let getItemsCompletedKey = "io.github.maksimn.retodolist.getItemsCompletedKey"
 
-final class ItemListThunkImp: ItemListThunk {
+final class TodoListThunkImp: TodoListThunk {
 
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
@@ -22,8 +22,7 @@ final class ItemListThunkImp: ItemListThunk {
     init(cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
          service: TodoListService,
-         userDefaults: UserDefaults
-    ) {
+         userDefaults: UserDefaults) {
         self.cache = cache
         self.deadItemsCache = deadItemsCache
         self.service = service
@@ -62,7 +61,7 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    func createItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
+    func createInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
             let dirtyItem = item.update(isDirty: true)
 
@@ -111,7 +110,7 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    func updateItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
+    func updateInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
             let dirtyItem = item.update(isDirty: true)
 
@@ -160,7 +159,7 @@ final class ItemListThunkImp: ItemListThunk {
         }
     }
 
-    func deleteItemInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
+    func deleteInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
             dispatch(DeleteItemInCacheStartAction(item: item))
             self?.cache.delete(item) { error in

@@ -37,7 +37,7 @@ final class EditorBuilderImp: EditorBuilder {
         let model = EditorModelImp(
             viewBlock: { viewLazy },
             store: store,
-            thunk: ItemListThunkImp()
+            thunk: TodoListThunkImp()
         )
         let view = EditorViewController(
             params: viewParams,
