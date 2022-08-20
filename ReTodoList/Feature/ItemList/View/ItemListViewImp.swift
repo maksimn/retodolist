@@ -14,7 +14,7 @@ final class ItemListViewImp: UIView, ItemListView {
 
     let tableView = UITableView()
 
-    lazy var tableController = TodoTableController(tableView: tableView)
+    lazy var tableController = ItemsTableController(tableView: tableView)
 
     private let model: ItemListModel
 

@@ -7,10 +7,9 @@
 
 import Foundation
 
-class JSONTodoCoder: TodoCoder {
+class JsonCoderImp: JsonCoder {
 
-    func encodeAsync<T: Encodable>(_ requestData: T,
-                                   _ completion: @escaping (Result<Data, Error>) -> Void) {
+    func encode<T: Encodable>(_ requestData: T, _ completion: @escaping (Result<Data, Error>) -> Void) {
         if Thread.isMainThread {
             DispatchQueue.global(qos: .default).async { [weak self] in
                 self?.encodeAndReturnToMainThread(requestData, completion)
@@ -20,8 +19,7 @@ class JSONTodoCoder: TodoCoder {
         }
     }
 
-    func decodeAsync<T: Decodable>(_ data: Data,
-                                   _ completion: @escaping (Result<T, Error>) -> Void) {
+    func decode<T: Decodable>(_ data: Data, _ completion: @escaping (Result<T, Error>) -> Void) {
         if Thread.isMainThread {
             DispatchQueue.global(qos: .default).async { [weak self] in
                 self?.decodeAndReturnToMainThread(data, completion)

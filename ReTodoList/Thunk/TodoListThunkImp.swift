@@ -242,9 +242,7 @@ final class TodoListThunkImp: TodoListThunk {
     private func retryMergeWithRemoteAfterDelay(_ seconds: Int,
                                                 _ dispatch: @escaping DispatchFunction,
                                                 _ getState: @escaping () -> AppState?) {
-        let deadlineTime = DispatchTime.now() + .seconds(seconds)
-
-        DispatchQueue.main.asyncAfter(deadline: deadlineTime) { [weak self, getState] in
+        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(seconds)) { [weak self, getState] in
             self?.mergeWithRemote(dispatch, getState)
         }
     }

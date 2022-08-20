@@ -16,13 +16,13 @@ final class LoggerImpl: Logger {
     func log(message: String) {
         guard isLoggingEnabled else { return }
 
-        print("\n******************\n\(message)\n******************\n")
+        print("\n******************\n\(message)")
     }
 
     func log(error: Error) {
         guard isLoggingEnabled else { return }
 
-        print("\nError happened during the app execution:")
+        print("\n!*!*!*!*!*!*!*!*!*!\nError happened during the app execution:")
         print(error)
     }
 }

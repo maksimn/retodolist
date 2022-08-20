@@ -11,16 +11,16 @@ class NetworkingServiceImp: NetworkingService {
 
     private let urlString: String
     private let headers: [String: String]
-    private let coreService: CoreService
-    private let coder: TodoCoder
+    private let httpClient: HttpClient
+    private let coder: JsonCoder
 
     init(urlString: String,
          headers: [String: String],
-         coreService: CoreService,
-         coder: TodoCoder) {
+         httpClient: HttpClient,
+         coder: JsonCoder) {
         self.urlString = urlString
         self.headers = headers
-        self.coreService = coreService
+        self.httpClient = httpClient
         self.coder = coder
     }
 
@@ -83,7 +83,7 @@ class NetworkingServiceImp: NetworkingService {
     }
 
     private func send<OutputDTO: Decodable>(_ http: Http, _ completion: @escaping (Result<OutputDTO, Error>) -> Void) {
-        coreService.send(http) { [weak self] result in
+        httpClient.send(http) { [weak self] result in
             self?.decode(result, completion)
         }
     }
@@ -93,11 +93,11 @@ class NetworkingServiceImp: NetworkingService {
         _ dto: InputDTO,
         _ completion: @escaping (Result<OutputDTO, Error>) -> Void
     ) {
-        coder.encodeAsync(dto) { [weak self] result in
+        coder.encode(dto) { [weak self] result in
             do {
                 let data = try result.get()
 
-                self?.coreService.send(
+                self?.httpClient.send(
                     Http(
                         urlString: http.urlString,
                         method: http.method,
@@ -118,7 +118,7 @@ class NetworkingServiceImp: NetworkingService {
         do {
             let data = try result.get()
 
-            coder.decodeAsync(data) { (result: Result<OutputDTO, Error>) in
+            coder.decode(data) { (result: Result<OutputDTO, Error>) in
                 switch result {
                 case .success(let dto):
                     completion(.success(dto))

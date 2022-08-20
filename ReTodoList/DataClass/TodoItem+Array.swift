@@ -50,4 +50,46 @@ extension Array where Element == TodoItem {
         // для полученных моделей ставить флаг isDirty в значение false
         return mergedItems.map { $0.isDirty ? $0.update(isDirty: false) : $0 }
     }
+
+    static func isCreateItemOperation(_ items: [TodoItem], _ prev: [TodoItem]) -> Bool {
+        prev.count + 1 == items.count && Array(items.prefix(prev.count)) == prev
+    }
+
+    static func isUpdateItemOperation(_ items: [TodoItem], _ prev: [TodoItem]) -> Bool {
+        prev.count == items.count
+    }
+
+    static func isDeleteItemOperation(_ items: [TodoItem], _ prev: [TodoItem]) -> Bool {
+        if prev.count == items.count + 1 {
+            var i = 0, j = 0, counter = 0
+
+            while i < items.count {
+                if items[i] == prev[j] {
+                    i += 1
+                    j += 1
+                } else {
+                    j += 1
+                    counter += 1
+
+                    if counter > 1 {
+                        return false
+                    }
+                }
+            }
+
+            if counter == 1 {
+                return true
+            }
+        }
+
+        return false
+    }
+
+    static func isExpandCompletedItemsOperation(_ items: [TodoItem], _ prev: [TodoItem]) -> Bool {
+        prev.allSatisfy({ !$0.isCompleted }) && items.contains(where: { $0.isCompleted })
+    }
+
+    static func isCollapseCompletedItemsOperation(_ items: [TodoItem], _ prev: [TodoItem]) -> Bool {
+        items.allSatisfy({ !$0.isCompleted }) && prev.contains(where: { $0.isCompleted })
+    }
 }

@@ -7,7 +7,7 @@
 
 import Foundation
 
-class URLSessionCoreService: CoreService {
+class HttpClientImp: HttpClient {
 
     private lazy var session: URLSession = {
         let sessionConfiguration = URLSessionConfiguration.default
