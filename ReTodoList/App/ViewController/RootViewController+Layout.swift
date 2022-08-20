@@ -13,16 +13,22 @@ extension RootViewController {
     func layout(_ counterBuilder: CounterBuilder) {
         let counterView = counterBuilder.build()
         view.addSubview(counterView)
-        counterView.constraints((view.safeAreaLayoutGuide.topAnchor, 16), 20,
-                                (view.safeAreaLayoutGuide.leadingAnchor, 32), (nil, 0))
+        counterView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(32)
+            make.height.equalTo(20)
+        }
     }
 
     func layout(_ visibilitySwitchBuilder: VisibilitySwitchBuilder) {
         let visibilitySwitchView = visibilitySwitchBuilder.build()
 
         view.addSubview(visibilitySwitchView)
-        visibilitySwitchView.constraints((view.safeAreaLayoutGuide.topAnchor, 16), 20, (nil, 0),
-                                         (view.safeAreaLayoutGuide.trailingAnchor, -32))
+        visibilitySwitchView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
+            make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-32)
+            make.height.equalTo(20)
+        }
     }
 
     func layout(_ itemListBuilder: ItemListBuilder) {

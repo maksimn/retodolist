@@ -5,6 +5,7 @@
 //  Created by Maxim Ivanov on 19.06.2021.
 //
 
+import SnapKit
 import UIKit
 
 extension NewTodoItemCell {
@@ -27,7 +28,12 @@ extension NewTodoItemCell {
         textView.textContainerInset = UIEdgeInsets(top: 2, left: 18, bottom: 16, right: 20)
         textView.contentOffset = CGPoint(x: 0, y: -6)
         addSubview(textView)
-        textView.constraints((topAnchor, 16), 24, (leadingAnchor, 16), (trailingAnchor, -16))
+        textView.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.snp.top).offset(16)
+            make.left.equalTo(self.snp.left).offset(16)
+            make.right.equalTo(self.snp.right).offset(-16)
+            make.height.equalTo(24)
+        }
         textView.backgroundColor = .clear
         textView.layer.cornerRadius = 16
         textView.isEditable = true
@@ -39,7 +45,12 @@ extension NewTodoItemCell {
         placeholderLabel.numberOfLines = 0
         placeholderLabel.text = "Новое"
         contentView.addSubview(placeholderLabel)
-        placeholderLabel.constraints((topAnchor, 17), 24, (leadingAnchor, 40), (trailingAnchor, -20))
+        placeholderLabel.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.snp.top).offset(17)
+            make.left.equalTo(self.snp.left).offset(40)
+            make.right.equalTo(self.snp.right).offset(-20)
+            make.height.equalTo(24)
+        }
         placeholderLabel.isUserInteractionEnabled = false
     }
 }
