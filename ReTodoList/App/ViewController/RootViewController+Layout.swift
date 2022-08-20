@@ -54,7 +54,10 @@ extension RootViewController {
         }
     }
 
-    func layout(_ networkIndicatorView: UIView) {
+    func layout(_ networkIndicatorBuilder: NetworkIndicatorBuilder) {
+        let graph = networkIndicatorBuilder.build()
+        let networkIndicatorView = graph.view
+
         view.addSubview(networkIndicatorView)
         networkIndicatorView.snp.makeConstraints { make -> Void in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(14)

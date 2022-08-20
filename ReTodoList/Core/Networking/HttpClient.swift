@@ -26,7 +26,7 @@ struct Http {
     }
 }
 
-protocol CoreService {
+protocol HttpClient {
 
     func send(_ http: Http, _ completion: @escaping (Result<Data, Error>) -> Void)
 }

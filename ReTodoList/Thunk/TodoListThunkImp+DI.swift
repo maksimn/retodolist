@@ -22,8 +22,8 @@ extension TodoListThunkImp {
                     "Authorization": token,
                     "Content-Type": "application/json"
                 ],
-                coreService: URLSessionCoreService(),
-                coder: JSONTodoCoder()
+                httpClient: HttpClientImp(),
+                coder: JsonCoderImp()
             )
         )
 
