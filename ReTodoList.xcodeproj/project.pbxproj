@@ -16,7 +16,6 @@
 		0C1604F328A64EA9004E710F /* TodoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604EE28A64EA8004E710F /* TodoItemCell.swift */; };
 		0C1604F428A64EA9004E710F /* NewTodoItemCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604EF28A64EA8004E710F /* NewTodoItemCell.swift */; };
 		0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */; };
-		0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604F628A64EDD004E710F /* UIView+Core.swift */; };
 		0C16050D28A65623004E710F /* ItemListViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050328A65623004E710F /* ItemListViewImp.swift */; };
 		0C16050E28A65623004E710F /* ItemListBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050528A65623004E710F /* ItemListBuilderImp.swift */; };
 		0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16050628A65623004E710F /* ItemListBuilder.swift */; };
@@ -139,7 +138,6 @@
 		0C1604EE28A64EA8004E710F /* TodoItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TodoItemCell.swift; sourceTree = "<group>"; };
 		0C1604EF28A64EA8004E710F /* NewTodoItemCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewTodoItemCell.swift; sourceTree = "<group>"; };
 		0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "NewTodoItemCell+Layout.swift"; sourceTree = "<group>"; };
-		0C1604F628A64EDD004E710F /* UIView+Core.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "UIView+Core.swift"; sourceTree = "<group>"; };
 		0C16050328A65623004E710F /* ItemListViewImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListViewImp.swift; sourceTree = "<group>"; };
 		0C16050528A65623004E710F /* ItemListBuilderImp.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListBuilderImp.swift; sourceTree = "<group>"; };
 		0C16050628A65623004E710F /* ItemListBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ItemListBuilder.swift; sourceTree = "<group>"; };
@@ -473,7 +471,6 @@
 				0C9EBDC528A74B770043797C /* Coder */,
 				0C9EBDA028A745D90043797C /* Logger */,
 				0C9EBDB228A749EF0043797C /* Networking */,
-				0C1604F628A64EDD004E710F /* UIView+Core.swift */,
 				0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */,
 				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
 				0C1604E828A61DF1004E710F /* UISegmentedControl+Core.swift */,
@@ -990,7 +987,6 @@
 				0C16051428A666F8004E710F /* ItemListAction.swift in Sources */,
 				0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */,
 				0C9EBDE628A861B80043797C /* CounterModel.swift in Sources */,
-				0C1604F728A64EDD004E710F /* UIView+Core.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* TodoCoder.swift in Sources */,
 				0CEB5E2528A914B5000DAD44 /* TodoListThunk.swift in Sources */,
