@@ -7,13 +7,13 @@
 
 import Foundation
 
-enum TodoItemPriority: String, Codable {
+enum TodoItemPriority: String {
     case high
     case normal
     case low
 }
 
-struct TodoItem: Equatable, Codable, Hashable {
+struct TodoItem: Equatable {
 
     let id: String
     let text: String
@@ -41,18 +41,6 @@ struct TodoItem: Equatable, Codable, Hashable {
         let now = Date()
         self.createdAt = createdAt ?? now.integer
         self.updatedAt = updatedAt ?? now.integer
-    }
-
-    init(isTerminal: Bool) {
-        if isTerminal {
-            self.init(createdAt: Int.min)
-        } else {
-            self.init()
-        }
-    }
-
-    var isTerminal: Bool {
-        createdAt == Int.min
     }
 
     func update(text: String? = nil,
@@ -92,17 +80,13 @@ struct TodoItem: Equatable, Codable, Hashable {
     }
 
     static func == (lhs: TodoItem, rhs: TodoItem) -> Bool {
-        return lhs.id == rhs.id &&
-            lhs.text == rhs.text &&
-            lhs.priority == rhs.priority &&
-            lhs.deadline?.timeIntervalSince1970 == rhs.deadline?.timeIntervalSince1970 &&
-            lhs.isCompleted == rhs.isCompleted &&
-            lhs.createdAt == rhs.createdAt &&
-            lhs.updatedAt == rhs.updatedAt &&
-            lhs.isDirty == rhs.isDirty
-    }
-
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(id)
+        lhs.id == rhs.id &&
+        lhs.text == rhs.text &&
+        lhs.priority == rhs.priority &&
+        lhs.deadline?.timeIntervalSince1970 == rhs.deadline?.timeIntervalSince1970 &&
+        lhs.isCompleted == rhs.isCompleted &&
+        lhs.createdAt == rhs.createdAt &&
+        lhs.updatedAt == rhs.updatedAt &&
+        lhs.isDirty == rhs.isDirty
     }
 }

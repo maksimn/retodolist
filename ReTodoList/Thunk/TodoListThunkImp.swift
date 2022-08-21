@@ -9,7 +9,6 @@ import Foundation
 import ReSwift
 import ReSwiftThunk
 
-private let initialDelay = 2
 private let getItemsCompletedKey = "io.github.maksimn.retodolist.getItemsCompletedKey"
 
 final class TodoListThunkImp: TodoListThunk {
@@ -103,7 +102,7 @@ final class TodoListThunkImp: TodoListThunk {
                         }
                     case .failure(let error):
                         dispatch(CreateRemoteItemErrorAction(item: item, error: error))
-                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
+                        self?.mergeWithRemote(dispatch, getState)
                     }
                 }
             }
@@ -152,7 +151,7 @@ final class TodoListThunkImp: TodoListThunk {
                         }
                     case .failure(let error):
                         dispatch(UpdateRemoteItemErrorAction(item: item, error: error))
-                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
+                        self?.mergeWithRemote(dispatch, getState)
                     }
                 }
             }
@@ -193,7 +192,7 @@ final class TodoListThunkImp: TodoListThunk {
 
                         }
                         dispatch(DeleteRemoteItemErrorAction(item: item, error: error))
-                        self?.retryMergeWithRemoteAfterDelay(initialDelay, dispatch, getState)
+                        self?.mergeWithRemote(dispatch, getState)
                     }
                 }
             }
@@ -236,14 +235,6 @@ final class TodoListThunkImp: TodoListThunk {
             case .failure(let error):
                 dispatch(MergeWithRemoteItemsErrorAction(error: error))
             }
-        }
-    }
-
-    private func retryMergeWithRemoteAfterDelay(_ seconds: Int,
-                                                _ dispatch: @escaping DispatchFunction,
-                                                _ getState: @escaping () -> AppState?) {
-        DispatchQueue.main.asyncAfter(deadline: DispatchTime.now() + .seconds(seconds)) { [weak self, getState] in
-            self?.mergeWithRemote(dispatch, getState)
         }
     }
 }
