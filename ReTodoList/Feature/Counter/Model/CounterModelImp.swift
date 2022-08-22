@@ -17,18 +17,25 @@ final class CounterModelImp: CounterModel, StoreSubscriber {
          store: Store<AppState>) {
         self.viewBlock = viewBlock
         self.store = store
-        store.subscribe(self) { subcription in
-            subcription.select { state in state.itemListState }
-        }
     }
 
     func newState(state: ItemListState?) {
         guard let state = state else { return }
 
+        view?.set(count: state.completedItemCount)
+    }
+
+    func subscribe() {
         if view == nil {
             view = viewBlock()
         }
 
-        view?.set(count: state.completedItemCount)
+        store.subscribe(self) { subcription in
+            subcription.select { state in state.itemListState }
+        }
+    }
+
+    func unsubscribe() {
+        store.unsubscribe(self)
     }
 }

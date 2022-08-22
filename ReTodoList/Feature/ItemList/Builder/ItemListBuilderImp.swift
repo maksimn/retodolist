@@ -38,7 +38,6 @@ final class ItemListBuilderImp: ItemListBuilder {
         )
 
         viewLazy = view
-        model.subscribe()
 
         return view
     }

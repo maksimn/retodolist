@@ -31,6 +31,11 @@
 		0C16052A28A70CB4004E710F /* VisibilitySwitchViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */; };
 		0C16052D28A7100E004E710F /* VisibilitySwitchAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */; };
 		0C38A86428A9B68600F9FEB0 /* TodoListThunkImp+DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */; };
+		0C603EC928B38B9D004B4F4D /* UDFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603EC828B38B9D004B4F4D /* UDFModel.swift */; };
+		0C603ECC28B38C85004B4F4D /* CounterGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ECB28B38C85004B4F4D /* CounterGraph.swift */; };
+		0C603ECE28B38C91004B4F4D /* CounterGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */; };
+		0C603ED128B38CEE004B4F4D /* VisibilitySwitchGraph.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ED028B38CEE004B4F4D /* VisibilitySwitchGraph.swift */; };
+		0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */; };
 		0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848B28A1D8A200805B83 /* AppDelegate.swift */; };
 		0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C69848D28A1D8A200805B83 /* SceneDelegate.swift */; };
 		0C69849528A1D8A400805B83 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0C69849428A1D8A400805B83 /* Assets.xcassets */; };
@@ -154,6 +159,11 @@
 		0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchViewImp.swift; sourceTree = "<group>"; };
 		0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchAction.swift; sourceTree = "<group>"; };
 		0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoListThunkImp+DI.swift"; sourceTree = "<group>"; };
+		0C603EC828B38B9D004B4F4D /* UDFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDFModel.swift; sourceTree = "<group>"; };
+		0C603ECB28B38C85004B4F4D /* CounterGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterGraph.swift; sourceTree = "<group>"; };
+		0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterGraphImp.swift; sourceTree = "<group>"; };
+		0C603ED028B38CEE004B4F4D /* VisibilitySwitchGraph.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchGraph.swift; sourceTree = "<group>"; };
+		0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchGraphImp.swift; sourceTree = "<group>"; };
 		0C69848828A1D8A200805B83 /* ReTodoList.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ReTodoList.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C69848B28A1D8A200805B83 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0C69848D28A1D8A200805B83 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -338,6 +348,7 @@
 			isa = PBXGroup;
 			children = (
 				0C16051C28A6BEBB004E710F /* Builder */,
+				0C603ECA28B38C75004B4F4D /* Graph */,
 				0C9EBDE428A861A30043797C /* Model */,
 				0C16051A28A6BEBB004E710F /* View */,
 			);
@@ -366,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				0C16052328A70C5C004E710F /* Builder */,
+				0C603ECF28B38CD5004B4F4D /* Graph */,
 				0C9EBDFD28A8AE780043797C /* Model */,
 				0C16052428A70C65004E710F /* View */,
 				0C16052B28A71003004E710F /* UDF */,
@@ -397,6 +409,24 @@
 				0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */,
 			);
 			path = UDF;
+			sourceTree = "<group>";
+		};
+		0C603ECA28B38C75004B4F4D /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				0C603ECB28B38C85004B4F4D /* CounterGraph.swift */,
+				0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */,
+			);
+			path = Graph;
+			sourceTree = "<group>";
+		};
+		0C603ECF28B38CD5004B4F4D /* Graph */ = {
+			isa = PBXGroup;
+			children = (
+				0C603ED028B38CEE004B4F4D /* VisibilitySwitchGraph.swift */,
+				0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */,
+			);
+			path = Graph;
 			sourceTree = "<group>";
 		};
 		0C69847F28A1D8A200805B83 = {
@@ -548,6 +578,7 @@
 			children = (
 				0C97E8B728A4CB3E00B087DC /* AppState.swift */,
 				0C97E8B928A4CC7400B087DC /* appReducer.swift */,
+				0C603EC828B38B9D004B4F4D /* UDFModel.swift */,
 			);
 			path = UDF;
 			sourceTree = "<group>";
@@ -976,6 +1007,7 @@
 				0C96E61028A463D60034FA73 /* EditorViewController.swift in Sources */,
 				0C9EBDBC28A749EF0043797C /* NetworkingServiceImp.swift in Sources */,
 				0C9EBDD728A831370043797C /* NetworkIndicatorBuilder.swift in Sources */,
+				0C603EC928B38B9D004B4F4D /* UDFModel.swift in Sources */,
 				0C9EBD9C28A745600043797C /* DeadItemsCacheImp.swift in Sources */,
 				0C1604E928A61DF1004E710F /* UISegmentedControl+Core.swift in Sources */,
 				0C16050E28A65623004E710F /* ItemListBuilderImp.swift in Sources */,
@@ -984,6 +1016,7 @@
 				0C96E5FF28A31DD30034FA73 /* AppBuilderImp.swift in Sources */,
 				0C96E60C28A463B60034FA73 /* EditorBuilder.swift in Sources */,
 				0C9EBD9A28A745600043797C /* TombstoneMO.swift in Sources */,
+				0C603ECC28B38C85004B4F4D /* CounterGraph.swift in Sources */,
 				0C9EBDA728A7462D0043797C /* Tombstone.swift in Sources */,
 				0C9EBDE328A836990043797C /* networkIndicatorReducer.swift in Sources */,
 				0C16051228A666E8004E710F /* ItemListState.swift in Sources */,
@@ -992,7 +1025,9 @@
 				0C9EBDE628A861B80043797C /* CounterModel.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* JsonCoder.swift in Sources */,
+				0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */,
 				0CEB5E2528A914B5000DAD44 /* TodoListThunk.swift in Sources */,
+				0C603ED128B38CEE004B4F4D /* VisibilitySwitchGraph.swift in Sources */,
 				0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */,
 				0C9EBE0428A8B7E90043797C /* NetworkIndicatorGraph.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
@@ -1039,6 +1074,7 @@
 				0C9EBDE828A861DA0043797C /* CounterModelImp.swift in Sources */,
 				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */,
+				0C603ECE28B38C91004B4F4D /* CounterGraphImp.swift in Sources */,
 				0C9EBDFF28A8AE850043797C /* VisibilitySwitchModel.swift in Sources */,
 				0C9EBDA428A745D90043797C /* LoggerImpl.swift in Sources */,
 				0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */,

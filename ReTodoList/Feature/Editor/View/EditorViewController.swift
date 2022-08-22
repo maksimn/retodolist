@@ -10,6 +10,8 @@ import UIKit
 final class EditorViewController: UIViewController, EditorView, UITextViewDelegate {
 
     let params: EditorViewParams
+    private let model: EditorModel
+    let networkIndicatorGraph: NetworkIndicatorGraph
 
     var navBar: EditorNavBar?
     let scrollView = UIScrollView(frame: .zero)
@@ -30,10 +32,6 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     var isKeyboardActive: Bool = false
     var keyboardSize: CGSize = .zero
 
-    private let model: EditorModel
-
-    let networkIndicatorGraph: NetworkIndicatorGraph
-
     init(params: EditorViewParams,
          model: EditorModel,
          networkIndicatorBuilder: NetworkIndicatorBuilder) {
@@ -51,6 +49,18 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         model.setInitial(item: params.initTodoItem)
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.subscribe()
+        networkIndicatorGraph.model?.subscribe()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        model.unsubscribe()
+        networkIndicatorGraph.model?.unsubscribe()
     }
 
     func set(state: EditorState) {
@@ -77,8 +87,6 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     func onCancelButtonTap() {
         model.close()
-        model.unsubscribe()
-        networkIndicatorGraph.model?.unsubscribe()
         dismiss(animated: true)
     }
 

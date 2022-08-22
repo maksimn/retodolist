@@ -16,22 +16,7 @@ final class VisibilitySwitchBuilderImp: VisibilitySwitchBuilder {
         self.store = store
     }
 
-    func build() -> UIView {
-        weak var viewLazy: VisibilitySwitchView?
-
-        let model = VisibilitySwitchModelImp(viewBlock: { viewLazy }, store: store)
-        let view = VisibilitySwitchViewImp(
-            params: VisibilitySwitchViewParams(
-                show: "Показать",
-                hide: "Скрыть"
-            ),
-            model: model
-        )
-
-        viewLazy = view
-
-        model.subscribe()
-
-        return view
+    func build() -> VisibilitySwitchGraph {
+        VisibilitySwitchGraphImp(store: store)
     }
 }

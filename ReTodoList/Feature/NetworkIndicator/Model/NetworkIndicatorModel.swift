@@ -7,5 +7,7 @@
 
 protocol NetworkIndicatorModel: AnyObject {
 
+    func subscribe()
+
     func unsubscribe()
 }
