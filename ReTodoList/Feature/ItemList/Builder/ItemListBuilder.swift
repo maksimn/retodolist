@@ -9,5 +9,5 @@ import UIKit
 
 protocol ItemListBuilder {
 
-    func build() -> UIView
+    func build() -> UIViewController
 }

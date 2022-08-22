@@ -5,29 +5,31 @@
 //  Created by Maxim Ivanov on 30.09.2021.
 //
 
-import ReSwift
 import UIKit
 
-final class ItemListViewImp: UIView, ItemListView {
+final class ItemListViewImp: UIViewController, ItemListView {
 
+    private let model: ItemListModel
     private let navToEditorRouter: NavToEditorRouter
 
     let tableView = UITableView()
-
     lazy var tableController = ItemsTableController(tableView: tableView)
-
-    private let model: ItemListModel
 
     init(model: ItemListModel,
          navToEditorRouter: NavToEditorRouter) {
         self.model = model
         self.navToEditorRouter = navToEditorRouter
-        super.init(frame: .zero)
+        super.init(nibName: nil, bundle: nil)
         initViews()
     }
 
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        model.load()
     }
 
     func set(state: ItemListState) {

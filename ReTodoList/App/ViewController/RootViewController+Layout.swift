@@ -32,14 +32,22 @@ extension RootViewController {
     }
 
     func layout(_ itemListBuilder: ItemListBuilder) {
-        let itemListView = itemListBuilder.build()
+        let itemListViewController = itemListBuilder.build()
+        let parentView = UIView()
 
-        view.addSubview(itemListView)
-        itemListView.snp.makeConstraints { make -> Void in
+        view.addSubview(parentView)
+        parentView.snp.makeConstraints { make -> Void in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(50)
             make.left.equalTo(view.safeAreaLayoutGuide.snp.left).offset(20)
             make.right.equalTo(view.safeAreaLayoutGuide.snp.right).offset(-20)
             make.bottom.equalTo(view.snp.bottom)
+        }
+
+        parentView.addSubview(itemListViewController.view)
+        addChild(itemListViewController)
+        itemListViewController.didMove(toParent: self)
+        itemListViewController.view.snp.makeConstraints { make -> Void in
+            make.edges.equalTo(parentView)
         }
     }
 

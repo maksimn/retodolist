@@ -21,9 +21,20 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
         self.viewBlock = viewBlock
         self.store = store
         self.thunk = thunk
+    }
+
+    func subscribe() {
+        if view == nil {
+            view = viewBlock()
+        }
+
         store.subscribe(self) { subcription in
             subcription.select { state in state.itemListState }
         }
+    }
+
+    func unsubscribe() {
+        store.unsubscribe(self)
     }
 
     func load() {
@@ -50,10 +61,6 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
 
     func newState(state: ItemListState?) {
         guard let state = state else { return }
-
-        if view == nil {
-            view = viewBlock()
-        }
 
         view?.set(state: state)
     }
