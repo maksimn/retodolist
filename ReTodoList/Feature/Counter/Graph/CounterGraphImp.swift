@@ -8,7 +8,7 @@
 import ReSwift
 import UIKit
 
-final class CounterGraphImp: CounterGraph {
+final class CounterGraphImp: UDFGraph {
 
     let view: UIView
 

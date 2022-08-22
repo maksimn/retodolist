@@ -8,7 +8,7 @@
 import ReSwift
 import UIKit
 
-final class VisibilitySwitchGraphImp: VisibilitySwitchGraph {
+final class VisibilitySwitchGraphImp: UDFGraph {
 
     let view: UIView
 

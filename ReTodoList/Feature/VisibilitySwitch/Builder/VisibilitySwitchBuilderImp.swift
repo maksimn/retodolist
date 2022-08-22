@@ -6,7 +6,6 @@
 //
 
 import ReSwift
-import UIKit
 
 final class VisibilitySwitchBuilderImp: VisibilitySwitchBuilder {
 
@@ -16,7 +15,7 @@ final class VisibilitySwitchBuilderImp: VisibilitySwitchBuilder {
         self.store = store
     }
 
-    func build() -> VisibilitySwitchGraph {
+    func build() -> UDFGraph {
         VisibilitySwitchGraphImp(store: store)
     }
 }

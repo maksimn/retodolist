@@ -5,7 +5,4 @@
 //  Created by Maksim Ivanov on 13.08.2022.
 //
 
-protocol VisibilitySwitchBuilder {
-
-    func build() -> VisibilitySwitchGraph
-}
+protocol VisibilitySwitchBuilder: UDFGraphBuilder { }

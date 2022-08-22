@@ -19,8 +19,8 @@ final class VisibilitySwitchModelImp: VisibilitySwitchModel, StoreSubscriber {
         self.store = store
     }
 
-    func dispatch(_ action: Action) {
-        store.dispatch(action)
+    func switchCompletedItemsVisibility() {
+        store.dispatch(SwitchCompletedItemsVisibilityAction())
     }
 
     func newState(state: ItemListState?) {
