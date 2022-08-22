@@ -500,6 +500,8 @@
 				0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */,
 				0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */,
 				0C1604E828A61DF1004E710F /* UISegmentedControl+Core.swift */,
+				0C603EC828B38B9D004B4F4D /* UDFModel.swift */,
+				0C603ED628B399F9004B4F4D /* UDFGraph.swift */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -572,8 +574,6 @@
 			children = (
 				0C97E8B728A4CB3E00B087DC /* AppState.swift */,
 				0C97E8B928A4CC7400B087DC /* appReducer.swift */,
-				0C603EC828B38B9D004B4F4D /* UDFModel.swift */,
-				0C603ED628B399F9004B4F4D /* UDFGraph.swift */,
 			);
 			path = UDF;
 			sourceTree = "<group>";
