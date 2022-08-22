@@ -7,6 +7,10 @@
 
 protocol ItemListModel: AnyObject {
 
+    func subscribe()
+
+    func unsubscribe()
+
     func load()
 
     func create(item: TodoItem)

@@ -19,7 +19,7 @@ final class ItemListBuilderImp: ItemListBuilder {
         self.store = store
     }
 
-    func build() -> UIView {
+    func build() -> UIViewController {
         let router = NavToEditorRouterImp(
             navigationController: navigationController,
             editorBuilder: EditorBuilderImp(store: store)
@@ -38,8 +38,7 @@ final class ItemListBuilderImp: ItemListBuilder {
         )
 
         viewLazy = view
-
-        model.load()
+        model.subscribe()
 
         return view
     }
