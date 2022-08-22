@@ -7,7 +7,7 @@
 
 import ReSwift
 
-protocol VisibilitySwitchModel {
+protocol VisibilitySwitchModel: UDFModel {
 
     func dispatch(_ action: Action)
 }

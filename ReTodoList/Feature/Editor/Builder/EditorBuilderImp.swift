@@ -47,8 +47,6 @@ final class EditorBuilderImp: EditorBuilder {
 
         viewLazy = view
 
-        model.subscribe()
-
         return view
     }
 }

@@ -19,6 +19,16 @@ final class VisibilitySwitchModelImp: VisibilitySwitchModel, StoreSubscriber {
         self.store = store
     }
 
+    func dispatch(_ action: Action) {
+        store.dispatch(action)
+    }
+
+    func newState(state: ItemListState?) {
+        guard let state = state else { return }
+
+        view?.set(state: state)
+    }
+
     func subscribe() {
         if view == nil {
             view = viewBlock()
@@ -29,13 +39,7 @@ final class VisibilitySwitchModelImp: VisibilitySwitchModel, StoreSubscriber {
         }
     }
 
-    func dispatch(_ action: Action) {
-        store.dispatch(action)
-    }
-
-    func newState(state: ItemListState?) {
-        guard let state = state else { return }
-
-        view?.set(state: state)
+    func unsubscribe() {
+        store.unsubscribe(self)
     }
 }

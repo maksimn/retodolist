@@ -32,6 +32,16 @@ final class ItemListViewImp: UIViewController, ItemListView {
         model.load()
     }
 
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        model.subscribe()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        model.unsubscribe()
+    }
+
     func set(state: ItemListState) {
         let items = state.areCompleteItemsVisible ? state.items : state.items.filter { !$0.isCompleted }
 

@@ -10,8 +10,9 @@ import UIKit
 
 extension RootViewController {
 
-    func layout(_ counterBuilder: CounterBuilder) {
-        let counterView = counterBuilder.build()
+    func layoutCounter() {
+        let counterView = counterGraph.view
+
         view.addSubview(counterView)
         counterView.snp.makeConstraints { make -> Void in
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top).offset(16)
@@ -20,8 +21,8 @@ extension RootViewController {
         }
     }
 
-    func layout(_ visibilitySwitchBuilder: VisibilitySwitchBuilder) {
-        let visibilitySwitchView = visibilitySwitchBuilder.build()
+    func layoutVisibilitySwitch() {
+        let visibilitySwitchView = visibilitySwitchGraph.view
 
         view.addSubview(visibilitySwitchView)
         visibilitySwitchView.snp.makeConstraints { make -> Void in
@@ -31,7 +32,7 @@ extension RootViewController {
         }
     }
 
-    func layout(_ itemListBuilder: ItemListBuilder) {
+    func layout(itemListBuilder: ItemListBuilder) {
         let itemListViewController = itemListBuilder.build()
         let parentView = UIView()
 
@@ -51,7 +52,7 @@ extension RootViewController {
         }
     }
 
-    func layout(_ navToEditorBuilder: NavToEditorBuilder) {
+    func layout(navToEditorBuilder: NavToEditorBuilder) {
         let navToEditorView = navToEditorBuilder.build()
 
         view.addSubview(navToEditorView)
@@ -62,9 +63,8 @@ extension RootViewController {
         }
     }
 
-    func layout(_ networkIndicatorBuilder: NetworkIndicatorBuilder) {
-        let graph = networkIndicatorBuilder.build()
-        let networkIndicatorView = graph.view
+    func layoutNetworkIndicator() {
+        let networkIndicatorView = networkIndicatorGraph.view
 
         view.addSubview(networkIndicatorView)
         networkIndicatorView.snp.makeConstraints { make -> Void in
