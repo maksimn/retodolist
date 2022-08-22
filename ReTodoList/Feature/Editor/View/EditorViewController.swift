@@ -11,7 +11,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     let params: EditorViewParams
     private let model: EditorModel
-    let networkIndicatorGraph: NetworkIndicatorGraph
+    let networkIndicatorGraph: UDFGraph
 
     var navBar: EditorNavBar?
     let scrollView = UIScrollView(frame: .zero)

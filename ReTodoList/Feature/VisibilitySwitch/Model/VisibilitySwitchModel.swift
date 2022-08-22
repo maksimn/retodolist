@@ -9,5 +9,5 @@ import ReSwift
 
 protocol VisibilitySwitchModel: UDFModel {
 
-    func dispatch(_ action: Action)
+    func switchCompletedItemsVisibility()
 }

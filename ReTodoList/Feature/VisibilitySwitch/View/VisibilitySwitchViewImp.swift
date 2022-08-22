@@ -40,7 +40,7 @@ final class VisibilitySwitchViewImp: UIView, VisibilitySwitchView {
 
     @objc
     private func onToggleTap() {
-        model.dispatch(SwitchCompletedItemsVisibilityAction())
+        model.switchCompletedItemsVisibility()
     }
 
     private func initViews() {

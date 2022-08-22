@@ -8,11 +8,11 @@
 import ReSwift
 import UIKit
 
-final class NetworkIndicatorGraphImp: NetworkIndicatorGraph {
+final class NetworkIndicatorGraphImp: UDFGraph {
 
     let view: UIView
 
-    private(set) weak var model: NetworkIndicatorModel?
+    private(set) weak var model: UDFModel?
 
     init(store: Store<AppState>) {
         weak var viewLazy: NetworkIndicatorView?

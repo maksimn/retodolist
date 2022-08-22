@@ -5,11 +5,7 @@
 //  Created by Maksim Ivanov on 13.08.2022.
 //
 
-protocol ItemListModel: AnyObject {
-
-    func subscribe()
-
-    func unsubscribe()
+protocol ItemListModel: UDFModel {
 
     func load()
 

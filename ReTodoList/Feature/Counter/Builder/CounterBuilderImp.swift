@@ -6,7 +6,6 @@
 //
 
 import ReSwift
-import UIKit
 
 final class CounterBuilderImp: CounterBuilder {
 
@@ -16,7 +15,7 @@ final class CounterBuilderImp: CounterBuilder {
         self.store = store
     }
 
-    func build() -> CounterGraph {
+    func build() -> UDFGraph {
         CounterGraphImp(store: store)
     }
 }

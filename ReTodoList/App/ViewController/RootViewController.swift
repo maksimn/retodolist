@@ -9,10 +9,9 @@ import UIKit
 
 final class RootViewController: UIViewController {
 
-    let navToEditorButton = UIButton()
-    let counterGraph: CounterGraph
-    let visibilitySwitchGraph: VisibilitySwitchGraph
-    let networkIndicatorGraph: NetworkIndicatorGraph
+    let counterGraph: UDFGraph
+    let visibilitySwitchGraph: UDFGraph
+    let networkIndicatorGraph: UDFGraph
 
     init(mainTitle: String,
          counterBuilder: CounterBuilder,

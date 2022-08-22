@@ -15,7 +15,7 @@ final class NetworkIndicatorBuilderImp: NetworkIndicatorBuilder {
         self.store = store
     }
 
-    func build() -> NetworkIndicatorGraph {
+    func build() -> UDFGraph {
         NetworkIndicatorGraphImp(store: store)
     }
 }

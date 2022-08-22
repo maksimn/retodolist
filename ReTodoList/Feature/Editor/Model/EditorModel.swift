@@ -7,11 +7,7 @@
 
 import Foundation
 
-protocol EditorModel {
-
-    func subscribe()
-
-    func unsubscribe()
+protocol EditorModel: UDFModel {
 
     func setInitial(item: TodoItem?)
 
