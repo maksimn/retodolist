@@ -105,7 +105,7 @@ extension EditorViewController {
                                       y: separatorViewOne.frame.origin.y + separatorHeight + 13.5,
                                       width: 61, height: 31)
         deadlineButton.frame = CGRect(x: pillowView.frame.origin.x + 12.5, y: shouldBeDoneBeforeLabel.frame.maxY - 1.5,
-                                      width: 100, height: 18)
+                                      width: 106, height: 18)
         separatorViewTwo.frame = CGRect(x: pillowView.frame.minX + 16, y: separatorViewOne.frame.maxY + 56,
                                         width: pillowView.bounds.width - 32, height: separatorHeight)
         deadlineDatePicker.frame = CGRect(x: pillowView.frame.minX + 16, y: separatorViewTwo.frame.maxY + 12,

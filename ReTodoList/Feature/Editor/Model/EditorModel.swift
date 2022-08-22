@@ -5,13 +5,27 @@
 //  Created by Maksim Ivanov on 14.08.2022.
 //
 
-import ReSwift
+import Foundation
 
 protocol EditorModel {
-
-    func dispatch(_ action: Action)
 
     func subscribe()
 
     func unsubscribe()
+
+    func setInitial(item: TodoItem?)
+
+    func set(deadline: Date?)
+
+    func set(isDeadlinePickerHidden: Bool)
+
+    func set(text: String)
+
+    func set(priority: TodoItemPriority)
+
+    func save()
+
+    func delete()
+
+    func close()
 }

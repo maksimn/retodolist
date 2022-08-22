@@ -5,7 +5,6 @@
 //  Created by Maksim Ivanov on 11.08.2022.
 //
 
-import ReSwift
 import UIKit
 
 final class EditorViewController: UIViewController, EditorView, UITextViewDelegate {
@@ -51,7 +50,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.dispatch(InitEditorAction(item: params.initTodoItem))
+        model.setInitial(item: params.initTodoItem)
     }
 
     func set(state: EditorState) {
@@ -68,7 +67,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
             deadlineSwitch.setOn(true, animated: false)
             deadlineDatePicker.setDate(deadline, animated: false)
             deadlineButton.isHidden = false
-            deadlineButton.setTitle(deadlineDatePicker.date.formattedDate, for: .normal)
+            deadlineButton.setTitle(deadline.formattedDate, for: .normal)
         } else {
             deadlineSwitch.setOn(false, animated: false)
         }
@@ -77,42 +76,42 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     }
 
     func onCancelButtonTap() {
-        model.dispatch(CloseEditorAction())
+        model.close()
         model.unsubscribe()
         networkIndicatorGraph.model?.unsubscribe()
         dismiss(animated: true)
     }
 
     func onSaveButtonTap() {
-        model.dispatch(EditorItemSavedAction())
+        model.save()
     }
 
     @objc
     func onRemoveButtonTap() {
-        model.dispatch(EditorItemDeletedAction())
+        model.delete()
     }
 
     @objc
     func onDeadlineSwitchValueChanged() {
-        model.dispatch(DeadlineChangedEditorAction(deadline: deadlineSwitch.isOn ? Date() : nil))
+        model.set(deadline: deadlineSwitch.isOn ? Date() : nil)
     }
 
     @objc
     func onDeadlineDatePickerValueChanged() {
-        model.dispatch(DeadlineChangedEditorAction(deadline: deadlineDatePicker.date))
+        model.set(deadline: deadlineDatePicker.date)
     }
 
     @objc
     func onDeadlineButtonTap() {
-        model.dispatch(DeadlinePickerVisibilityAction(isHidden: !deadlineDatePicker.isHidden))
+        model.set(isDeadlinePickerHidden: !deadlineDatePicker.isHidden)
     }
 
     func textViewDidChange(_ textView: UITextView) {
-        model.dispatch(TextChangedEditorAction(text: textView.text))
+        model.set(text: textView.text)
     }
 
     @objc
     func onPriorityChanged() {
-        model.dispatch(PriorityChangedEditorAction(priority: prioritySegmentedControl.todoItemPriority))
+        model.set(priority: prioritySegmentedControl.todoItemPriority)
     }
 }
