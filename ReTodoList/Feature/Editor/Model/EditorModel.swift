@@ -9,7 +9,7 @@ import Foundation
 
 protocol EditorModel: UDFModel {
 
-    func setInitial(item: TodoItem?)
+    func initialize()
 
     func set(deadline: Date?)
 

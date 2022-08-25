@@ -28,14 +28,14 @@ final class EditorBuilderImp: EditorBuilder {
                 save: "Сохранить",
                 todo: "Дело",
                 cancel: "Отменить"
-            ),
-            initTodoItem: initTodoItem
+            )
         )
 
         weak var viewLazy: EditorView?
 
         let model = EditorModelImp(
             viewBlock: { viewLazy },
+            initialItem: initTodoItem,
             store: store,
             thunk: TodoListThunkImp()
         )
