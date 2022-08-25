@@ -49,8 +49,7 @@ final class TodoListThunkImp: TodoListThunk {
 
                 switch result {
                 case .success(let items):
-                    dispatch(GetRemoteItemsSuccessAction(items: items))
-                    self?.replaceAllCachedItemsWith(items, dispatch, isInitialGet: true)
+                    self?.complete(operation: .get, items, dispatch)
                 case .failure(let error):
                     dispatch(GetRemoteItemsErrorAction(error: error))
                 }
@@ -197,19 +196,30 @@ final class TodoListThunkImp: TodoListThunk {
         }
     }
 
-    private func replaceAllCachedItemsWith(_ items: [TodoItem],
-                                           _ dispatch: @escaping DispatchFunction,
-                                           isInitialGet: Bool) {
+    private func complete(operation: TodoListOperation, _ items: [TodoItem], _ dispatch: @escaping DispatchFunction) {
         dispatch(ReplaceAllCachedItemsStartAction())
         cache.replaceWith(items) { [weak self] error in
             if let error = error {
-                return dispatch(ReplaceAllCachedItemsErrorAction(error: error))
+                dispatch(ReplaceAllCachedItemsErrorAction(error: error))
+
+                switch operation {
+                case .get:
+                    dispatch(GetRemoteItemsErrorAction(error: error))
+                case .merge:
+                    dispatch(MergeWithRemoteItemsErrorAction(error: error))
+                }
+
+                return
             }
 
             dispatch(ReplaceAllCachedItemsSuccessAction())
 
-            if isInitialGet {
+            switch operation {
+            case .get:
                 self?.flags.isGetRemotedItemsCompleted = true
+                dispatch(GetRemoteItemsSuccessAction(items: items))
+            case .merge:
+                dispatch(MergeWithRemoteItemsSuccessAction(items: items))
             }
         }
     }
@@ -227,14 +237,15 @@ final class TodoListThunkImp: TodoListThunk {
             case .success(let items):
                 let mergedItems = mergedItemsFrom(remoteItems: items, getState)
 
-                dispatch(MergeWithRemoteItemsSuccessAction(items: mergedItems))
                 self?.deadItemsCache.clearTombstones { _ in }
-                self?.replaceAllCachedItemsWith(mergedItems, dispatch, isInitialGet: false)
+                self?.complete(operation: .merge, mergedItems, dispatch)
             case .failure(let error):
                 dispatch(MergeWithRemoteItemsErrorAction(error: error))
             }
         }
     }
+
+    private enum TodoListOperation { case get, merge }
 }
 
 private func mergedItemsFrom(remoteItems: [TodoItem], _ getState: () -> AppState?) -> [TodoItem] {
