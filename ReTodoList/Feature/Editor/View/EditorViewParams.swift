@@ -16,5 +16,4 @@ struct EditorViewParams {
     let shouldBeDoneBefore: String
     let remove: String
     let navBar: EditorNavBarParams
-    let initTodoItem: TodoItem?
 }

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0C04A97628B750C400DB8B4F /* TodoListThunkFlags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A97528B750C400DB8B4F /* TodoListThunkFlags.swift */; };
+		0C04A97828B750D900DB8B4F /* TodoListThunkFlagsImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C04A97728B750D900DB8B4F /* TodoListThunkFlagsImp.swift */; };
 		0C1604DC28A5E917004E710F /* EditorState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DB28A5E917004E710F /* EditorState.swift */; };
 		0C1604DE28A5E931004E710F /* editorReducer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DD28A5E930004E710F /* editorReducer.swift */; };
 		0C1604E028A5E949004E710F /* EditorAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C1604DF28A5E949004E710F /* EditorAction.swift */; };
@@ -133,6 +135,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		0C04A97528B750C400DB8B4F /* TodoListThunkFlags.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListThunkFlags.swift; sourceTree = "<group>"; };
+		0C04A97728B750D900DB8B4F /* TodoListThunkFlagsImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListThunkFlagsImp.swift; sourceTree = "<group>"; };
 		0C1604DB28A5E917004E710F /* EditorState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorState.swift; sourceTree = "<group>"; };
 		0C1604DD28A5E930004E710F /* editorReducer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = editorReducer.swift; sourceTree = "<group>"; };
 		0C1604DF28A5E949004E710F /* EditorAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorAction.swift; sourceTree = "<group>"; };
@@ -811,6 +815,8 @@
 				0CEB5E2628A914C1000DAD44 /* TodoListThunkImp.swift */,
 				0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */,
 				0CF42ED528B0F05500C2EA0A /* TodoListThunkAction.swift */,
+				0C04A97528B750C400DB8B4F /* TodoListThunkFlags.swift */,
+				0C04A97728B750D900DB8B4F /* TodoListThunkFlagsImp.swift */,
 			);
 			path = Thunk;
 			sourceTree = "<group>";
@@ -1018,6 +1024,7 @@
 				0C9EBDE628A861B80043797C /* CounterModel.swift in Sources */,
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* JsonCoder.swift in Sources */,
+				0C04A97628B750C400DB8B4F /* TodoListThunkFlags.swift in Sources */,
 				0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */,
 				0CEB5E2528A914B5000DAD44 /* TodoListThunk.swift in Sources */,
 				0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */,
@@ -1048,6 +1055,7 @@
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
 				0C9EBDA328A745D90043797C /* Logger.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
+				0C04A97828B750D900DB8B4F /* TodoListThunkFlagsImp.swift in Sources */,
 				0C38A86428A9B68600F9FEB0 /* TodoListThunkImp+DI.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
 				0C9EBDFC28A8AE690043797C /* VisibilitySwitchView.swift in Sources */,

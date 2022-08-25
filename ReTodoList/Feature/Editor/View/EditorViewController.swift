@@ -48,7 +48,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        model.setInitial(item: params.initTodoItem)
+        model.initialize()
     }
 
     override func viewWillAppear(_ animated: Bool) {

@@ -9,23 +9,21 @@ import Foundation
 import ReSwift
 import ReSwiftThunk
 
-private let getItemsCompletedKey = "io.github.maksimn.retodolist.getItemsCompletedKey"
-
 final class TodoListThunkImp: TodoListThunk {
 
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
     private let service: TodoListService
-    private let userDefaults: UserDefaults
+    private var flags: TodoListThunkFlags
 
     init(cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
          service: TodoListService,
-         userDefaults: UserDefaults) {
+         flags: TodoListThunkFlags) {
         self.cache = cache
         self.deadItemsCache = deadItemsCache
         self.service = service
-        self.userDefaults = userDefaults
+        self.flags = flags
     }
 
     var loadItemsFromCache: Thunk<AppState> {
@@ -36,7 +34,7 @@ final class TodoListThunkImp: TodoListThunk {
 
     var getRemoteItemsIfNeeded: Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
-            let getItemsCompleted = self?.userDefaults.bool(forKey: getItemsCompletedKey) ?? false
+            let getItemsCompleted = self?.flags.isGetRemotedItemsCompleted ?? false
 
             if getItemsCompleted && (self?.cache.isDirty ?? false) {
                 return self?.mergeWithRemote(dispatch, getState) ?? Void()
@@ -211,7 +209,7 @@ final class TodoListThunkImp: TodoListThunk {
             dispatch(ReplaceAllCachedItemsSuccessAction())
 
             if isInitialGet {
-                self?.userDefaults.set(true, forKey: getItemsCompletedKey)
+                self?.flags.isGetRemotedItemsCompleted = true
             }
         }
     }

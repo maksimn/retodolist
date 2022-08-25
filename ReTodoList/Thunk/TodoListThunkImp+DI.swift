@@ -26,7 +26,8 @@ extension TodoListThunkImp {
                 coder: JsonCoderImp()
             )
         )
+        let flags = TodoListThunkFlagsImp(userDefaults: UserDefaults.standard)
 
-        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service, userDefaults: UserDefaults.standard)
+        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service, flags: flags)
     }
 }

@@ -50,10 +50,6 @@ class TodoListCacheImp: TodoListCache {
         }
     }
 
-    var completedItemCount: Int {
-        items.filter({ $0.isCompleted }).count
-    }
-
     func insert(_ todoItem: TodoItem, _ completion: @escaping (Error?) -> Void) {
         let backgroundContext = persistentContainer.newBackgroundContext()
 

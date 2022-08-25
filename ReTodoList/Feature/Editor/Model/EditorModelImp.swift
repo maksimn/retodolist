@@ -12,13 +12,16 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
 
     private let viewBlock: () -> EditorView?
     private weak var view: EditorView?
+    private let initialItem: TodoItem?
     private let store: Store<AppState>
     private let thunk: CUDTodoItemThunk
 
     init(viewBlock: @escaping () -> EditorView?,
+         initialItem: TodoItem?,
          store: Store<AppState>,
          thunk: CUDTodoItemThunk) {
         self.viewBlock = viewBlock
+        self.initialItem = initialItem
         self.store = store
         self.thunk = thunk
     }
@@ -39,8 +42,8 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
         view?.set(state: state)
     }
 
-    func setInitial(item: TodoItem?) {
-        store.dispatch(InitEditorAction(item: item))
+    func initialize() {
+        store.dispatch(InitEditorAction(item: initialItem))
     }
 
     func set(deadline: Date?) {

@@ -11,8 +11,6 @@ protocol TodoListCache {
 
     var items: [TodoItem] { get }
 
-    var completedItemCount: Int { get }
-
     func insert(_ todoItem: TodoItem, _ completion: @escaping (Error?) -> Void)
 
     func update(_ todoItem: TodoItem, _ completion: @escaping (Error?) -> Void)
