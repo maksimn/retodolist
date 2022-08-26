@@ -16,7 +16,7 @@ extension TodoListThunkImp {
         let cache = TodoListCacheImp(container: persistentContainer, logger: logger)
         let deadItemsCache = DeadItemsCacheImp(container: persistentContainer, logger: logger)
         let service = TodoListServiceImp(
-            networking: NetworkingServiceImp(
+            networking: TodoListNetworkingImp(
                 urlString: "https://d5dps3h13rv6902lp5c8.apigw.yandexcloud.net",
                 headers: [
                     "Authorization": token,
@@ -26,8 +26,7 @@ extension TodoListThunkImp {
                 coder: JsonCoderImp()
             )
         )
-        let flags = TodoListThunkFlagsImp(userDefaults: UserDefaults.standard)
 
-        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service, flags: flags)
+        self.init(cache: cache, deadItemsCache: deadItemsCache, service: service)
     }
 }
