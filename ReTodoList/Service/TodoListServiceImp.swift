@@ -9,7 +9,7 @@ import Foundation
 
 final class TodoListServiceImp: TodoListService {
 
-    private let networking: NetworkingService
+    private let networking: TodoListNetworking
 
     private static let minDelay: Double = 2
     private static let maxDelay: Double = 120
@@ -20,7 +20,7 @@ final class TodoListServiceImp: TodoListService {
     private var mergeAttempts = 0
     private static let maxMergeAttempts = 6
 
-    init(networking: NetworkingService) {
+    init(networking: TodoListNetworking) {
         self.networking = networking
     }
 

@@ -8,7 +8,7 @@
 typealias TodoListDTOResult = Result<[TodoItemDTO], Error>
 typealias TodoItemDTOResult = Result<TodoItemDTO, Error>
 
-protocol NetworkingService {
+protocol TodoListNetworking {
 
     func fetchTodoList(_ completion: @escaping (TodoListDTOResult) -> Void)
 

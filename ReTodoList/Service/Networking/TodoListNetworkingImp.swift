@@ -7,7 +7,7 @@
 
 import Foundation
 
-class NetworkingServiceImp: NetworkingService {
+class TodoListNetworkingImp: TodoListNetworking {
 
     private let urlString: String
     private let headers: [String: String]

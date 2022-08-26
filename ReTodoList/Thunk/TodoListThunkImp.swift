@@ -14,16 +14,13 @@ final class TodoListThunkImp: TodoListThunk {
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache
     private let service: TodoListService
-    private var flags: TodoListThunkFlags
 
     init(cache: TodoListCache,
          deadItemsCache: DeadItemsCache,
-         service: TodoListService,
-         flags: TodoListThunkFlags) {
+         service: TodoListService) {
         self.cache = cache
         self.deadItemsCache = deadItemsCache
         self.service = service
-        self.flags = flags
     }
 
     var loadItemsFromCache: Thunk<AppState> {
@@ -34,17 +31,15 @@ final class TodoListThunkImp: TodoListThunk {
 
     var getRemoteItemsIfNeeded: Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
-            let getItemsCompleted = self?.flags.isGetRemotedItemsCompleted ?? false
+            guard let self = self else { return }
 
-            if getItemsCompleted && (self?.cache.isDirty ?? false) {
-                return self?.mergeWithRemote(dispatch, getState) ?? Void()
+            if self.cache.isDirty {
+                return self.mergeWithRemote(dispatch, getState)
             }
-
-            guard !getItemsCompleted else { return }
 
             dispatch(GetRemoteItemsStartAction())
             dispatch(IncrementNetworkRequestCountAction())
-            self?.service.getItems { [weak self] result in
+            self.service.getItems { [weak self] result in
                 dispatch(DecrementNetworkRequestCountAction())
 
                 switch result {
@@ -198,7 +193,7 @@ final class TodoListThunkImp: TodoListThunk {
 
     private func complete(operation: TodoListOperation, _ items: [TodoItem], _ dispatch: @escaping DispatchFunction) {
         dispatch(ReplaceAllCachedItemsStartAction())
-        cache.replaceWith(items) { [weak self] error in
+        cache.replaceWith(items) { error in
             if let error = error {
                 dispatch(ReplaceAllCachedItemsErrorAction(error: error))
 
@@ -216,7 +211,6 @@ final class TodoListThunkImp: TodoListThunk {
 
             switch operation {
             case .get:
-                self?.flags.isGetRemotedItemsCompleted = true
                 dispatch(GetRemoteItemsSuccessAction(items: items))
             case .merge:
                 dispatch(MergeWithRemoteItemsSuccessAction(items: items))
