@@ -31,6 +31,7 @@ extension EditorViewController {
     }
 
     func initViews() {
+        initNavBar()
         view.backgroundColor = params.backgroundColor
         scrollView.backgroundColor = params.backgroundColor
         initTextView()
@@ -105,6 +106,16 @@ extension EditorViewController {
 
         scrollView.contentSize = CGSize(width: scrollView.bounds.width,
                                         height: removeButton.frame.maxY + 17)
+    }
+
+    private func initNavBar() {
+        let activityBarButtonItem = UIBarButtonItem(customView: networkIndicatorGraph.view)
+
+        navigationItem.title = params.navBarStrings.todo
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.rightBarButtonItems = [saveBarButtonItem, activityBarButtonItem]
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: params.navBarStrings.cancel, style: .plain,
+                                                           target: self, action: #selector(onCancelButtonTap))
     }
 
     private func setTextViewFrame() {

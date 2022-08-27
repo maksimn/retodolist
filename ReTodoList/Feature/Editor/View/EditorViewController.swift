@@ -13,21 +13,8 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     private let model: EditorModel
     let networkIndicatorGraph: UDFGraph
 
-    lazy var navBar = EditorNavBar(
-        params: EditorNavBarParams(
-            save: params.navBarStrings.save,
-            todo: params.navBarStrings.todo,
-            cancel: params.navBarStrings.cancel,
-            navigationItem: navigationItem,
-            networkIndicatorView: networkIndicatorGraph.view,
-            onSaveButtonTap: { [weak self] in
-                self?.onSaveButtonTap()
-            },
-            onCancelButtonTap: { [weak self] in
-                self?.onCancelButtonTap()
-            }
-        )
-    )
+    lazy var saveBarButtonItem = UIBarButtonItem(title: params.navBarStrings.save, style: .plain,
+                                                 target: self, action: #selector(onSaveButtonTap))
     let scrollView = UIScrollView(frame: .zero)
     let textView = UITextView()
     let placeholderLabel = UILabel()
@@ -78,7 +65,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
     }
 
     func set(state: EditorState) {
-        navBar.setSaveButton(state.canItemBeSaved)
+        saveBarButtonItem.isEnabled = state.canItemBeSaved
         removeButton.isEnabled = state.canItemBeRemoved
         removeButton.setTitleColor(state.canItemBeRemoved ? .systemRed : .systemGray, for: .normal)
         deadlineDatePicker.isHidden = state.isDeadlinePickerHidden
@@ -99,11 +86,13 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
         setupFrameLayout()
     }
 
+    @objc
     func onCancelButtonTap() {
         model.close()
         dismiss(animated: true)
     }
 
+    @objc
     func onSaveButtonTap() {
         model.save()
     }
