@@ -16,8 +16,6 @@ class TodoItemCell: UITableViewCell {
     let calendarIconView = UIImageView()
     let deadlineLabel = UILabel()
 
-    var todoItem: TodoItem?
-
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         initViews()
@@ -28,7 +26,6 @@ class TodoItemCell: UITableViewCell {
     }
 
     func set(todoItem: TodoItem) {
-        self.todoItem = todoItem
         setText(from: todoItem)
         priorityImageView.image = image(for: todoItem.priority)
         calendarIconView.isHidden = todoItem.deadline == nil

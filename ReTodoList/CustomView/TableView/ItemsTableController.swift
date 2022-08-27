@@ -18,8 +18,6 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
 
     private weak var tableView: UITableView?
 
-    private let hCell = TodoItemCell(frame: .zero)
-
     init(tableView: UITableView) {
         self.tableView = tableView
     }
@@ -98,17 +96,6 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
 
             onDidSelectAt?(indexPath.row)
         }
-    }
-
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        if indexPath.row == items.count {
-            return NewTodoItemCell.cellHeight
-        }
-
-        hCell.set(todoItem: items[indexPath.row])
-        hCell.layoutSubviews()
-
-        return hCell.computedHeight
     }
 
     func tableView(_ tableView: UITableView,
