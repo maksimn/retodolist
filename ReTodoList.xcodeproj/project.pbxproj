@@ -41,7 +41,6 @@
 		0C6984A328A1D8A500805B83 /* ReTodoListTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984A228A1D8A500805B83 /* ReTodoListTests.swift */; };
 		0C6984AD28A1D8A500805B83 /* ReTodoListUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984AC28A1D8A500805B83 /* ReTodoListUITests.swift */; };
 		0C6984AF28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */; };
-		0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378EE28A57C54002035EB /* EditorNavBar.swift */; };
 		0C9378F128A58081002035EB /* EditorViewController+Layout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F028A58081002035EB /* EditorViewController+Layout.swift */; };
 		0C9378F328A5808F002035EB /* EditorViewParams.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F228A5808F002035EB /* EditorViewParams.swift */; };
 		0C9378F628A5810F002035EB /* KeyboardEventsHandle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */; };
@@ -170,7 +169,6 @@
 		0C6984A828A1D8A500805B83 /* ReTodoListUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ReTodoListUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		0C6984AC28A1D8A500805B83 /* ReTodoListUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReTodoListUITests.swift; sourceTree = "<group>"; };
 		0C6984AE28A1D8A500805B83 /* ReTodoListUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReTodoListUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		0C9378EE28A57C54002035EB /* EditorNavBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorNavBar.swift; sourceTree = "<group>"; };
 		0C9378F028A58081002035EB /* EditorViewController+Layout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "EditorViewController+Layout.swift"; sourceTree = "<group>"; };
 		0C9378F228A5808F002035EB /* EditorViewParams.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditorViewParams.swift; sourceTree = "<group>"; };
 		0C9378F528A5810F002035EB /* KeyboardEventsHandle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyboardEventsHandle.swift; sourceTree = "<group>"; };
@@ -482,7 +480,6 @@
 		0C9378ED28A57C39002035EB /* CustomView */ = {
 			isa = PBXGroup;
 			children = (
-				0C9378EE28A57C54002035EB /* EditorNavBar.swift */,
 				0C1604EA28A64EA8004E710F /* TableView */,
 			);
 			path = CustomView;
@@ -1060,7 +1057,6 @@
 				0C16051F28A6BEBB004E710F /* CounterViewImp.swift in Sources */,
 				0C9EBDDF28A8319D0043797C /* NetworkIndicatorAction.swift in Sources */,
 				0C9EBDE828A861DA0043797C /* CounterModelImp.swift in Sources */,
-				0C9378EF28A57C54002035EB /* EditorNavBar.swift in Sources */,
 				0C16052128A6BEBB004E710F /* CounterBuilderImp.swift in Sources */,
 				0C603ECE28B38C91004B4F4D /* CounterGraphImp.swift in Sources */,
 				0C9EBDFF28A8AE850043797C /* VisibilitySwitchModel.swift in Sources */,
