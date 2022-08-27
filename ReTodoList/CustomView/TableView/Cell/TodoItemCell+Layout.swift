@@ -5,96 +5,83 @@
 //  Created by Maxim Ivanov on 18.06.2021.
 //
 
+import SnapKit
 import UIKit
 
 extension TodoItemCell {
-
-    static var fulfillmentMarginLeft: CGFloat { 16 }
-    static var fulfillmentWidth: CGFloat { 24 }
-    static var textMarginLeft: CGFloat { 12 }
-    static var textMarginRight: CGFloat { 35 }
-    static var priorityImageWidth: CGFloat { 10 }
-    static var priorityImageMargin: CGFloat { 16 }
-    static var deadlineHeight: CGFloat { 18.5 }
-    static var font: UIFont { UIFont.systemFont(ofSize: CGFloat(17), weight: .regular) }
 
     func initViews() {
         selectionStyle = .none
         backgroundColor = .white
         textlabel.textColor = .black
-        textlabel.font = TodoItemCell.font
+        textlabel.font = UIFont.systemFont(ofSize: 17)
         textlabel.backgroundColor = .clear
         textlabel.numberOfLines = 3
         contentView.addSubview(textlabel)
 
-        contentView.addSubview(completenessImageView)
+        contentView.addSubview(leadingImageView)
         contentView.addSubview(priorityImageView)
 
-        rightArrowImageView.image = Theme.image.rightArrowMark
-        contentView.addSubview(rightArrowImageView)
+        trailingImageView.image = Theme.image.rightArrowMark
+        contentView.addSubview(trailingImageView)
 
-        deadlineImageView.image = Theme.image.smallCalendarIcon
-        contentView.addSubview(deadlineImageView)
+        calendarIconView.image = Theme.image.smallCalendarIcon
+        contentView.addSubview(calendarIconView)
 
         deadlineLabel.textColor = Theme.data.lightTextColor
         deadlineLabel.font = UIFont.systemFont(ofSize: 15)
         addSubview(deadlineLabel)
+
+        setConstraints()
     }
 
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        let priorityImageWidth: CGFloat = todoItem?.priority == .normal ? 0 : TodoItemCell.priorityImageMargin
-        let textLabelLeftMargin = TodoItemCell.fulfillmentMarginLeft + TodoItemCell.fulfillmentWidth +
-            priorityImageWidth + TodoItemCell.textMarginLeft + 2.5
+    func setConstraints() {
+        leadingImageView.snp.makeConstraints { make -> Void in
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.left.equalTo(self.contentView.snp.left).offset(16)
+            make.size.equalTo(CGSize(width: 24, height: 24))
+        }
 
-        textlabel.preferredMaxLayoutWidth = frame.width - (textLabelLeftMargin + TodoItemCell.textMarginRight)
-        textlabel.frame = CGRect(origin: CGPoint(x: textLabelLeftMargin, y: 17),
-                                 size: textlabel.intrinsicContentSize)
+        trailingImageView.snp.makeConstraints { make -> Void in
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.right.equalTo(self.contentView.snp.right).offset(-16)
+            make.size.equalTo(CGSize(width: 7, height: 12))
+        }
+
+        priorityImageView.snp.makeConstraints { make -> Void in
+            make.centerY.equalTo(self.contentView.snp.centerY)
+            make.left.equalTo(self.leadingImageView.snp.right).offset(12)
+            make.size.equalTo(CGSize(width: 10, height: 16))
+        }
+
+        textlabel.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.contentView.snp.top).offset(16)
+            make.left.equalTo(self.priorityImageView.snp.right).offset(8)
+            make.right.equalTo(self.trailingImageView.snp.left).offset(-10)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-16)
+        }
+
+        calendarIconView.snp.makeConstraints { make -> Void in
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-16)
+            make.left.equalTo(self.textlabel.snp.left)
+            make.size.equalTo(CGSize(width: 13, height: 12))
+        }
+
+        deadlineLabel.snp.makeConstraints { make -> Void in
+            make.top.equalTo(self.calendarIconView.snp.top).offset(-2.5)
+            make.left.equalTo(self.calendarIconView.snp.right).offset(5)
+            make.height.equalTo(18.5)
+        }
     }
 
-    var computedHeight: CGFloat {
-        textlabel.frame.height + 34 + (todoItem?.deadline != nil ? TodoItemCell.deadlineHeight : 0)
-    }
+    func updateLayout(isPriorityHidden: Bool, isDeadlineHidden: Bool) {
+        priorityImageView.isHidden = isPriorityHidden
+        deadlineLabel.isHidden = isDeadlineHidden
+        calendarIconView.isHidden = isDeadlineHidden
 
-    func setLayout() {
-        completenessImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            completenessImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            completenessImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
-                                                           constant: TodoItemCell.fulfillmentMarginLeft),
-            completenessImageView.heightAnchor.constraint(equalToConstant: 24),
-            completenessImageView.widthAnchor.constraint(equalToConstant: TodoItemCell.fulfillmentWidth)
-        ])
-
-        priorityImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            priorityImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            priorityImageView.heightAnchor.constraint(equalToConstant: 16),
-            priorityImageView.widthAnchor.constraint(equalToConstant: TodoItemCell.priorityImageWidth),
-            priorityImageView.leadingAnchor.constraint(equalTo: completenessImageView.trailingAnchor, constant: 12)
-        ])
-
-        rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            rightArrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            rightArrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            rightArrowImageView.heightAnchor.constraint(equalToConstant: 12),
-            rightArrowImageView.widthAnchor.constraint(equalToConstant: 7)
-        ])
-
-        deadlineImageView.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            deadlineImageView.leadingAnchor.constraint(equalTo: textlabel.leadingAnchor),
-            deadlineImageView.widthAnchor.constraint(equalToConstant: 13),
-            deadlineImageView.heightAnchor.constraint(equalToConstant: 12),
-            deadlineImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
-        ])
-
-        deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
-        NSLayoutConstraint.activate([
-            deadlineLabel.leadingAnchor.constraint(equalTo: deadlineImageView.trailingAnchor, constant: 5),
-            deadlineLabel.topAnchor.constraint(equalTo: deadlineImageView.topAnchor, constant: -2.5),
-            deadlineLabel.heightAnchor.constraint(equalToConstant: TodoItemCell.deadlineHeight)
-        ])
+        textlabel.snp.updateConstraints { make -> Void in
+            make.left.equalTo(self.priorityImageView.snp.right).offset(isPriorityHidden ? -8 : 8)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(isDeadlineHidden ? -16 : -34.5)
+        }
     }
 }

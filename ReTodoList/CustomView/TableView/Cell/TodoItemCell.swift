@@ -10,13 +10,11 @@ import UIKit
 class TodoItemCell: UITableViewCell {
 
     let textlabel = UILabel()
-    let completenessImageView = UIImageView()
-    let rightArrowImageView = UIImageView()
+    let leadingImageView = UIImageView()
+    let trailingImageView = UIImageView()
     let priorityImageView = UIImageView()
-    let deadlineImageView = UIImageView()
+    let calendarIconView = UIImageView()
     let deadlineLabel = UILabel()
-
-    var todoItem: TodoItem?
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -28,14 +26,13 @@ class TodoItemCell: UITableViewCell {
     }
 
     func set(todoItem: TodoItem) {
-        self.todoItem = todoItem
         setText(from: todoItem)
         priorityImageView.image = image(for: todoItem.priority)
-        deadlineImageView.isHidden = todoItem.deadline == nil
-        deadlineLabel.isHidden = deadlineImageView.isHidden
+        calendarIconView.isHidden = todoItem.deadline == nil
+        deadlineLabel.isHidden = calendarIconView.isHidden
         deadlineLabel.text = todoItem.deadline?.formattedDate
-        completenessImageView.image = completenessImage(for: todoItem)
-        setLayout()
+        leadingImageView.image = completenessImage(for: todoItem)
+        updateLayout(isPriorityHidden: todoItem.priority == .normal, isDeadlineHidden: todoItem.deadline == nil)
     }
 
     private func image(for priority: TodoItemPriority) -> UIImage? {

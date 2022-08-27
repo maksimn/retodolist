@@ -10,8 +10,6 @@ import UIKit
 
 extension NewTodoItemCell {
 
-    static let cellHeight: CGFloat = 54
-
     func initViews() {
         self.clipsToBounds = true
         self.layer.cornerRadius = 16
@@ -27,11 +25,12 @@ extension NewTodoItemCell {
         textView.font = UIFont.systemFont(ofSize: 17)
         textView.textContainerInset = UIEdgeInsets(top: 2, left: 18, bottom: 16, right: 20)
         textView.contentOffset = CGPoint(x: 0, y: -6)
-        addSubview(textView)
+        contentView.addSubview(textView)
         textView.snp.makeConstraints { make -> Void in
-            make.top.equalTo(self.snp.top).offset(16)
-            make.left.equalTo(self.snp.left).offset(16)
-            make.right.equalTo(self.snp.right).offset(-16)
+            make.top.equalTo(self.contentView.snp.top).offset(16)
+            make.left.equalTo(self.contentView.snp.left).offset(16)
+            make.right.equalTo(self.contentView.snp.right).offset(-16)
+            make.bottom.equalTo(self.contentView.snp.bottom).offset(-14)
             make.height.equalTo(24)
         }
         textView.backgroundColor = .clear
@@ -46,9 +45,9 @@ extension NewTodoItemCell {
         placeholderLabel.text = "Новое"
         contentView.addSubview(placeholderLabel)
         placeholderLabel.snp.makeConstraints { make -> Void in
-            make.top.equalTo(self.snp.top).offset(17)
-            make.left.equalTo(self.snp.left).offset(40)
-            make.right.equalTo(self.snp.right).offset(-20)
+            make.top.equalTo(self.contentView.snp.top).offset(17)
+            make.left.equalTo(self.contentView.snp.left).offset(40)
+            make.right.equalTo(self.contentView.snp.right).offset(-20)
             make.height.equalTo(24)
         }
         placeholderLabel.isUserInteractionEnabled = false
