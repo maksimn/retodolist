@@ -24,7 +24,7 @@ extension NewTodoItemCell {
 
     private func initTextView() {
         textView.delegate = self
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = Theme.data.normalFont
         textView.textContainerInset = UIEdgeInsets(top: 2, left: 18, bottom: 16, right: 20)
         textView.contentOffset = CGPoint(x: 0, y: -6)
         addSubview(textView)
@@ -41,7 +41,7 @@ extension NewTodoItemCell {
 
     private func initPlacholderLabel() {
         placeholderLabel.textColor = .gray
-        placeholderLabel.font = UIFont.systemFont(ofSize: 17)
+        placeholderLabel.font = Theme.data.normalFont
         placeholderLabel.numberOfLines = 0
         placeholderLabel.text = "Новое"
         contentView.addSubview(placeholderLabel)

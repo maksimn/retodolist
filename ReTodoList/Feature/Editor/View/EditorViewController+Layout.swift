@@ -156,7 +156,7 @@ extension EditorViewController {
 
     private func initTextView() {
         textView.delegate = self
-        textView.font = UIFont.systemFont(ofSize: 17)
+        textView.font = Theme.data.normalFont
         textView.textContainerInset = UIEdgeInsets(top: 17, left: 12, bottom: 17, right: 12)
         textView.contentOffset = CGPoint(x: 0, y: -17)
         textView.backgroundColor = .white
@@ -165,7 +165,7 @@ extension EditorViewController {
 
     private func initPlaceholderLabel() {
         placeholderLabel.text = params.newTodoPlaceholder
-        placeholderLabel.font = UIFont.systemFont(ofSize: 17)
+        placeholderLabel.font = Theme.data.normalFont
         placeholderLabel.textColor = .lightGray
         placeholderLabel.textAlignment = .left
     }
@@ -187,12 +187,12 @@ extension EditorViewController {
 
     private func initImportanceLabel() {
         importanceLabel.text = params.priority
-        importanceLabel.font = UIFont.systemFont(ofSize: 17)
+        importanceLabel.font = Theme.data.normalFont
     }
 
     private func initShouldBeDoneBeforeLabel() {
         shouldBeDoneBeforeLabel.text = params.shouldBeDoneBefore
-        shouldBeDoneBeforeLabel.font = UIFont.systemFont(ofSize: 17)
+        shouldBeDoneBeforeLabel.font = Theme.data.normalFont
     }
 
     private func initDeadlineSwitch() {
@@ -222,7 +222,7 @@ extension EditorViewController {
     private func initRemoveButton() {
         removeButton.setTitle(params.remove, for: .normal)
         removeButton.addTarget(self, action: #selector(onRemoveButtonTap), for: .touchUpInside)
-        removeButton.titleLabel?.font = UIFont.systemFont(ofSize: 17)
+        removeButton.titleLabel?.font = Theme.data.normalFont
         removeButton.setTitleColor(.systemGray, for: .normal)
         removeButton.backgroundColor = .white
         removeButton.layer.cornerRadius = 16
