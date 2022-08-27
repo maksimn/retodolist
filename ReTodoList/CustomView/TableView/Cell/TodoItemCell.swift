@@ -13,7 +13,7 @@ class TodoItemCell: UITableViewCell {
     let leadingImageView = UIImageView()
     let trailingImageView = UIImageView()
     let priorityImageView = UIImageView()
-    let smallCalendarImageView = UIImageView()
+    let calendarIconView = UIImageView()
     let deadlineLabel = UILabel()
 
     var todoItem: TodoItem?
@@ -31,8 +31,8 @@ class TodoItemCell: UITableViewCell {
         self.todoItem = todoItem
         setText(from: todoItem)
         priorityImageView.image = image(for: todoItem.priority)
-        smallCalendarImageView.isHidden = todoItem.deadline == nil
-        deadlineLabel.isHidden = smallCalendarImageView.isHidden
+        calendarIconView.isHidden = todoItem.deadline == nil
+        deadlineLabel.isHidden = calendarIconView.isHidden
         deadlineLabel.text = todoItem.deadline?.formattedDate
         leadingImageView.image = completenessImage(for: todoItem)
     }

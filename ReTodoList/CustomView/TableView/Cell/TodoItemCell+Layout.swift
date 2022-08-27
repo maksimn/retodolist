@@ -32,8 +32,8 @@ extension TodoItemCell {
         trailingImageView.image = Theme.image.rightArrowMark
         contentView.addSubview(trailingImageView)
 
-        smallCalendarImageView.image = Theme.image.smallCalendarIcon
-        contentView.addSubview(smallCalendarImageView)
+        calendarIconView.image = Theme.image.smallCalendarIcon
+        contentView.addSubview(calendarIconView)
 
         deadlineLabel.textColor = Theme.data.lightTextColor
         deadlineLabel.font = UIFont.systemFont(ofSize: 15)
@@ -82,18 +82,18 @@ extension TodoItemCell {
             trailingImageView.widthAnchor.constraint(equalToConstant: 7)
         ])
 
-        smallCalendarImageView.translatesAutoresizingMaskIntoConstraints = false
+        calendarIconView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            smallCalendarImageView.leadingAnchor.constraint(equalTo: textlabel.leadingAnchor),
-            smallCalendarImageView.widthAnchor.constraint(equalToConstant: 13),
-            smallCalendarImageView.heightAnchor.constraint(equalToConstant: 12),
-            smallCalendarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            calendarIconView.leadingAnchor.constraint(equalTo: textlabel.leadingAnchor),
+            calendarIconView.widthAnchor.constraint(equalToConstant: 13),
+            calendarIconView.heightAnchor.constraint(equalToConstant: 12),
+            calendarIconView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
 
         deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            deadlineLabel.leadingAnchor.constraint(equalTo: smallCalendarImageView.trailingAnchor, constant: 5),
-            deadlineLabel.topAnchor.constraint(equalTo: smallCalendarImageView.topAnchor, constant: -2.5),
+            deadlineLabel.leadingAnchor.constraint(equalTo: calendarIconView.trailingAnchor, constant: 5),
+            deadlineLabel.topAnchor.constraint(equalTo: calendarIconView.topAnchor, constant: -2.5),
             deadlineLabel.heightAnchor.constraint(equalToConstant: TodoItemCell.deadlineHeight)
         ])
     }
