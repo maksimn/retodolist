@@ -11,14 +11,32 @@ final class ItemListViewImp: UIViewController, ItemListView {
 
     private let model: ItemListModel
     private let navToEditorRouter: NavToEditorRouter
+    private let newItemCellPlaceholderText: String
 
-    let tableView = UITableView()
-    lazy var tableController = ItemsTableController(tableView: tableView)
+    private let tableView = UITableView()
+    private lazy var tableController = ItemsTableController(
+        tableView: tableView,
+        newItemCellPlaceholderText: newItemCellPlaceholderText,
+        onNewTodoItemTextEnter: { [weak self] text in
+            self?.onNewTodoItemTextEnter(text)
+        },
+        onDeleteTap: { [weak self] position in
+            self?.onDeleteTap(position)
+        },
+        onTodoCompletionTap: { [weak self] position in
+            self?.onTodoCompletionTap(position)
+        },
+        onDidSelectAt: { [weak self] position in
+            self?.onDidSelectAt(position)
+        }
+    )
 
     init(model: ItemListModel,
-         navToEditorRouter: NavToEditorRouter) {
+         navToEditorRouter: NavToEditorRouter,
+         newItemCellPlaceholderText: String) {
         self.model = model
         self.navToEditorRouter = navToEditorRouter
+        self.newItemCellPlaceholderText = newItemCellPlaceholderText
         super.init(nibName: nil, bundle: nil)
         initViews()
     }
@@ -48,23 +66,23 @@ final class ItemListViewImp: UIViewController, ItemListView {
         tableController.update(items)
     }
 
-    func onNewTodoItemTextEnter(_ text: String) {
+    private func onNewTodoItemTextEnter(_ text: String) {
         model.create(item: TodoItem(text: text))
     }
 
-    func onDeleteTap(_ position: Int) {
+    private func onDeleteTap(_ position: Int) {
         if let item = itemAt(position) {
             model.delete(item: item)
         }
     }
 
-    func onTodoCompletionTap(_ position: Int) {
+    private func onTodoCompletionTap(_ position: Int) {
         if let item = itemAt(position) {
             model.toggleCompletionFor(item: item)
         }
     }
 
-    func onDidSelectAt(_ position: Int) {
+    private func onDidSelectAt(_ position: Int) {
         if let item = itemAt(position) {
             navToEditorRouter.navigate(with: item)
         }
@@ -74,5 +92,21 @@ final class ItemListViewImp: UIViewController, ItemListView {
         guard position > -1 && position < tableController.items.count else { return nil }
 
         return tableController.items[position]
+    }
+
+    private func initViews() {
+        view.addSubview(tableView)
+        tableView.backgroundColor = Theme.data.backgroundColor
+        tableView.layer.cornerRadius = 16
+        tableView.register(TodoItemCell.self, forCellReuseIdentifier: "\(TodoItemCell.self)")
+        tableView.register(NewTodoItemCell.self, forCellReuseIdentifier: "\(NewTodoItemCell.self)")
+        tableView.dataSource = tableController
+        tableView.delegate = tableController
+        tableView.tableHeaderView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        tableView.tableFooterView = UIView(frame: CGRect(x: 0, y: 0, width: tableView.frame.size.width, height: 1))
+        tableView.snp.makeConstraints { make -> Void in
+            make.edges.equalTo(view)
+        }
+        tableView.keyboardDismissMode = .onDrag
     }
 }

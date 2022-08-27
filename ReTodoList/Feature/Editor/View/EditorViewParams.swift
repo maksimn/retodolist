@@ -15,5 +15,11 @@ struct EditorViewParams {
     let priority: String
     let shouldBeDoneBefore: String
     let remove: String
-    let navBar: EditorNavBarParams
+    let navBarStrings: EditorNavBarStrings
+}
+
+struct EditorNavBarStrings {
+    let save: String
+    let cancel: String
+    let todo: String
 }

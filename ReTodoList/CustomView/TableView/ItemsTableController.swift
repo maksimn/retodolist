@@ -11,15 +11,25 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
 
     private(set) var items: [TodoItem] = []
 
-    var onNewTodoItemTextEnter: ((String) -> Void)?
-    var onDeleteTap: ((Int) -> Void)?
-    var onTodoCompletionTap: ((Int) -> Void)?
-    var onDidSelectAt: ((Int) -> Void)?
-
     private weak var tableView: UITableView?
+    private let newItemCellPlaceholderText: String
+    private var onNewTodoItemTextEnter: (String) -> Void
+    private var onDeleteTap: (Int) -> Void
+    private var onTodoCompletionTap: (Int) -> Void
+    private var onDidSelectAt: (Int) -> Void
 
-    init(tableView: UITableView) {
+    init(tableView: UITableView,
+         newItemCellPlaceholderText: String,
+         onNewTodoItemTextEnter: @escaping (String) -> Void,
+         onDeleteTap: @escaping (Int) -> Void,
+         onTodoCompletionTap: @escaping (Int) -> Void,
+         onDidSelectAt: @escaping (Int) -> Void) {
         self.tableView = tableView
+        self.newItemCellPlaceholderText = newItemCellPlaceholderText
+        self.onNewTodoItemTextEnter = onNewTodoItemTextEnter
+        self.onDeleteTap = onDeleteTap
+        self.onTodoCompletionTap = onTodoCompletionTap
+        self.onDidSelectAt = onDidSelectAt
     }
 
     func update(_ items: [TodoItem]) {
@@ -72,7 +82,7 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
                 return UITableViewCell()
             }
 
-            cell.onNewTodoItemTextEnter = self.onNewTodoItemTextEnter
+            cell.set(placeholderText: newItemCellPlaceholderText, onTextEntered: onNewTodoItemTextEnter)
 
             return cell
         }
@@ -94,15 +104,15 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
                 return
             }
 
-            onDidSelectAt?(indexPath.row)
+            onDidSelectAt(indexPath.row)
         }
     }
 
     func tableView(_ tableView: UITableView,
                    leadingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let completionAction = UIContextualAction(style: .normal, title: "",
-                                             handler: { (_, _, success: (Bool) -> Void) in
-                                                self.onTodoCompletionTap?(indexPath.row)
+                                             handler: { [weak self] (_, _, success: (Bool) -> Void) in
+                                                self?.onTodoCompletionTap(indexPath.row)
                                                 success(true)
                                              })
         completionAction.image = Theme.image.completedTodoMarkInverse
@@ -114,8 +124,8 @@ final class ItemsTableController: NSObject, UITableViewDataSource, UITableViewDe
     func tableView(_ tableView: UITableView,
                    trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let deleteAction = UIContextualAction(style: .normal, title: "",
-                                              handler: { (_, _, success: (Bool) -> Void) in
-                                                self.onDeleteTap?(indexPath.row)
+                                              handler: { [weak self] (_, _, success: (Bool) -> Void) in
+                                                self?.onDeleteTap(indexPath.row)
                                                 success(true)
                                               })
 
