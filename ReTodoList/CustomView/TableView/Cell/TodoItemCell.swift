@@ -10,10 +10,10 @@ import UIKit
 class TodoItemCell: UITableViewCell {
 
     let textlabel = UILabel()
-    let completenessImageView = UIImageView()
-    let rightArrowImageView = UIImageView()
+    let leadingImageView = UIImageView()
+    let trailingImageView = UIImageView()
     let priorityImageView = UIImageView()
-    let deadlineImageView = UIImageView()
+    let smallCalendarImageView = UIImageView()
     let deadlineLabel = UILabel()
 
     var todoItem: TodoItem?
@@ -31,10 +31,10 @@ class TodoItemCell: UITableViewCell {
         self.todoItem = todoItem
         setText(from: todoItem)
         priorityImageView.image = image(for: todoItem.priority)
-        deadlineImageView.isHidden = todoItem.deadline == nil
-        deadlineLabel.isHidden = deadlineImageView.isHidden
+        smallCalendarImageView.isHidden = todoItem.deadline == nil
+        deadlineLabel.isHidden = smallCalendarImageView.isHidden
         deadlineLabel.text = todoItem.deadline?.formattedDate
-        completenessImageView.image = completenessImage(for: todoItem)
+        leadingImageView.image = completenessImage(for: todoItem)
     }
 
     private func image(for priority: TodoItemPriority) -> UIImage? {

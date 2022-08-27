@@ -26,14 +26,14 @@ extension TodoItemCell {
         textlabel.numberOfLines = 3
         contentView.addSubview(textlabel)
 
-        contentView.addSubview(completenessImageView)
+        contentView.addSubview(leadingImageView)
         contentView.addSubview(priorityImageView)
 
-        rightArrowImageView.image = Theme.image.rightArrowMark
-        contentView.addSubview(rightArrowImageView)
+        trailingImageView.image = Theme.image.rightArrowMark
+        contentView.addSubview(trailingImageView)
 
-        deadlineImageView.image = Theme.image.smallCalendarIcon
-        contentView.addSubview(deadlineImageView)
+        smallCalendarImageView.image = Theme.image.smallCalendarIcon
+        contentView.addSubview(smallCalendarImageView)
 
         deadlineLabel.textColor = Theme.data.lightTextColor
         deadlineLabel.font = UIFont.systemFont(ofSize: 15)
@@ -57,13 +57,13 @@ extension TodoItemCell {
     }
 
     private func setLayout() {
-        completenessImageView.translatesAutoresizingMaskIntoConstraints = false
+        leadingImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            completenessImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            completenessImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
+            leadingImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            leadingImageView.leadingAnchor.constraint(equalTo: leadingAnchor,
                                                            constant: TodoItemCell.fulfillmentMarginLeft),
-            completenessImageView.heightAnchor.constraint(equalToConstant: 24),
-            completenessImageView.widthAnchor.constraint(equalToConstant: TodoItemCell.fulfillmentWidth)
+            leadingImageView.heightAnchor.constraint(equalToConstant: 24),
+            leadingImageView.widthAnchor.constraint(equalToConstant: TodoItemCell.fulfillmentWidth)
         ])
 
         priorityImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -71,29 +71,29 @@ extension TodoItemCell {
             priorityImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
             priorityImageView.heightAnchor.constraint(equalToConstant: 16),
             priorityImageView.widthAnchor.constraint(equalToConstant: TodoItemCell.priorityImageWidth),
-            priorityImageView.leadingAnchor.constraint(equalTo: completenessImageView.trailingAnchor, constant: 12)
+            priorityImageView.leadingAnchor.constraint(equalTo: leadingImageView.trailingAnchor, constant: 12)
         ])
 
-        rightArrowImageView.translatesAutoresizingMaskIntoConstraints = false
+        trailingImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            rightArrowImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
-            rightArrowImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
-            rightArrowImageView.heightAnchor.constraint(equalToConstant: 12),
-            rightArrowImageView.widthAnchor.constraint(equalToConstant: 7)
+            trailingImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
+            trailingImageView.trailingAnchor.constraint(equalTo: trailingAnchor, constant: -16),
+            trailingImageView.heightAnchor.constraint(equalToConstant: 12),
+            trailingImageView.widthAnchor.constraint(equalToConstant: 7)
         ])
 
-        deadlineImageView.translatesAutoresizingMaskIntoConstraints = false
+        smallCalendarImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            deadlineImageView.leadingAnchor.constraint(equalTo: textlabel.leadingAnchor),
-            deadlineImageView.widthAnchor.constraint(equalToConstant: 13),
-            deadlineImageView.heightAnchor.constraint(equalToConstant: 12),
-            deadlineImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
+            smallCalendarImageView.leadingAnchor.constraint(equalTo: textlabel.leadingAnchor),
+            smallCalendarImageView.widthAnchor.constraint(equalToConstant: 13),
+            smallCalendarImageView.heightAnchor.constraint(equalToConstant: 12),
+            smallCalendarImageView.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -16)
         ])
 
         deadlineLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            deadlineLabel.leadingAnchor.constraint(equalTo: deadlineImageView.trailingAnchor, constant: 5),
-            deadlineLabel.topAnchor.constraint(equalTo: deadlineImageView.topAnchor, constant: -2.5),
+            deadlineLabel.leadingAnchor.constraint(equalTo: smallCalendarImageView.trailingAnchor, constant: 5),
+            deadlineLabel.topAnchor.constraint(equalTo: smallCalendarImageView.topAnchor, constant: -2.5),
             deadlineLabel.heightAnchor.constraint(equalToConstant: TodoItemCell.deadlineHeight)
         ])
     }
