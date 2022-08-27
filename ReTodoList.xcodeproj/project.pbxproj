@@ -292,8 +292,8 @@
 		0C1604EC28A64EA8004E710F /* Cell */ = {
 			isa = PBXGroup;
 			children = (
-				0C1604ED28A64EA8004E710F /* TodoItemCell+Layout.swift */,
 				0C1604EE28A64EA8004E710F /* TodoItemCell.swift */,
+				0C1604ED28A64EA8004E710F /* TodoItemCell+Layout.swift */,
 				0C1604EF28A64EA8004E710F /* NewTodoItemCell.swift */,
 				0C1604F028A64EA8004E710F /* NewTodoItemCell+Layout.swift */,
 			);
