@@ -16,13 +16,12 @@ extension TodoItemCell {
     static var priorityImageWidth: CGFloat { 10 }
     static var priorityImageMargin: CGFloat { 16 }
     static var deadlineHeight: CGFloat { 18.5 }
-    static var font: UIFont { UIFont.systemFont(ofSize: CGFloat(17), weight: .regular) }
 
     func initViews() {
         selectionStyle = .none
         backgroundColor = .white
         textlabel.textColor = .black
-        textlabel.font = TodoItemCell.font
+        textlabel.font = Theme.data.normalFont
         textlabel.backgroundColor = .clear
         textlabel.numberOfLines = 3
         contentView.addSubview(textlabel)
