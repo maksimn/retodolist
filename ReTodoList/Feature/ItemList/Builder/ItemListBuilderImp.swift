@@ -34,7 +34,8 @@ final class ItemListBuilderImp: ItemListBuilder {
         )
         let view = ItemListViewImp(
             model: model,
-            navToEditorRouter: router
+            navToEditorRouter: router,
+            newItemCellPlaceholderText: "Новое"
         )
 
         viewLazy = view

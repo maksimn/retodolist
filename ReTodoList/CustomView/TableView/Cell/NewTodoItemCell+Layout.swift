@@ -41,8 +41,6 @@ extension NewTodoItemCell {
     private func initPlacholderLabel() {
         placeholderLabel.textColor = .gray
         placeholderLabel.font = UIFont.systemFont(ofSize: 17)
-        placeholderLabel.numberOfLines = 0
-        placeholderLabel.text = "Новое"
         contentView.addSubview(placeholderLabel)
         placeholderLabel.snp.makeConstraints { make -> Void in
             make.top.equalTo(self.contentView.snp.top).offset(17)

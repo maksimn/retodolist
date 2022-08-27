@@ -31,17 +31,6 @@ extension EditorViewController {
     }
 
     func initViews() {
-        navBar = EditorNavBar(
-            params: params.navBar,
-            navigationItem: navigationItem,
-            networkIndicatorView: networkIndicatorGraph.view
-        )
-        navBar?.onSaveButtonTap = { [weak self] in
-            self?.onSaveButtonTap()
-        }
-        navBar?.onCancelButtonTap = { [weak self] in
-            self?.onCancelButtonTap()
-        }
         view.backgroundColor = params.backgroundColor
         scrollView.backgroundColor = params.backgroundColor
         initTextView()

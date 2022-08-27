@@ -11,39 +11,40 @@ struct EditorNavBarParams {
     let save: String
     let todo: String
     let cancel: String
+    let navigationItem: UINavigationItem
+    let networkIndicatorView: UIView
+    let onSaveButtonTap: () -> Void
+    let onCancelButtonTap: () -> Void
 }
 
 class EditorNavBar {
-
-    var onSaveButtonTap: (() -> Void)?
-    var onCancelButtonTap: (() -> Void)?
 
     private let params: EditorNavBarParams
     private lazy var saveBarButtonItem = UIBarButtonItem(title: params.save, style: .plain,
                                                          target: self, action: #selector(saveButtonTap))
 
-    init(params: EditorNavBarParams,
-         navigationItem: UINavigationItem,
-         networkIndicatorView: UIView) {
+    init(params: EditorNavBarParams) {
         self.params = params
-        let activityBarButtonItem = UIBarButtonItem(customView: networkIndicatorView)
+        let activityBarButtonItem = UIBarButtonItem(customView: params.networkIndicatorView)
 
-        navigationItem.title = params.todo
-        navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.rightBarButtonItems = [saveBarButtonItem, activityBarButtonItem]
-        navigationItem.leftBarButtonItem = UIBarButtonItem(title: params.cancel, style: .plain,
-                                                           target: self, action: #selector(cancelButtonTap))
-    }
-
-    @objc private func saveButtonTap() {
-        onSaveButtonTap?()
-    }
-
-    @objc private func cancelButtonTap() {
-        onCancelButtonTap?()
+        params.navigationItem.title = params.todo
+        params.navigationItem.setHidesBackButton(true, animated: false)
+        params.navigationItem.rightBarButtonItems = [saveBarButtonItem, activityBarButtonItem]
+        params.navigationItem.leftBarButtonItem = UIBarButtonItem(title: params.cancel, style: .plain,
+                                                                  target: self, action: #selector(cancelButtonTap))
     }
 
     func setSaveButton(_ enabled: Bool) {
         saveBarButtonItem.isEnabled = enabled
+    }
+
+    @objc
+    private func saveButtonTap() {
+        params.onSaveButtonTap()
+    }
+
+    @objc
+    private func cancelButtonTap() {
+        params.onCancelButtonTap()
     }
 }

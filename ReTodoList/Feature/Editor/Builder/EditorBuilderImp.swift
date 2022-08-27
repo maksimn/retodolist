@@ -24,11 +24,7 @@ final class EditorBuilderImp: EditorBuilder {
             priority: "Важность",
             shouldBeDoneBefore: "Сделать до",
             remove: "Удалить",
-            navBar: EditorNavBarParams(
-                save: "Сохранить",
-                todo: "Дело",
-                cancel: "Отменить"
-            )
+            navBarStrings: EditorNavBarStrings(save: "Сохранить", cancel: "Отменить", todo: "Дело")
         )
 
         weak var viewLazy: EditorView?
