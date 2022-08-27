@@ -35,7 +35,6 @@ class TodoItemCell: UITableViewCell {
         deadlineLabel.isHidden = deadlineImageView.isHidden
         deadlineLabel.text = todoItem.deadline?.formattedDate
         completenessImageView.image = completenessImage(for: todoItem)
-        setLayout()
     }
 
     private func image(for priority: TodoItemPriority) -> UIImage? {

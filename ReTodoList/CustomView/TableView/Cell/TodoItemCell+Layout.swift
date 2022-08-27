@@ -39,6 +39,7 @@ extension TodoItemCell {
         deadlineLabel.textColor = Theme.data.lightTextColor
         deadlineLabel.font = UIFont.systemFont(ofSize: 15)
         addSubview(deadlineLabel)
+        setLayout()
     }
 
     override func layoutSubviews() {
@@ -56,7 +57,7 @@ extension TodoItemCell {
         textlabel.frame.height + 34 + (todoItem?.deadline != nil ? TodoItemCell.deadlineHeight : 0)
     }
 
-    func setLayout() {
+    private func setLayout() {
         completenessImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             completenessImageView.centerYAnchor.constraint(equalTo: centerYAnchor),
