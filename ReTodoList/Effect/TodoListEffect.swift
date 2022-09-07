@@ -7,7 +7,7 @@
 
 import ReSwiftThunk
 
-protocol CUDTodoItemThunk {
+protocol CUDTodoItemEffect {
 
     func createInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState>
 
@@ -16,7 +16,7 @@ protocol CUDTodoItemThunk {
     func deleteInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState>
 }
 
-protocol TodoListThunk: CUDTodoItemThunk {
+protocol TodoListEffect: CUDTodoItemEffect {
 
     var loadItemsFromCache: Thunk<AppState> { get }
 

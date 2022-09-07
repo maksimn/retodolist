@@ -29,7 +29,7 @@
 		0C16052828A70C98004E710F /* VisibilitySwitchBuilderImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052728A70C98004E710F /* VisibilitySwitchBuilderImp.swift */; };
 		0C16052A28A70CB4004E710F /* VisibilitySwitchViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */; };
 		0C16052D28A7100E004E710F /* VisibilitySwitchAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */; };
-		0C38A86428A9B68600F9FEB0 /* TodoListThunkImp+DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */; };
+		0C38A86428A9B68600F9FEB0 /* TodoListEffectImp+DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */; };
 		0C603EC928B38B9D004B4F4D /* UDFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603EC828B38B9D004B4F4D /* UDFModel.swift */; };
 		0C603ECE28B38C91004B4F4D /* CounterGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */; };
 		0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */; };
@@ -108,9 +108,9 @@
 		0CA0A4ED28A5BE3B00668895 /* Date+Core.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */; };
 		0CEB5E2128A91476000DAD44 /* TodoListService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2028A91476000DAD44 /* TodoListService.swift */; };
 		0CEB5E2328A91483000DAD44 /* TodoListServiceImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2228A91483000DAD44 /* TodoListServiceImp.swift */; };
-		0CEB5E2528A914B5000DAD44 /* TodoListThunk.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2428A914B5000DAD44 /* TodoListThunk.swift */; };
-		0CEB5E2728A914C1000DAD44 /* TodoListThunkImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2628A914C1000DAD44 /* TodoListThunkImp.swift */; };
-		0CF42ED628B0F05500C2EA0A /* TodoListThunkAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF42ED528B0F05500C2EA0A /* TodoListThunkAction.swift */; };
+		0CEB5E2528A914B5000DAD44 /* TodoListEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2428A914B5000DAD44 /* TodoListEffect.swift */; };
+		0CEB5E2728A914C1000DAD44 /* TodoListEffectImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CEB5E2628A914C1000DAD44 /* TodoListEffectImp.swift */; };
+		0CF42ED628B0F05500C2EA0A /* TodoListEffectAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0CF42ED528B0F05500C2EA0A /* TodoListEffectAction.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -153,7 +153,7 @@
 		0C16052728A70C98004E710F /* VisibilitySwitchBuilderImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchBuilderImp.swift; sourceTree = "<group>"; };
 		0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchViewImp.swift; sourceTree = "<group>"; };
 		0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchAction.swift; sourceTree = "<group>"; };
-		0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoListThunkImp+DI.swift"; sourceTree = "<group>"; };
+		0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoListEffectImp+DI.swift"; sourceTree = "<group>"; };
 		0C603EC828B38B9D004B4F4D /* UDFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDFModel.swift; sourceTree = "<group>"; };
 		0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterGraphImp.swift; sourceTree = "<group>"; };
 		0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchGraphImp.swift; sourceTree = "<group>"; };
@@ -233,9 +233,9 @@
 		0CA0A4EC28A5BE3B00668895 /* Date+Core.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Core.swift"; sourceTree = "<group>"; };
 		0CEB5E2028A91476000DAD44 /* TodoListService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListService.swift; sourceTree = "<group>"; };
 		0CEB5E2228A91483000DAD44 /* TodoListServiceImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListServiceImp.swift; sourceTree = "<group>"; };
-		0CEB5E2428A914B5000DAD44 /* TodoListThunk.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListThunk.swift; sourceTree = "<group>"; };
-		0CEB5E2628A914C1000DAD44 /* TodoListThunkImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListThunkImp.swift; sourceTree = "<group>"; };
-		0CF42ED528B0F05500C2EA0A /* TodoListThunkAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListThunkAction.swift; sourceTree = "<group>"; };
+		0CEB5E2428A914B5000DAD44 /* TodoListEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEffect.swift; sourceTree = "<group>"; };
+		0CEB5E2628A914C1000DAD44 /* TodoListEffectImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEffectImp.swift; sourceTree = "<group>"; };
+		0CF42ED528B0F05500C2EA0A /* TodoListEffectAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodoListEffectAction.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -448,7 +448,7 @@
 				0CA0A4E628A5BC4300668895 /* DataClass */,
 				0C96E60728A4628E0034FA73 /* Feature */,
 				0C9EBDAB28A749EF0043797C /* Service */,
-				0CA3101328AFDA7000542140 /* Thunk */,
+				0CA3101328AFDA7000542140 /* Effect */,
 				0C69848B28A1D8A200805B83 /* AppDelegate.swift */,
 				0C69848D28A1D8A200805B83 /* SceneDelegate.swift */,
 				0C96E60528A45F3C0034FA73 /* Theme.swift */,
@@ -798,15 +798,15 @@
 			path = DataClass;
 			sourceTree = "<group>";
 		};
-		0CA3101328AFDA7000542140 /* Thunk */ = {
+		0CA3101328AFDA7000542140 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
-				0CEB5E2428A914B5000DAD44 /* TodoListThunk.swift */,
-				0CEB5E2628A914C1000DAD44 /* TodoListThunkImp.swift */,
-				0C38A86328A9B68600F9FEB0 /* TodoListThunkImp+DI.swift */,
-				0CF42ED528B0F05500C2EA0A /* TodoListThunkAction.swift */,
+				0CEB5E2428A914B5000DAD44 /* TodoListEffect.swift */,
+				0CEB5E2628A914C1000DAD44 /* TodoListEffectImp.swift */,
+				0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */,
+				0CF42ED528B0F05500C2EA0A /* TodoListEffectAction.swift */,
 			);
-			path = Thunk;
+			path = Effect;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -980,7 +980,7 @@
 				0C9EBDD928A831580043797C /* NetworkIndicatorBuilderImp.swift in Sources */,
 				0C9EBE0628A8B8040043797C /* NetworkIndicatorGraphImp.swift in Sources */,
 				0C9EBDFA28A89C950043797C /* NetworkIndicatorView.swift in Sources */,
-				0CEB5E2728A914C1000DAD44 /* TodoListThunkImp.swift in Sources */,
+				0CEB5E2728A914C1000DAD44 /* TodoListEffectImp.swift in Sources */,
 				0C69848C28A1D8A200805B83 /* AppDelegate.swift in Sources */,
 				0C9EBDED28A86E1C0043797C /* EditorModel.swift in Sources */,
 				0CEB5E2328A91483000DAD44 /* TodoListServiceImp.swift in Sources */,
@@ -1013,7 +1013,7 @@
 				0C97E8B828A4CB3E00B087DC /* AppState.swift in Sources */,
 				0C9EBDC928A74B770043797C /* JsonCoder.swift in Sources */,
 				0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */,
-				0CEB5E2528A914B5000DAD44 /* TodoListThunk.swift in Sources */,
+				0CEB5E2528A914B5000DAD44 /* TodoListEffect.swift in Sources */,
 				0C9EBDC328A749EF0043797C /* MergeTodoListRequestData.swift in Sources */,
 				0C603ED728B399F9004B4F4D /* UDFGraph.swift in Sources */,
 				0C1604E028A5E949004E710F /* EditorAction.swift in Sources */,
@@ -1027,7 +1027,7 @@
 				0C1604DC28A5E917004E710F /* EditorState.swift in Sources */,
 				0C9EBDA828A7462D0043797C /* TodoItem+Array.swift in Sources */,
 				0C96E60E28A463C40034FA73 /* EditorBuilderImp.swift in Sources */,
-				0CF42ED628B0F05500C2EA0A /* TodoListThunkAction.swift in Sources */,
+				0CF42ED628B0F05500C2EA0A /* TodoListEffectAction.swift in Sources */,
 				0C9EBD9928A745600043797C /* TodoItemMO.swift in Sources */,
 				0C69848E28A1D8A200805B83 /* SceneDelegate.swift in Sources */,
 				0CA0A4E328A5BC0F00668895 /* NavToEditorBuilder.swift in Sources */,
@@ -1041,7 +1041,7 @@
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
 				0C9EBDA328A745D90043797C /* Logger.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
-				0C38A86428A9B68600F9FEB0 /* TodoListThunkImp+DI.swift in Sources */,
+				0C38A86428A9B68600F9FEB0 /* TodoListEffectImp+DI.swift in Sources */,
 				0C96E5FD28A31DC30034FA73 /* AppBuilder.swift in Sources */,
 				0C9EBDFC28A8AE690043797C /* VisibilitySwitchView.swift in Sources */,
 				0C16052028A6BEBB004E710F /* CounterBuilder.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-extension TodoListThunkImp {
+extension TodoListEffectImp {
 
     convenience init() {
         let token = ""
