@@ -30,7 +30,7 @@ final class ItemListBuilderImp: ItemListBuilder {
         let model = ItemListModelImp(
             viewBlock: { viewLazy },
             store: store,
-            thunk: TodoListThunkImp()
+            effect: TodoListEffectImp()
         )
         let view = ItemListViewImp(
             model: model,

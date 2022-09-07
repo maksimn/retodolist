@@ -9,7 +9,7 @@ import Foundation
 import ReSwift
 import ReSwiftThunk
 
-final class TodoListThunkImp: TodoListThunk {
+final class TodoListEffectImp: TodoListEffect {
 
     private let cache: TodoListCache
     private let deadItemsCache: DeadItemsCache

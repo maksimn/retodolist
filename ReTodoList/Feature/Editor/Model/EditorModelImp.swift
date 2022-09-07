@@ -14,16 +14,16 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     private weak var view: EditorView?
     private let initialItem: TodoItem?
     private let store: Store<AppState>
-    private let thunk: CUDTodoItemThunk
+    private let effect: CUDTodoItemEffect
 
     init(viewBlock: @escaping () -> EditorView?,
          initialItem: TodoItem?,
          store: Store<AppState>,
-         thunk: CUDTodoItemThunk) {
+         effect: CUDTodoItemEffect) {
         self.viewBlock = viewBlock
         self.initialItem = initialItem
         self.store = store
-        self.thunk = thunk
+        self.effect = effect
     }
 
     func subscribe() {
@@ -69,9 +69,9 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
         store.dispatch(EditorItemSavedAction())
 
         if isCreatingMode, let item = item {
-            store.dispatch(thunk.createInCacheAndRemote(item))
+            store.dispatch(effect.createInCacheAndRemote(item))
         } else if let item = item {
-            store.dispatch(thunk.updateInCacheAndRemote(item))
+            store.dispatch(effect.updateInCacheAndRemote(item))
         }
     }
 
@@ -79,7 +79,7 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
         guard let item = store.state.editorState?.item else { return }
 
         store.dispatch(EditorItemDeletedAction())
-        store.dispatch(thunk.deleteInCacheAndRemote(item))
+        store.dispatch(effect.deleteInCacheAndRemote(item))
     }
 
     func close() {

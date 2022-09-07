@@ -30,7 +30,7 @@ final class AppBuilderImp: AppBuilder {
             }
         }
 
-        let thunkMiddleware: Middleware<AppState> = createThunkMiddleware()
+        let effectMiddleware: Middleware<AppState> = createThunkMiddleware()
 
         let initialState = AppState(
             itemListState: ItemListState(
@@ -44,7 +44,7 @@ final class AppBuilderImp: AppBuilder {
         let store = Store(
             reducer: appReducer,
             state: initialState,
-            middleware: [loggingMiddleware, thunkMiddleware]
+            middleware: [loggingMiddleware, effectMiddleware]
         )
 
         let navigationController = UINavigationController()

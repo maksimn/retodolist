@@ -13,14 +13,14 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
     private weak var view: ItemListView?
 
     private let store: Store<AppState>
-    private let thunk: TodoListThunk
+    private let effect: TodoListEffect
 
     init(viewBlock: @escaping () -> ItemListView?,
          store: Store<AppState>,
-         thunk: TodoListThunk) {
+         effect: TodoListEffect) {
         self.viewBlock = viewBlock
         self.store = store
-        self.thunk = thunk
+        self.effect = effect
     }
 
     func subscribe() {
@@ -38,25 +38,25 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
     }
 
     func load() {
-        store.dispatch(thunk.loadItemsFromCache)
-        store.dispatch(thunk.getRemoteItemsIfNeeded)
+        store.dispatch(effect.loadItemsFromCache)
+        store.dispatch(effect.getRemoteItemsIfNeeded)
     }
 
     func create(item: TodoItem) {
         store.dispatch(CreateItemAction(item: item))
-        store.dispatch(thunk.createInCacheAndRemote(item))
+        store.dispatch(effect.createInCacheAndRemote(item))
     }
 
     func toggleCompletionFor(item: TodoItem) {
         let updatedItem = item.update(isCompleted: !item.isCompleted)
 
         store.dispatch(ToggleItemCompletionAction(item: item))
-        store.dispatch(thunk.updateInCacheAndRemote(updatedItem))
+        store.dispatch(effect.updateInCacheAndRemote(updatedItem))
     }
 
     func delete(item: TodoItem) {
         store.dispatch(DeleteItemAction(item: item))
-        store.dispatch(thunk.deleteInCacheAndRemote(item))
+        store.dispatch(effect.deleteInCacheAndRemote(item))
     }
 
     func newState(state: ItemListState?) {
