@@ -30,6 +30,8 @@
 		0C16052A28A70CB4004E710F /* VisibilitySwitchViewImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */; };
 		0C16052D28A7100E004E710F /* VisibilitySwitchAction.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */; };
 		0C38A86428A9B68600F9FEB0 /* TodoListEffectImp+DI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */; };
+		0C39320F28CA32B9006DE4B2 /* NavigationEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C39320E28CA32B9006DE4B2 /* NavigationEffect.swift */; };
+		0C39321128CA3318006DE4B2 /* NavigationEffectImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C39321028CA3318006DE4B2 /* NavigationEffectImp.swift */; };
 		0C603EC928B38B9D004B4F4D /* UDFModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603EC828B38B9D004B4F4D /* UDFModel.swift */; };
 		0C603ECE28B38C91004B4F4D /* CounterGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */; };
 		0C603ED328B38D00004B4F4D /* VisibilitySwitchGraphImp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */; };
@@ -154,6 +156,8 @@
 		0C16052928A70CB4004E710F /* VisibilitySwitchViewImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchViewImp.swift; sourceTree = "<group>"; };
 		0C16052C28A7100E004E710F /* VisibilitySwitchAction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchAction.swift; sourceTree = "<group>"; };
 		0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TodoListEffectImp+DI.swift"; sourceTree = "<group>"; };
+		0C39320E28CA32B9006DE4B2 /* NavigationEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEffect.swift; sourceTree = "<group>"; };
+		0C39321028CA3318006DE4B2 /* NavigationEffectImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationEffectImp.swift; sourceTree = "<group>"; };
 		0C603EC828B38B9D004B4F4D /* UDFModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UDFModel.swift; sourceTree = "<group>"; };
 		0C603ECD28B38C91004B4F4D /* CounterGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CounterGraphImp.swift; sourceTree = "<group>"; };
 		0C603ED228B38D00004B4F4D /* VisibilitySwitchGraphImp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySwitchGraphImp.swift; sourceTree = "<group>"; };
@@ -801,6 +805,8 @@
 		0CA3101328AFDA7000542140 /* Effect */ = {
 			isa = PBXGroup;
 			children = (
+				0C39320E28CA32B9006DE4B2 /* NavigationEffect.swift */,
+				0C39321028CA3318006DE4B2 /* NavigationEffectImp.swift */,
 				0CEB5E2428A914B5000DAD44 /* TodoListEffect.swift */,
 				0CEB5E2628A914C1000DAD44 /* TodoListEffectImp.swift */,
 				0C38A86328A9B68600F9FEB0 /* TodoListEffectImp+DI.swift */,
@@ -1020,6 +1026,7 @@
 				0C9EBD9728A745600043797C /* DeadItemsCache.swift in Sources */,
 				0C9EBDEA28A862B40043797C /* CounterView.swift in Sources */,
 				0C1604F528A64EA9004E710F /* NewTodoItemCell+Layout.swift in Sources */,
+				0C39321128CA3318006DE4B2 /* NavigationEffectImp.swift in Sources */,
 				0C1604F128A64EA9004E710F /* ItemsTableController.swift in Sources */,
 				0C16050F28A65623004E710F /* ItemListBuilder.swift in Sources */,
 				0C9EBDBF28A749EF0043797C /* HttpClient.swift in Sources */,
@@ -1039,6 +1046,7 @@
 				0C16052628A70C7D004E710F /* VisibilitySwitchBuilder.swift in Sources */,
 				0C9EBDF128A86EAA0043797C /* EditorView.swift in Sources */,
 				0CA0A4E528A5BC0F00668895 /* NavToEditorRouter.swift in Sources */,
+				0C39320F28CA32B9006DE4B2 /* NavigationEffect.swift in Sources */,
 				0C9EBDA328A745D90043797C /* Logger.swift in Sources */,
 				0C1604F228A64EA9004E710F /* TodoItemCell+Layout.swift in Sources */,
 				0C38A86428A9B68600F9FEB0 /* TodoListEffectImp+DI.swift in Sources */,
