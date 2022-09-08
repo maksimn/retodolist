@@ -8,28 +8,13 @@
 import Foundation
 import ReSwift
 
-struct InitEditorAction: Action {
-    let item: TodoItem?
+enum EditorAction: Action {
+    case initWith(item: TodoItem?)
+    case close
+    case textChanged(String)
+    case priorityChanged(TodoItemPriority)
+    case deadlineChanged(Date?)
+    case toggleDeadlinePickerVisibility
+    case itemSaved
+    case itemDeleted
 }
-
-struct CloseEditorAction: Action { }
-
-struct TextChangedEditorAction: Action {
-    let text: String
-}
-
-struct PriorityChangedEditorAction: Action {
-    let priority: TodoItemPriority
-}
-
-struct DeadlineChangedEditorAction: Action {
-    let deadline: Date?
-}
-
-struct DeadlinePickerVisibilityAction: Action {
-    let isHidden: Bool
-}
-
-struct EditorItemSavedAction: Action { }
-
-struct EditorItemDeletedAction: Action { }

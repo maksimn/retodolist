@@ -43,30 +43,30 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     }
 
     func initialize() {
-        store.dispatch(InitEditorAction(item: initialItem))
+        store.dispatch(EditorAction.initWith(item: initialItem))
     }
 
     func set(deadline: Date?) {
-        store.dispatch(DeadlineChangedEditorAction(deadline: deadline))
+        store.dispatch(EditorAction.deadlineChanged(deadline))
     }
 
-    func set(isDeadlinePickerHidden: Bool) {
-        store.dispatch(DeadlinePickerVisibilityAction(isHidden: isDeadlinePickerHidden))
+    func toggleDeadlinePickerVisibility() {
+        store.dispatch(EditorAction.toggleDeadlinePickerVisibility)
     }
 
     func set(text: String) {
-        store.dispatch(TextChangedEditorAction(text: text))
+        store.dispatch(EditorAction.textChanged(text))
     }
 
     func set(priority: TodoItemPriority) {
-        store.dispatch(PriorityChangedEditorAction(priority: priority))
+        store.dispatch(EditorAction.priorityChanged(priority))
     }
 
     func save() {
         let isCreatingMode = store.state.editorState?.mode == .creating
         let item = store.state.editorState?.item
 
-        store.dispatch(EditorItemSavedAction())
+        store.dispatch(EditorAction.itemSaved)
 
         if isCreatingMode, let item = item {
             store.dispatch(effect.createInCacheAndRemote(item))
@@ -78,12 +78,12 @@ final class EditorModelImp: EditorModel, StoreSubscriber {
     func delete() {
         guard let item = store.state.editorState?.item else { return }
 
-        store.dispatch(EditorItemDeletedAction())
+        store.dispatch(EditorAction.itemDeleted)
         store.dispatch(effect.deleteInCacheAndRemote(item))
     }
 
     func close() {
-        store.dispatch(CloseEditorAction())
+        store.dispatch(EditorAction.close)
     }
 
     func unsubscribe() {

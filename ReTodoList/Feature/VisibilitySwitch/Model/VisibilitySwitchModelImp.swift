@@ -20,7 +20,7 @@ final class VisibilitySwitchModelImp: VisibilitySwitchModel, StoreSubscriber {
     }
 
     func switchCompletedItemsVisibility() {
-        store.dispatch(SwitchCompletedItemsVisibilityAction())
+        store.dispatch(VisibilitySwitchAction.toggleCompletedItemsVisibility)
     }
 
     func newState(state: ItemListState?) {

@@ -7,4 +7,4 @@
 
 import ReSwift
 
-struct SwitchCompletedItemsVisibilityAction: Action { }
+enum VisibilitySwitchAction: Action { case toggleCompletedItemsVisibility }

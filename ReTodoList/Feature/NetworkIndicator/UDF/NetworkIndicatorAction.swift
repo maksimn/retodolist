@@ -7,6 +7,7 @@
 
 import ReSwift
 
-struct IncrementNetworkRequestCountAction: Action { }
-
-struct DecrementNetworkRequestCountAction: Action { }
+enum NetworkIndicatorAction: Action {
+    case incrementNetworkRequestCount
+    case decrementNetworkRequestCount
+}

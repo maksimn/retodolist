@@ -114,7 +114,7 @@ final class EditorViewController: UIViewController, EditorView, UITextViewDelega
 
     @objc
     func onDeadlineButtonTap() {
-        model.set(isDeadlinePickerHidden: !deadlineDatePicker.isHidden)
+        model.toggleDeadlinePickerVisibility()
     }
 
     func textViewDidChange(_ textView: UITextView) {

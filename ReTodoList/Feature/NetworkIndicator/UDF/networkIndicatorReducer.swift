@@ -8,18 +8,17 @@
 import ReSwift
 
 func networkIndicatorReducer(action: Action, state: NetworkIndicatorState?) -> NetworkIndicatorState {
-    guard let state = state else {
+    guard let state = state,
+          let action = action as? NetworkIndicatorAction else {
         return NetworkIndicatorState(pendingRequestCount: 0)
     }
     var newState = state
 
     switch action {
-    case _ as IncrementNetworkRequestCountAction:
+    case .incrementNetworkRequestCount:
         newState.pendingRequestCount += 1
-    case _ as DecrementNetworkRequestCountAction:
+    case .decrementNetworkRequestCount:
         newState.pendingRequestCount = decrementIfPositive(state.pendingRequestCount)
-    default:
-        break
     }
 
     return newState

@@ -7,14 +7,8 @@
 
 import ReSwift
 
-struct CreateItemAction: Action {
-    let item: TodoItem
-}
-
-struct ToggleItemCompletionAction: Action {
-    let item: TodoItem
-}
-
-struct DeleteItemAction: Action {
-    let item: TodoItem
+enum ItemListAction: Action {
+    case createItem(item: TodoItem)
+    case toggleItemCompletion(item: TodoItem)
+    case deleteItem(item: TodoItem)
 }

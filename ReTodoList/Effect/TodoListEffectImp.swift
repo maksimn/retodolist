@@ -25,7 +25,7 @@ final class TodoListEffectImp: TodoListEffect {
 
     var loadItemsFromCache: Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, _ in
-            dispatch(LoadItemsFromCacheAction(items: self?.cache.items ?? []))
+            dispatch(TodoListAction.loadItemsFromCache(items: self?.cache.items ?? []))
         }
     }
 
@@ -37,16 +37,16 @@ final class TodoListEffectImp: TodoListEffect {
                 return self.mergeWithRemote(dispatch, getState)
             }
 
-            dispatch(GetRemoteItemsStartAction())
-            dispatch(IncrementNetworkRequestCountAction())
+            dispatch(TodoListAction.getRemoteItemsStart)
+            dispatch(NetworkIndicatorAction.incrementNetworkRequestCount)
             self.service.getItems { [weak self] result in
-                dispatch(DecrementNetworkRequestCountAction())
+                dispatch(NetworkIndicatorAction.decrementNetworkRequestCount)
 
                 switch result {
                 case .success(let items):
                     self?.complete(operation: .get, items, dispatch)
                 case .failure(let error):
-                    dispatch(GetRemoteItemsErrorAction(error: error))
+                    dispatch(TodoListAction.getRemoteItemsError(error))
                 }
             }
         }
@@ -57,43 +57,43 @@ final class TodoListEffectImp: TodoListEffect {
             let dirtyItem = item.update(isDirty: true)
 
             if self?.cache.isDirty ?? false {
-                dispatch(InsertItemIntoCacheStartAction(item: dirtyItem))
+                dispatch(InsertItemIntoCacheAction.start(item: dirtyItem))
                 self?.cache.insert(dirtyItem) { [weak self] error in
                     if let error = error {
-                        return dispatch(InsertItemIntoCacheErrorAction(item: dirtyItem, error: error))
+                        return dispatch(InsertItemIntoCacheAction.error(item: dirtyItem, error: error))
                     }
 
-                    dispatch(InsertItemIntoCacheSuccessAction(item: dirtyItem))
+                    dispatch(InsertItemIntoCacheAction.success(item: dirtyItem))
                     self?.mergeWithRemote(dispatch, getState)
                 }
                 return
             }
 
-            dispatch(InsertItemIntoCacheStartAction(item: dirtyItem))
+            dispatch(InsertItemIntoCacheAction.start(item: dirtyItem))
             self?.cache.insert(dirtyItem) { error in
                 if let error = error {
-                    return dispatch(InsertItemIntoCacheErrorAction(item: dirtyItem, error: error))
+                    return dispatch(InsertItemIntoCacheAction.error(item: dirtyItem, error: error))
                 }
 
-                dispatch(InsertItemIntoCacheSuccessAction(item: dirtyItem))
-                dispatch(CreateRemoteItemStartAction(item: item))
-                dispatch(IncrementNetworkRequestCountAction())
+                dispatch(InsertItemIntoCacheAction.success(item: dirtyItem))
+                dispatch(CreateRemoteItemAction.start(item: item))
+                dispatch(NetworkIndicatorAction.incrementNetworkRequestCount)
                 self?.service.createRemote(item) { result in
-                    dispatch(DecrementNetworkRequestCountAction())
+                    dispatch(NetworkIndicatorAction.decrementNetworkRequestCount)
 
                     switch result {
                     case .success:
-                        dispatch(CreateRemoteItemSuccessAction(item: item))
-                        dispatch(UpdateItemInCacheStartAction(item: item))
+                        dispatch(CreateRemoteItemAction.success(item: item))
+                        dispatch(UpdateItemInCacheAction.start(item: item))
                         self?.cache.update(item) { error in
                             if let error = error {
-                                return dispatch(UpdateItemInCacheErrorAction(item: item, error: error))
+                                return dispatch(UpdateItemInCacheAction.error(item: item, error: error))
                             }
 
-                            dispatch(UpdateItemInCacheSuccessAction(item: item))
+                            dispatch(UpdateItemInCacheAction.success(item: item))
                         }
                     case .failure(let error):
-                        dispatch(CreateRemoteItemErrorAction(item: item, error: error))
+                        dispatch(CreateRemoteItemAction.error(item: item, error: error))
                         self?.mergeWithRemote(dispatch, getState)
                     }
                 }
@@ -106,43 +106,43 @@ final class TodoListEffectImp: TodoListEffect {
             let dirtyItem = item.update(isDirty: true)
 
             if self?.cache.isDirty ?? false {
-                dispatch(UpdateItemInCacheStartAction(item: dirtyItem))
+                dispatch(UpdateItemInCacheAction.start(item: dirtyItem))
                 self?.cache.update(dirtyItem) { error in
                     if let error = error {
-                        return dispatch(UpdateItemInCacheErrorAction(item: dirtyItem, error: error))
+                        return dispatch(UpdateItemInCacheAction.error(item: dirtyItem, error: error))
                     }
 
-                    dispatch(UpdateItemInCacheSuccessAction(item: dirtyItem))
+                    dispatch(UpdateItemInCacheAction.success(item: dirtyItem))
                     self?.mergeWithRemote(dispatch, getState)
                 }
                 return
             }
 
-            dispatch(UpdateItemInCacheStartAction(item: dirtyItem))
+            dispatch(UpdateItemInCacheAction.start(item: dirtyItem))
             self?.cache.update(dirtyItem) { error in
                 if let error = error {
-                    return dispatch(UpdateItemInCacheErrorAction(item: item, error: error))
+                    return dispatch(UpdateItemInCacheAction.error(item: item, error: error))
                 }
 
-                dispatch(UpdateItemInCacheSuccessAction(item: dirtyItem))
-                dispatch(UpdateRemoteItemStartAction(item: item))
-                dispatch(IncrementNetworkRequestCountAction())
+                dispatch(UpdateItemInCacheAction.success(item: dirtyItem))
+                dispatch(UpdateRemoteItemAction.start(item: item))
+                dispatch(NetworkIndicatorAction.incrementNetworkRequestCount)
                 self?.service.updateRemote(item) { result in
-                    dispatch(DecrementNetworkRequestCountAction())
+                    dispatch(NetworkIndicatorAction.decrementNetworkRequestCount)
 
                     switch result {
                     case .success:
-                        dispatch(UpdateRemoteItemSuccessAction(item: item))
-                        dispatch(UpdateItemInCacheStartAction(item: item))
+                        dispatch(UpdateRemoteItemAction.success(item: item))
+                        dispatch(UpdateItemInCacheAction.start(item: item))
                         self?.cache.update(item) { error in
                             if let error = error {
-                                return dispatch(UpdateItemInCacheErrorAction(item: item, error: error))
+                                return dispatch(UpdateItemInCacheAction.error(item: item, error: error))
                             }
 
-                            dispatch(UpdateItemInCacheSuccessAction(item: item))
+                            dispatch(UpdateItemInCacheAction.success(item: item))
                         }
                     case .failure(let error):
-                        dispatch(UpdateRemoteItemErrorAction(item: item, error: error))
+                        dispatch(UpdateRemoteItemAction.error(item: item, error: error))
                         self?.mergeWithRemote(dispatch, getState)
                     }
                 }
@@ -152,13 +152,13 @@ final class TodoListEffectImp: TodoListEffect {
 
     func deleteInCacheAndRemote(_ item: TodoItem) -> Thunk<AppState> {
         Thunk<AppState> { [weak self] dispatch, getState in
-            dispatch(DeleteItemInCacheStartAction(item: item))
+            dispatch(DeleteItemInCacheAction.start(item: item))
             self?.cache.delete(item) { error in
                 if let error = error {
-                    return dispatch(DeleteItemInCacheErrorAction(item: item, error: error))
+                    return dispatch(DeleteItemInCacheAction.error(item: item, error: error))
                 }
 
-                dispatch(DeleteItemInCacheSuccessAction(item: item))
+                dispatch(DeleteItemInCacheAction.success(item: item))
 
                 if self?.cache.isDirty ?? false {
                     let tombstone = Tombstone(itemId: item.id, deletedAt: Date())
@@ -169,21 +169,21 @@ final class TodoListEffectImp: TodoListEffect {
                     return
                 }
 
-                dispatch(DeleteRemoteItemStartAction(item: item))
-                dispatch(IncrementNetworkRequestCountAction())
+                dispatch(DeleteRemoteItemAction.start(item: item))
+                dispatch(NetworkIndicatorAction.incrementNetworkRequestCount)
                 self?.service.deleteRemote(item) { [weak self] result in
-                    dispatch(DecrementNetworkRequestCountAction())
+                    dispatch(NetworkIndicatorAction.decrementNetworkRequestCount)
 
                     switch result {
                     case .success:
-                        dispatch(DeleteRemoteItemSuccessAction(item: item))
+                        dispatch(DeleteRemoteItemAction.success(item: item))
                     case .failure(let error):
                         let tombstone = Tombstone(itemId: item.id, deletedAt: Date())
 
                         self?.deadItemsCache.insert(tombstone: tombstone) { _ in
 
                         }
-                        dispatch(DeleteRemoteItemErrorAction(item: item, error: error))
+                        dispatch(DeleteRemoteItemAction.error(item: item, error: error))
                         self?.mergeWithRemote(dispatch, getState)
                     }
                 }
@@ -192,28 +192,28 @@ final class TodoListEffectImp: TodoListEffect {
     }
 
     private func complete(operation: TodoListOperation, _ items: [TodoItem], _ dispatch: @escaping DispatchFunction) {
-        dispatch(ReplaceAllCachedItemsStartAction())
+        dispatch(TodoListAction.replaceAllItemsInCacheStart)
         cache.replaceWith(items) { error in
             if let error = error {
-                dispatch(ReplaceAllCachedItemsErrorAction(error: error))
+                dispatch(TodoListAction.replaceAllItemsInCacheError(error))
 
                 switch operation {
                 case .get:
-                    dispatch(GetRemoteItemsErrorAction(error: error))
+                    dispatch(TodoListAction.getRemoteItemsError(error))
                 case .merge:
-                    dispatch(MergeWithRemoteItemsErrorAction(error: error))
+                    dispatch(TodoListAction.mergeWithRemoteItemsError(error))
                 }
 
                 return
             }
 
-            dispatch(ReplaceAllCachedItemsSuccessAction())
+            dispatch(TodoListAction.replaceAllItemsInCacheSuccess)
 
             switch operation {
             case .get:
-                dispatch(GetRemoteItemsSuccessAction(items: items))
+                dispatch(TodoListAction.getRemoteItemsSuccess(items: items))
             case .merge:
-                dispatch(MergeWithRemoteItemsSuccessAction(items: items))
+                dispatch(TodoListAction.mergeWithRemoteItemsSuccess(items: items))
             }
         }
     }
@@ -222,10 +222,10 @@ final class TodoListEffectImp: TodoListEffect {
         let deleted = Array(Set(deadItemsCache.tombstones.map { $0.itemId }))
         let dirtyItems = cache.items.filter { $0.isDirty }
 
-        dispatch(MergeWithRemoteItemsStartAction())
-        dispatch(IncrementNetworkRequestCountAction())
+        dispatch(TodoListAction.mergeWithRemoteItemsStart)
+        dispatch(NetworkIndicatorAction.incrementNetworkRequestCount)
         service.mergeWithRemote(deleted, dirtyItems) { [weak self] result in
-            dispatch(DecrementNetworkRequestCountAction())
+            dispatch(NetworkIndicatorAction.decrementNetworkRequestCount)
 
             switch result {
             case .success(let items):
@@ -234,7 +234,7 @@ final class TodoListEffectImp: TodoListEffect {
                 self?.deadItemsCache.clearTombstones { _ in }
                 self?.complete(operation: .merge, mergedItems, dispatch)
             case .failure(let error):
-                dispatch(MergeWithRemoteItemsErrorAction(error: error))
+                dispatch(TodoListAction.mergeWithRemoteItemsError(error))
             }
         }
     }

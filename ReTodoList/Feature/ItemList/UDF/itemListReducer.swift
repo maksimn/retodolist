@@ -7,55 +7,38 @@
 
 import ReSwift
 
-// swiftlint:disable cyclomatic_complexity
 func itemListReducer(action: Action, state: AppState?) -> ItemListState {
     guard let state = state else {
         return ItemListState(items: [], completedItemCount: 0, areCompleteItemsVisible: true)
     }
 
     switch action {
-    case let action as LoadItemsFromCacheAction:
-        return nextState(action, state.itemListState)
+    case TodoListAction.loadItemsFromCache(let items),
+         TodoListAction.getRemoteItemsSuccess(let items),
+         TodoListAction.mergeWithRemoteItemsSuccess(let items):
+        return nextState(forNewItems: items, state: state.itemListState)
 
-    case let action as GetRemoteItemsSuccessAction:
-        return nextState(action, state.itemListState)
+    case EditorAction.itemSaved:
+        return nextState(editorItemSaved: state)
 
-    case let action as MergeWithRemoteItemsSuccessAction:
-        return nextState(action, state.itemListState)
+    case EditorAction.itemDeleted:
+        return nextState(editorItemDeleted: state)
 
-    case let action as EditorItemSavedAction:
-        return nextState(action, state)
+    case ItemListAction.createItem(let item):
+        return nextState(createItem: item, state.itemListState)
 
-    case let action as EditorItemDeletedAction:
-        return nextState(action, state)
+    case ItemListAction.toggleItemCompletion(let item):
+        return nextState(toggleItemCompletion: item, state.itemListState)
 
-    case let action as CreateItemAction:
-        return nextState(action, state.itemListState)
+    case ItemListAction.deleteItem(let item):
+        return nextState(deleteItem: item, state.itemListState)
 
-    case let action as ToggleItemCompletionAction:
-        return nextState(action, state.itemListState)
-
-    case let action as DeleteItemAction:
-        return nextState(action, state.itemListState)
-
-    case let action as SwitchCompletedItemsVisibilityAction:
-        return nextState(action, state.itemListState)
+    case VisibilitySwitchAction.toggleCompletedItemsVisibility:
+        return nextState(toggleCompletedItemsVisibility: state.itemListState)
 
     default:
         return state.itemListState
     }
-}
-
-private func nextState(_ action: LoadItemsFromCacheAction, _ state: ItemListState) -> ItemListState {
-    return nextState(forNewItems: action.items, state: state)
-}
-
-private func nextState(_ action: GetRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
-    return nextState(forNewItems: action.items, state: state)
-}
-
-private func nextState(_ action: MergeWithRemoteItemsSuccessAction, _ state: ItemListState) -> ItemListState {
-    return nextState(forNewItems: action.items, state: state)
 }
 
 private func nextState(forNewItems items: [TodoItem], state: ItemListState) -> ItemListState {
@@ -67,7 +50,7 @@ private func nextState(forNewItems items: [TodoItem], state: ItemListState) -> I
     return state
 }
 
-private func nextState(_ action: EditorItemSavedAction, _ state: AppState) -> ItemListState {
+private func nextState(editorItemSaved state: AppState) -> ItemListState {
     guard let item = state.editorState?.item else {
         return state.itemListState
     }
@@ -82,7 +65,7 @@ private func nextState(_ action: EditorItemSavedAction, _ state: AppState) -> It
     return itemListState
 }
 
-private func nextState(_ action: EditorItemDeletedAction, _ state: AppState) -> ItemListState {
+private func nextState(editorItemDeleted state: AppState) -> ItemListState {
     guard let deletedItem = state.editorState?.item else {
         return state.itemListState
     }
@@ -95,17 +78,17 @@ private func nextState(_ action: EditorItemDeletedAction, _ state: AppState) -> 
     return state
 }
 
-private func nextState(_ action: CreateItemAction, _ state: ItemListState) -> ItemListState {
+private func nextState(createItem item: TodoItem, _ state: ItemListState) -> ItemListState {
     var itemListState = state
 
-    itemListState.items.append(action.item)
+    itemListState.items.append(item)
 
     return itemListState
 }
 
-private func nextState(_ action: ToggleItemCompletionAction, _ state: ItemListState) -> ItemListState {
+private func nextState(toggleItemCompletion item: TodoItem, _ state: ItemListState) -> ItemListState {
     var state = state
-    guard let index = state.items.firstIndex(where: { $0.id == action.item.id }) else {
+    guard let index = state.items.firstIndex(where: { $0.id == item.id }) else {
         return state
     }
 
@@ -123,8 +106,8 @@ private func nextState(_ action: ToggleItemCompletionAction, _ state: ItemListSt
     return state
 }
 
-private func nextState(_ action: DeleteItemAction, _ state: ItemListState) -> ItemListState {
-    guard let index = state.items.firstIndex(where: { $0.id == action.item.id }) else { return state }
+private func nextState(deleteItem item: TodoItem, _ state: ItemListState) -> ItemListState {
+    guard let index = state.items.firstIndex(where: { $0.id == item.id }) else { return state }
     let item = state.items[index]
     var state = state
 
@@ -137,10 +120,10 @@ private func nextState(_ action: DeleteItemAction, _ state: ItemListState) -> It
     return state
 }
 
-private func nextState(_ action: SwitchCompletedItemsVisibilityAction, _ state: ItemListState) -> ItemListState {
+private func nextState(toggleCompletedItemsVisibility state: ItemListState) -> ItemListState {
     var state = state
 
-    state.areCompleteItemsVisible = !state.areCompleteItemsVisible
+    state.areCompleteItemsVisible.toggle()
 
     return state
 }
