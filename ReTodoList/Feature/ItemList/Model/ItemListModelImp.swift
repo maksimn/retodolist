@@ -43,19 +43,19 @@ final class ItemListModelImp: ItemListModel, StoreSubscriber {
     }
 
     func create(item: TodoItem) {
-        store.dispatch(CreateItemAction(item: item))
+        store.dispatch(ItemListAction.createItem(item: item))
         store.dispatch(effect.createInCacheAndRemote(item))
     }
 
     func toggleCompletionFor(item: TodoItem) {
         let updatedItem = item.update(isCompleted: !item.isCompleted)
 
-        store.dispatch(ToggleItemCompletionAction(item: item))
+        store.dispatch(ItemListAction.toggleItemCompletion(item: item))
         store.dispatch(effect.updateInCacheAndRemote(updatedItem))
     }
 
     func delete(item: TodoItem) {
-        store.dispatch(DeleteItemAction(item: item))
+        store.dispatch(ItemListAction.deleteItem(item: item))
         store.dispatch(effect.deleteInCacheAndRemote(item))
     }
 

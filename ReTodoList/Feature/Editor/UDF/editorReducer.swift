@@ -5,37 +5,36 @@
 //  Created by Maksim Ivanov on 12.08.2022.
 //
 
+import Foundation
 import ReSwift
 
 func editorReducer(action: Action, state: EditorState?) -> EditorState? {
+    guard let action = action as? EditorAction else { return state }
+
     switch action {
+    case .initWith(let item):
+        return nextState(initEditorItem: item, state)
 
-    case let action as InitEditorAction:
-        return nextState(action, state)
-
-    case _ as CloseEditorAction:
+    case .close:
         return nil
 
-    case let action as TextChangedEditorAction:
-        return nextState(action, state)
+    case .textChanged(let text):
+        return nextState(textChanged: text, state)
 
-    case let action as PriorityChangedEditorAction:
-        return nextState(action, state)
+    case .priorityChanged(let priority):
+        return nextState(priorityChanged: priority, state)
 
-    case let action as DeadlineChangedEditorAction:
-        return nextState(action, state)
+    case .deadlineChanged(let deadline):
+        return nextState(deadlineChanged: deadline, state)
 
-    case let action as DeadlinePickerVisibilityAction:
-        return nextState(action, state)
+    case .toggleDeadlinePickerVisibility:
+        return nextState(toggleDeadlinePickerVisibility: state)
 
-    case let action as EditorItemSavedAction:
-        return nextState(action, state)
+    case .itemSaved:
+        return nextState(editorItemSaved: state)
 
-    case _ as EditorItemDeletedAction:
+    case .itemDeleted:
         return createEmptyState()
-
-    default:
-        return state
     }
 }
 
@@ -48,10 +47,10 @@ private func createEmptyState() -> EditorState {
     )
 }
 
-private func nextState(_ action: InitEditorAction, _ state: EditorState?) -> EditorState? {
+private func nextState(initEditorItem item: TodoItem?, _ state: EditorState?) -> EditorState? {
     let emptyState = createEmptyState()
 
-    if let item = action.item {
+    if let item = item {
         return EditorState(
             mode: .editing,
             item: item,
@@ -63,42 +62,42 @@ private func nextState(_ action: InitEditorAction, _ state: EditorState?) -> Edi
     }
 }
 
-private func nextState(_ action: TextChangedEditorAction, _ state: EditorState?) -> EditorState? {
+private func nextState(textChanged text: String, _ state: EditorState?) -> EditorState? {
     guard let state = state else { return state }
     var newState = state
 
-    newState.item = state.item.update(text: action.text)
+    newState.item = state.item.update(text: text)
 
     return newState
 }
 
-private func nextState(_ action: PriorityChangedEditorAction, _ state: EditorState?) -> EditorState? {
+private func nextState(priorityChanged priority: TodoItemPriority, _ state: EditorState?) -> EditorState? {
     guard let state = state else { return state }
     var newState = state
 
-    newState.item = state.item.update(priority: action.priority)
+    newState.item = state.item.update(priority: priority)
 
     return newState
 }
 
-private func nextState(_ action: DeadlineChangedEditorAction, _ state: EditorState?) -> EditorState? {
+private func nextState(deadlineChanged deadline: Date?, _ state: EditorState?) -> EditorState? {
     guard let state = state else { return state }
     var newState = state
 
-    newState.item = newState.item.update(deadline: action.deadline)
+    newState.item = newState.item.update(deadline: deadline)
 
     return newState
 }
 
-private func nextState(_ action: DeadlinePickerVisibilityAction, _ state: EditorState?) -> EditorState? {
+private func nextState(toggleDeadlinePickerVisibility state: EditorState?) -> EditorState? {
     var state = state
 
-    state?.isDeadlinePickerHidden = action.isHidden
+    state?.isDeadlinePickerHidden.toggle()
 
     return state
 }
 
-private func nextState(_ action: EditorItemSavedAction, _ state: EditorState?) -> EditorState? {
+private func nextState(editorItemSaved state: EditorState?) -> EditorState? {
     guard let state = state else { return state }
     var newState = state
 

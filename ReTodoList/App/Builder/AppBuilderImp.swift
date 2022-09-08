@@ -23,7 +23,7 @@ final class AppBuilderImp: AppBuilder {
                         print("PREVIOUS_STATE:\(state)")
                     }
 
-                    print("\(action)")
+                    debugPrint(action)
 
                     return next(action)
                 }

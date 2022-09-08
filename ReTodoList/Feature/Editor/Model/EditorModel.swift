@@ -13,7 +13,7 @@ protocol EditorModel: UDFModel {
 
     func set(deadline: Date?)
 
-    func set(isDeadlinePickerHidden: Bool)
+    func toggleDeadlinePickerVisibility()
 
     func set(text: String)
 
